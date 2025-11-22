@@ -10,8 +10,8 @@ The moment we enter the site, we get prompted with a login page, I Try a baisc S
 So, The final SQL Query is going to be <br>
 From:- 
 ```sql
-    SELECT * FROM USERS WHERE
-    username = ' USER INPUT ' AND password = 'USER INPUT'; ```
+SELECT * FROM USERS WHERE
+username = ' USER INPUT ' AND password = 'USER INPUT'; ```
 To:- 
 ```sql
 SELECT * FROM USERS 
