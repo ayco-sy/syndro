@@ -35,6 +35,8 @@ WHERE username = '' OR 1=1 -- AND PASSWORD = '1234';
 <h4>But the only shell line that would work is "echo", since its a built it shell, And we can use it to execute other commands using echo "$(pwd)"</h4>
 <img width="1162" height="312" alt="image" src="https://github.com/user-attachments/assets/23478a2d-d22c-4934-b008-a43fb068a071" />
 <h4>Afterwards, i do 127.0.0.1&echo "$(ls)", And there it is, i do echo "$(cat flag.txt)"</h4>
-<img width="1173" height="502" alt="image" src="https://github.com/user-attachments/assets/dc608b04-c685-4948-9d0b-e9f6009d2bc4" /> <img width="1138" height="319" alt="image" src="https://github.com/user-<img width="1158" height="405" alt="image" src="https://github.com/user-attachments/assets/fd101b0b-40be-42db-8697-dc8e061fea59" />
+<img width="1173" height="502" alt="image" src="https://github.com/user-attachments/assets/dc608b04-c685-4948-9d0b-e9f6009d2bc4" />
+<img width="1158" height="405" alt="image" src="https://github.com/user-attachments/assets/f235a7c0-d073-400c-9ac4-53ccf19d02f9" />
+>
 
 
