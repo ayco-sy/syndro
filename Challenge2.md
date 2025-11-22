@@ -27,3 +27,4 @@ I go into Bookmarks, I see an input field, i try to input a basic payload, {{7*7
 <h3>I Just do Strings * and i search website for PCTF, saves the hassle ngl.</h3>
 
 And there it is the flag !
+<img width="1899" height="993" alt="image" src="https://github.com/user-attachments/assets/01480359-b7e3-44eb-a8d1-278efc5302d4" />
