@@ -30,6 +30,10 @@ WHERE username = '' OR 1=1 -- AND PASSWORD = '1234';
 <h4>this works like a shell command ping, How do i add some malicious commands into it ?</h4> <br>
 <h4>After 1 google search, It is done by logical operators AND/OR ( there is more but this will do for now ),</h4> <br>
 <h4>( || OR), at first i try 127.0.0.1||ls, But it doesnt work</h4> <br>
-<h4>(&& AND & Both work),A Then i try this, and output !, but it is not what i expected </h4><img width="1162" height="312" alt="image" src="https://github.com/user-attachments/assets/23478a2d-d22c-4934-b008-a43fb068a071" />
-<h4>Afterwards, i do 127.0.0.1&echo "$(ls)"</h4>
-<img width="1173" height="502" alt="image" src="https://github.com/user-attachments/assets/dc608b04-c685-4948-9d0b-e9f6009d2bc4" />
+<h4>(&& AND & Both work),A Then i try this and i get a new output, but this time it gives us more info about how the execution is going, </h4> <br>
+<h4>Instead of at first thinking its ping "input", INSTEAD, It is, /bin/sh -c "ping INPUT", Hence why we get an error when we run (pwd,ls,whoami,etc)</h4> <br>
+<h4>But the only shell line that would work is "echo", since its a built it shell, And we can use it to execute other commands using echo "$(pwd)"</h4>
+<img width="1162" height="312" alt="image" src="https://github.com/user-attachments/assets/23478a2d-d22c-4934-b008-a43fb068a071" />
+<h4>Afterwards, i do 127.0.0.1&echo "$(ls)", And there it is, i do echo "$(cat flag.txt)"</h4>
+<img width="1173" height="502" alt="image" src="https://github.com/user-attachments/assets/dc608b04-c685-4948-9d0b-e9f6009d2bc4" /> <img width="1138" height="319" alt="image" src="https://github.com/user-attachments/assets/c42b8ead-be7d-4e5f-af98-5c108f13d175" />
+
