@@ -33,7 +33,9 @@ After login we get a dashboard with a "Test Connection" feature that pings any h
 Trying 127.0.0.1 works perfectly → OS command execution confirmed.
 Ping localhost
 
-3. Discovering Command Injection
+<img width="1176" height="318" alt="image" src="https://github.com/user-attachments/assets/f8c3aac0-726b-472d-b726-2e10c266c1ee" />
+
+4. Discovering Command Injection
 The backend runs something like:
 
 <pre> /bin/sh -c "ping -c 4 <user_input>" </pre>
@@ -48,9 +50,13 @@ Since we're inside /bin/sh -c, we can chain commands with &:
 → Lists the current directory and reveals flag.txt.
 Listing files
 
+<img width="1163" height="530" alt="image" src="https://github.com/user-attachments/assets/06f5e09b-2914-4605-bb88-452aaf44a51d" />
+
 5. Reading the Flag
 
 <pre>127.0.0.1 & echo "$(cat flag.txt)"</pre>
 
+<img width="1228" height="394" alt="image" src="https://github.com/user-attachments/assets/e38815c5-3418-458b-9dd6-315b935b486a" />
+
 Flag captured
-Flag: PCTF{...your_flag_here...}
+Flag: PCTF{FLAG:O}
