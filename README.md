@@ -11,9 +11,10 @@ So, The final SQL Query is going to be <br>
 From:- 
     SELECT * FROM USERS WHERE username = ' USER INPUT ' AND password = 'USER INPUT'; <br>
 To:- <br>
-    SELECT * FROM USERS 
-    WHERE username = '' or 1=1   -- <-- injected comment
-    AND password = '1234';
+```sql
+SELECT * FROM USERS 
+WHERE username = '' OR 1=1 -- AND PASSWORD = '1234';
+```
 <img width="1130" height="337" alt="image" src="https://github.com/user-attachments/assets/a65faff7-36dc-4e98-8061-d358cdc47eba" />
 
 And just like that we are in!
