@@ -20,6 +20,14 @@ WHERE username = '' OR 1=1 -- AND PASSWORD = '1234';
 ```
 <img width="1130" height="337" alt="image" src="https://github.com/user-attachments/assets/a65faff7-36dc-4e98-8061-d358cdc47eba" />
 
-<h3>And just like that we are in!, Afterward, we are greeted by a dashboard which tests the connectiviy ( ping command ); </h3>
+<h3>And just like that we are in!, Afterward, we are greeted by a dashboard; </h3>
 
 <img width="1173" height="214" alt="image" src="https://github.com/user-attachments/assets/c2bff44f-8c36-4746-ac58-ad952f87d2f9" />
+
+
+<h4>I try something like pinging localhost ( 127.0.0.1 )</h4> <br>
+<img width="1148" height="296" alt="image" src="https://github.com/user-attachments/assets/1ca19992-a9d2-4d83-a60c-9568bb2ae8c9" /> <br>
+<h4>if this works like a shell command ping, How do i add some malicious commands into it ?</h4> <br>
+<h4>After 1 google search, It is done by logical operators AND/OR ( there is more but this will do for now ),</h4> <br>
+<h4>( || OR), at first i try 127.0.0.1||ls, But it doesnt work</h4> <br>
+<h4>(&& AND) Then i try this, and output !, but it is not what i expected </h4><img width="1162" height="312" alt="image" src="https://github.com/user-attachments/assets/23478a2d-d22c-4934-b008-a43fb068a071" />
