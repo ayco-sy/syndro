@@ -2,6 +2,7 @@
 **Challenge 1: Connection Tester**  
 **Author:** [Syndro/Ayco]  
 **Category:** Web  
+<img width="486" height="474" alt="image" src="https://github.com/user-attachments/assets/f153377f-33b5-4ba8-97cd-2c13fd7980f2" />
 
 ---
 
