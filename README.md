@@ -15,7 +15,7 @@ username = ' USER INPUT ' AND password = 'USER INPUT';
 To:- 
 SELECT * FROM USERS 
 WHERE username = '' OR 1=1 -- AND PASSWORD = '1234';
-                      \(\uparrow \)
+                           ⬆️
                       We ignore everything after the comment
 ```
 <img width="1130" height="337" alt="image" src="https://github.com/user-attachments/assets/a65faff7-36dc-4e98-8061-d358cdc47eba" />
