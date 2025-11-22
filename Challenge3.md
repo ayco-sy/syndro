@@ -29,4 +29,5 @@ Writeups for web-challenges Partriot-CTF
 <h3>Then, I started doing random env names</h3>
 <pre>${env:FLAG},${env:FL$G},${env:FLAG1}${env:flag},${env:secret},${env:admin},${env:root},${env:0},${env:SECRET_FLAG}</pre>
 <h3>and it worked, it was just pure guessing, not setup reverse shell and try to take over, a guess, a simple guess....</h3>
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/7d8635f6-9033-457b-a38c-8732e2c8b868" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/8ca76960-5865-4b52-89ea-d4afd39b7bc9" />
+
