@@ -11,8 +11,7 @@ So, The final SQL Query is going to be
 From:
     SELECT * FROM USERS WHERE username = ' USER INPUT ' AND password = 'USER INPUT';
 To:
-    SELECT * FROM USERS WHERE username = '' or 1=1```diff
-+ -- AND PASSWORD = 'asdadsdaadx';
+    SELECT * FROM USERS WHERE username = '' or 1=1+ -- AND PASSWORD = 'asdadsdaadx';
 <img width="1130" height="337" alt="image" src="https://github.com/user-attachments/assets/a65faff7-36dc-4e98-8061-d358cdc47eba" />
 
 And just like that we are in!
