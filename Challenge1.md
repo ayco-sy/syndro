@@ -5,6 +5,7 @@
 <img width="486" height="474" alt="image" src="https://github.com/user-attachments/assets/f153377f-33b5-4ba8-97cd-2c13fd7980f2" />
 
 ---
+<img width="1145" height="291" alt="image" src="https://github.com/user-attachments/assets/d4bf979b-40ee-4515-9eea-c101dd5f33c7" />
 
 ### 1. Login Page – Classic SQL Injection
 The site greets us with a simple login form.
@@ -24,6 +25,8 @@ SELECT * FROM users WHERE username = '' OR 1=1 -- ' AND password = '...';
 ```
 → Instant admin login!
 SQLi bypass
+
+<img width="1169" height="216" alt="image" src="https://github.com/user-attachments/assets/bdb0e30c-d989-445f-b574-d535f029f4c1" />
 
 2. Dashboard – Connection Tester (Ping Tool)
 After login we get a dashboard with a "Test Connection" feature that pings any host we enter.
