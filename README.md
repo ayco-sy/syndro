@@ -9,15 +9,14 @@ The moment we enter the site, we get prompted with a login page, I Try a baisc S
 
 So, The final SQL Query is going to be <br>
 From:- 
-``1sql
+```sql
     SELECT * FROM USERS WHERE
-    username = ' USER INPUT ' AND password = 'USER INPUT'; ``1
-<br>
+    username = ' USER INPUT ' AND password = 'USER INPUT'; ```
 To:- 
-``1sql
+```sql
 SELECT * FROM USERS 
 WHERE username = '' OR 1=1 -- AND PASSWORD = '1234';
-``1
+```
 <img width="1130" height="337" alt="image" src="https://github.com/user-attachments/assets/a65faff7-36dc-4e98-8061-d358cdc47eba" />
 
 And just like that we are in!
