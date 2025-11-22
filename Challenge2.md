@@ -17,3 +17,9 @@ Audit, is just audit log of other guys ( we are not using it, i personally dont 
 reports, useless.
 I go into Bookmarks, I see an input field, i try to input a basic payload, {{7*7}}, But its just getting copy pasted back to me.</h3>
 <h3> But i find something interesting in the return output, my input is surronded by double quote, maybe we think its just nothing, but this can destory our whole injection, we can avoid it by just adding " at the start and ' at the end. </h3>
+<h3>Then i try to view page sources of every page, and i come accross this</h3>
+<img width="464" height="73" alt="image" src="https://github.com/user-attachments/assets/7754ef73-2dd4-44d3-9ac7-7b570cba4147" />
+<h3>I Found it in the bookmarks source code, I Follow it To (18.212.136.134:5001/search), And we see our bookmarks and we can execute them through here!</h3>
+<img width="614" height="400" alt="image" src="https://github.com/user-attachments/assets/b6233952-8bf2-4052-91b7-25e3f6675dc7" />
+<h3>We do a simple payload to make sure its jinja, And yes its jinja2 template.</h3>
+<h3></h3>
