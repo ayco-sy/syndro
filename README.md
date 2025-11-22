@@ -20,6 +20,6 @@ WHERE username = '' OR 1=1 -- AND PASSWORD = '1234';
 ```
 <img width="1130" height="337" alt="image" src="https://github.com/user-attachments/assets/a65faff7-36dc-4e98-8061-d358cdc47eba" />
 
-And just like that we are in!, Afterward, we are greeted by a dashboard which tests the connectiviy ( ping command );
+<h1>And just like that we are in!, Afterward, we are greeted by a dashboard which tests the connectiviy ( ping command ); </h1>
 
 <img width="1173" height="214" alt="image" src="https://github.com/user-attachments/assets/c2bff44f-8c36-4746-ac58-ad952f87d2f9" />
