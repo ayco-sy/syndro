@@ -11,9 +11,8 @@ So, The final SQL Query is going to be <br>
 From:- 
 ```sql
 SELECT * FROM USERS WHERE
-username = ' USER INPUT ' AND password = 'USER INPUT'; ```
+username = ' USER INPUT ' AND password = 'USER INPUT';
 To:- 
-```sql
 SELECT * FROM USERS 
 WHERE username = '' OR 1=1 -- AND PASSWORD = '1234';
 ```
