@@ -19,6 +19,8 @@ At first, i try to do basic injection into the password with username admin, So 
 Username: admin
 Password: {"$ne": null} ---> This is always true, Its similar to 'or 1='1 in SQL injection.
 But, it doesnt seem to work, It suggests that it is getting sent as a String.
+
+<pre>Payload Reference: https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection</pre>
 ---
 ### 2- Using CURL/ZAP/Burp
 Then i try to access the API end point using ZAP,
