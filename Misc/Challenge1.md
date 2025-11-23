@@ -16,6 +16,7 @@ At first, We are greeted by an upload page,I Checked the page source, and it doe
   |
 
 ---
+### 2- Deploying the attack.
 
 I Tried to upload a PHP Shell and it said it got uploaded Successfully! <br>
 
@@ -26,6 +27,16 @@ And luckily it worked and now we have a shell on the server ! <br>
 | Uploaded  | File |
 | ------------- | ------------- |
 | <img width="380" height="185" alt="image" src="https://github.com/user-attachments/assets/eec01e40-edc0-469a-9e37-1f85669bfddf" /> | <img width="600" height="1042" alt="image" src="https://github.com/user-attachments/assets/7f667e88-f38f-4b7d-89da-d662e96c6e80" />
+
+---
+### 3- Caputring it!
+
+We have a shell at the site, its pretty much solved.
+
+i first 'ls' the directory, And i find a flag2.txt, I try to cat it, And there it is, The flag < br >
+(Someone was just doing rm * every few minutes to grief the challenge, so sometimes when u ls, u wont find the flag, But it is getting uploaded each minute if its not here ) <br>
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/27b62a35-02a5-4960-a70d-84665e631f8a" />
+
 
 
 
