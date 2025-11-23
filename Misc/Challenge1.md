@@ -34,7 +34,7 @@ And luckily it worked and now we have a shell on the server ! <br>
 We have a shell at the site, its pretty much solved.
 
 i first 'ls' the directory, And i find a flag2.txt, I try to cat it, And there it is, The flag <br>
-(Someone was just doing rm * every few minutes to grief the challenge, so sometimes when u ls, u wont find the flag, But it is getting uploaded each minute if its not here ) <br>
+(Someone was just doing rm * every few minutes to grief the challenge, so sometimes when u ls, u wont find the flag.<br>
 <img width="1915" height="1040" alt="image" src="https://github.com/user-attachments/assets/c50c112b-3a8a-4fc3-bbb7-42715a07d8d6" />
 
 
