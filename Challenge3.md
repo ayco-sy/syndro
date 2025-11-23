@@ -3,7 +3,7 @@
 **Author:** [Syndro/Ayco]  
 **Category:** Web  
 
-
+---
 <img width="492" height="430" alt="image" src="https://github.com/user-attachments/assets/81a61722-71a8-417f-8c3d-4f0635109c69" />
 
 <h3>The description says a really old version of java, It doesnt say much at the start, but we are going to need it later.</h3>
