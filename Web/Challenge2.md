@@ -25,12 +25,12 @@ Only **Bookmarks** matters.
 ---
 
 ### Finding the SSTI Endpoint
-Adding a bookmark with '{{7*7}}' just gets reflected as plain text → not rendered.
-
-View page source on the Bookmarks tab → /search:
-
+Adding a bookmark with '{{7*7}}' just gets reflected as plain text → not rendered. <br>
 
 <img width="331" height="279" alt="2" src="https://github.com/user-attachments/assets/e0370a28-153c-4781-b92d-44393d1123fc"> <br>
+
+View page source on the Bookmarks tab → /search: <br>
+
 
 ```
   <-- <p>Legacy console: <a href="/search">/search</a></p> -->
