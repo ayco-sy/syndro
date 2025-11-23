@@ -1,5 +1,5 @@
 # PatriotCTF 2025 – Web Challenges Writeups
-**Challenge 1: Connection Tester**  
+**Challenge 3: Feedback Fallout**  
 **Author:** [Syndro/Ayco]  
 **Category:** Web  
 
