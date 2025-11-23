@@ -3,6 +3,21 @@
 **Author:** [Syndro/Ayco]  
 **Category:** Misc  
 
+----
 <img width="491" height="613" alt="image" src="https://github.com/user-attachments/assets/6550504a-1e15-4339-aa04-4c811b75b0d6" />
 
 ---
+### 1- Upload page
+At first, We are greeted by an upload page,I Checked the page source, and it doesnt look like it requires a specfic extension.
+
+| Initial Page  | Source page |
+| ------------- | ------------- |
+| <img width="441" height="209" alt="image" src="https://github.com/user-attachments/assets/420f4536-a676-4eb6-b30a-4d6b760961f5" />  | <img width="397" height="206" alt="image" src="https://github.com/user-attachments/assets/93d98d98-ce2e-4462-997c-0c46931c5812" />
+  |
+
+---
+
+ I Tried to upload a PHP Shell and it said it got uploaded Successfully!
+<img width="380" height="185" alt="image" src="https://github.com/user-attachments/assets/eec01e40-edc0-469a-9e37-1f85669bfddf" />
+
+We dont get information back other than its being stored, So what if we try to navigate to /Uploads/Filename ?
