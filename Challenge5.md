@@ -25,8 +25,10 @@ Then i try to access the API end point using ZAP,
 
 At first, i get Method not allowed, Which means, yo u are using a wrong HTTP Request, By default its GET, So, We edit that in BURP/ZAP, And while we are at it, We also add the content type since its Missing
 
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/f8da4eae-0d3c-425f-bd26-4a9700912330" />
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/aa4de28e-f4d8-48eb-8676-cf063993a634" />
+| First Header  | Second Header |
+| ------------- | ------------- |
+| <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/f8da4eae-0d3c-425f-bd26-4a9700912330" />  | <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/aa4de28e-f4d8-48eb-8676-cf063993a634" />  |
+| Content Cell  | Content Cell  |
 
 ---
 ### 3- Initialization the attack
