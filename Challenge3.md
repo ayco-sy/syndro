@@ -1,7 +1,9 @@
-# PatriotCTF2025-Web
-Writeups for web-challenges Partriot-CTF
+# PatriotCTF 2025 – Web Challenges Writeups
+**Challenge 1: Connection Tester**  
+**Author:** [Syndro/Ayco]  
+**Category:** Web  
 
-# Challenge-3: Feedback Fallout
+
 <img width="492" height="430" alt="image" src="https://github.com/user-attachments/assets/81a61722-71a8-417f-8c3d-4f0635109c69" />
 
 <h3>The description says a really old version of java, It doesnt say much at the start, but we are going to need it later.</h3>
