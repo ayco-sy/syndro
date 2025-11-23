@@ -25,7 +25,7 @@ And luckily it worked and now we have a shell on the server ! <br>
 
 | Uploaded  | File |
 | ------------- | ------------- |
-| <img width="380" height="185" alt="image" src="https://github.com/user-attachments/assets/eec01e40-edc0-469a-9e37-1f85669bfddf" /> | <img width="1200" height="1042" alt="image" src="https://github.com/user-attachments/assets/7f667e88-f38f-4b7d-89da-d662e96c6e80" />
-  |
+| <img width="380" height="185" alt="image" src="https://github.com/user-attachments/assets/eec01e40-edc0-469a-9e37-1f85669bfddf" /> | <img width="600" height="1042" alt="image" src="https://github.com/user-attachments/assets/7f667e88-f38f-4b7d-89da-d662e96c6e80" />
+
 
 
