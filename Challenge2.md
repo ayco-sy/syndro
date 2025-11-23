@@ -1,8 +1,9 @@
 # PatriotCTF 2025 – Web Challenges Writeups
+**Challenge 1: Connection Tester**  
+**Author:** [Syndro/Ayco]  
+**Category:** Web  
 
-**Challenge 1: Connection Tester**  <br>
-**Author:** [Syndro/Ayco]  <br>
-**Category:** Web  <br>
+
 ---
 
 ### Initial Observations
