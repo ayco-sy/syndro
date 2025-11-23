@@ -32,7 +32,7 @@ At first, i get Method not allowed, Which means, yo u are using a wrong HTTP Req
 | <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/f8da4eae-0d3c-425f-bd26-4a9700912330" />  | <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/aa4de28e-f4d8-48eb-8676-cf063993a634" />  |
 
 ---
-### 3- Initialization the attack
+### 3- Initialization of the attack
 
 Since now everything is working perfect, Now we need to add the Payload, Luckily he already gave us info
 <img width="570" height="154" alt="image" src="https://github.com/user-attachments/assets/02f7afdb-0a73-4099-ae0d-25765f629f5b" /> <br>
