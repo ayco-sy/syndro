@@ -1,5 +1,6 @@
 # PatriotCTF 2025 – Web Challenges Writeups
-**Challenge 2: Trust Vault**  
+
+**Challenge 1: Trust Vault**  
 **Author:** [Syndro/Ayco]  
 **Category:** Web  
 ---
