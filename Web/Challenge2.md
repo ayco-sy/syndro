@@ -29,7 +29,7 @@ Adding a bookmark with `{{7*7}}` just gets reflected as plain text → not rende
 
 View page source on the Bookmarks tab → jackpot → /search:
 
-```html<img width="331" height="279" alt="2" src="https://github.com/user-attachments/assets/e0370a28-153c-4781-b92d-44393d1123fc" />
+<img width="331" height="279" alt="2" src="https://github.com/user-attachments/assets/e0370a28-153c-4781-b92d-44393d1123fc" />
 
 <!-- Debug endpoint? -->
 <script src="/static/js/bookmarks.js"></script>
