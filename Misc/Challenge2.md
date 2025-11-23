@@ -26,10 +26,26 @@ So, i think what if i 'ls' backwards? ls ../.. <br>
 
 We keep navigating using 'ls -la' incase there is any hidden files, until we come across the log directory.
 
-Then i try to check the ctf monitor with various greps, <br>
+<img width="489" height="184" alt="image" src="https://github.com/user-attachments/assets/8152e2ba-3484-4330-8e6b-9065fab8bb06" />
+
+
+Then i try to check the 'ctf-monitor/processes.log' with various greps, <br>
 <pre>
   grep -i "MASONCC{",
   grep -i "flag{",
   grep -i "flag",
   grep -i "pctf{"
 </pre>
+
+---
+
+### Flag!
+
+After i did 
+<pre>
+  strings ../../../log/ctf-monitor/processes.log | grep -i "pctf{"
+</pre>
+
+I Finally got the flag back!
+
+<img width="1849" height="188" alt="image" src="https://github.com/user-attachments/assets/ea786880-85ef-4670-a95b-9b73253a5bfd" />
