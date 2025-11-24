@@ -12,7 +12,7 @@
     canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.15}
     .container{max-width:1100px;margin:0 auto;padding:20px;position:relative;z-index:2}
     header{text-align:center;padding:80px 20px;position:relative}
-    #glitch{font-family:'Orbitron',sans-serif;font-size:5rem;margin:0;background:linear-gradient(90deg,#58a6ff,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}
+    #glitch{font-family:'Orbitron',sans-serif;font-size:5rem;margin:0;background:linear-gradient(90deg,#58a6ff,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
     #glitch:hover{animation:glitch 1s linear infinite}
     @keyframes glitch{0%,100%{text-shadow:0 0 10px #58a6ff}2%{text-shadow:5px 0 #f85149,-5px 0 #3fb950}4%{text-shadow:-5px 0 #f85149,5px 0 #3fb950}}
     .terminal{background:#000;color:#0f0;padding:20px;border-radius:12px;margin:40px auto;max-width:800px;box-shadow:0 0 30px #0f03;inset 0 0 20px #0f03;font-size:1.1rem;line-height:1.6;opacity:0;transform:translateY(30px);transition:opacity 1s,transform 1s}
@@ -35,14 +35,22 @@
     .tag-crypto{background:#ffa657;color:#000}.tag-forensics{background:#9c72ff;color:#fff}.tag-rev{background:#ff79c6;color:#000}
     .toggle,.ctf-toggle{position:absolute;top:30px;background:var(--card);border:2px solid var(--border);padding:12px 18px;border-radius:50px;cursor:pointer;font-size:1.5rem;z-index:10;transition:.3s}
     .toggle{right:30px}
-    .ctf-toggle{right:140px}
-    .ctf-panel{position:fixed;top:0;right:-400px;width:380px;height:100%;background:var(--card);border-left:3px solid var(--accent);padding:100px 30px 30px;box-shadow:-20px 0 60px rgba(0,0,0,0.8);transition:right .6s cubic-bezier(0.22,1,0.36,1);z-index:999;overflow-y:auto}
-    .ctf-panel.open{right:0}
-    .ctf-panel h2{color:var(--accent);text-align:center;margin:0 0 40px;font-size:2.2rem}
-    .ctf-item{margin:30px 0;padding:20px;background:rgba(0,0,0,0.3);border-radius:12px;cursor:pointer;transition:.4s;border:2px solid transparent}
-    .ctf-item:hover{border-color:var(--accent);transform:translateX(-10px);box-shadow:0 10px 30px rgba(88,166,255,.3)}
-    .ctf-item h3{margin:0 0 8px;color:var(--accent)}
-    .close-panel{position:absolute;top:30px;right:20px;font-size:2rem;cursor:pointer;opacity:0.7}
+    .ctf-toggle{left:30px}
+    /* MODAL */
+    .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
+    .modal-overlay.open{opacity:1;visibility:visible}
+    .modal-content{background:var(--card);border:3px solid var(--accent);border-radius:20px;width:90%;max-width:1200px;max-height:90vh;overflow-y:auto;padding:40px;box-shadow:0 0 80px rgba(88,166,255,.8);transform:scale(0.7);transition:transform .6s cubic-bezier(0.175,0.885,0.32,1.275)}
+    .modal-overlay.open .modal-content{transform:scale(1)}
+    .modal-header{text-align:center;margin-bottom:40px;position:relative}
+    .modal-header h2{color:var(--accent);font-family:'Orbitron';font-size:3rem;margin:0}
+    .close-modal{position:absolute;top:10px;right:20px;font-size:3rem;cursor:pointer;opacity:0.7;transition:.3s}
+    .close-modal:hover{opacity:1;transform:rotate(90deg)}
+    .ctf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
+    .ctf-card{background:rgba(0,0,0,0.4);border:2px solid transparent;border-radius:16px;padding:30px;text-align:center;cursor:pointer;transition:.5s;position:relative;overflow:hidden}
+    .ctf-card:hover{border-color:var(--accent);transform:translateY(-15px);box-shadow:0 20px 50px rgba(88,166,255,.6)}
+    .ctf-card h3{margin:0 0 12px;color:var(--accent);font-size:1.6rem}
+    .ctf-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(88,166,255,.3),transparent);transition:.6s}
+    .ctf-card:hover::before{left:100%}
     footer{text-align:center;margin:100px 0 50px;opacity:0.6}
     .reveal{opacity:1!important;transform:translateY(0)!important}
   </style>
@@ -51,7 +59,7 @@
   <canvas id="matrix"></canvas>
   <div class="container">
     <div class="toggle" onclick="document.documentElement.classList.toggle('light');localStorage.theme=document.documentElement.classList.contains('light')?'light':'dark'">Theme</div>
-    <div class="ctf-toggle" onclick="document.getElementById('ctfPanel').classList.toggle('open')">CTFs</div>
+    <div class="ctf-toggle" onclick="document.getElementById('ctfModal').classList.add('open')">CTFs</div>
     
     <header>
       <h1 id="glitch">Syndro</h1>
@@ -73,7 +81,6 @@
          <a href="https://medium.com/@syndro" style="color:var(--accent)">Medium</a></p>
     </div>
 
-    <!-- PatriotCTF 2025 Challenges -->
     <h2 style="text-align:center;color:var(--accent);font-size:2.5rem;margin:80px 0 40px">PatriotCTF 2025</h2>
     <div class="tabs">
       <div class="tab active" data-cat="all">All</div>
@@ -89,22 +96,29 @@
     <footer>syndro • Built with rage, RGB, and zero sleep</footer>
   </div>
 
-  <!-- SLIDING CTF PANEL -->
-  <div class="ctf-panel" id="ctfPanel">
-    <div class="close-panel" onclick="document.getElementById('ctfPanel').classList.remove('open')">×</div>
-    <h2>My CTFs</h2>
-    <div class="ctf-item" onclick="location.href='ctf/patriotctf2025.html'">
-      <h3>PatriotCTF 2025</h3>
-      <p>6+ solves • Web & Misc focus</p>
-      <p style="color:var(--green)">Currently Active</p>
+  <!-- CENTERED CTF MODAL -->
+  <div class="modal-overlay" id="ctfModal" onclick="this.classList.remove('open')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h2>My CTFs</h2>
+        <div class="close-modal" onclick="document.getElementById('ctfModal').classList.remove('open')">×</div>
+      </div>
+
+      <div class="ctf-grid">
+        <div class="ctf-card" onclick="location.href='ctf/patriotctf2025.html'">
+          <h3>PatriotCTF 2025</h3>
+          <p>6+ solves • Web & Misc</p>
+          <p style="color:var(--green);font-weight:bold">Currently Active</p>
+        </div>
+        <!-- Add more CTFs here -->
+        <!--
+        <div class="ctf-card" onclick="location.href='ctf/google2025.html'">
+          <h3>Google CTF</h3>
+          <p>Pwn & Crypto focus</p>
+        </div>
+        -->
+      </div>
     </div>
-    <!-- Add more CTFs here in the future -->
-    <!--
-    <div class="ctf-item" onclick="location.href='ctf/htb.html'">
-      <h3>HackTheBox CTF</h3>
-      <p>12 solves • Pwn & Crypto</p>
-    </div>
-    -->
   </div>
 
   <script>
