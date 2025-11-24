@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reverse Metadata Part 1 • PatriotCTF 2025</title>
   
-  <!-- Shared style from your main site -->
   <link rel="stylesheet" href="../../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* Only tiny, safe overrides for writeups */
     .writeup {
       max-width: 1000px;
       margin: 60px auto;
@@ -20,13 +18,12 @@
       border: 2px solid var(--border);
       box-shadow: 0 25px 80px rgba(0,0,0,0.7);
       position: relative;
-      overflow: hidden;
     }
     .writeup::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; height: 6px;
-      background: linear-gradient(90deg, #58a6ff, #8b5cf6);
+      background: linear-gradient(90deg, var(--accent), #8b5cf6);
     }
 
     .back-btn {
@@ -39,93 +36,110 @@
       padding: 14px 32px;
       border-radius: 50px;
       font-weight: bold;
-      text-decoration: none;
       font-size: 1.1rem;
+      text-decoration: none;
       box-shadow: 0 10px 30px rgba(88,166,255,0.4);
       transition: all .3s;
     }
-    .back-btn:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(88,166,255,0.6); }
+    .back-btn:hover { transform: translateY(-4px); }
 
-    .title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
     .title h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 4rem;
-      background: linear-gradient(90deg, #58a6ff, #8b5cf6);
+      font-size: 4.2rem;
+      text-align: center;
+      background: linear-gradient(90deg, var(--accent), #8b5cf6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin: 0;
+      margin: 0 0 16px;
     }
     .title small {
       display: block;
-      font-size: 2rem;
+      text-align: center;
+      font-size: 1.9rem;
       opacity: 0.9;
-      margin-top: 10px;
-      font-weight: normal;
+      color: var(--text);
     }
+
     .meta {
       text-align: center;
+      margin: 30px 0;
+      color: var(--text);
       opacity: 0.8;
       font-size: 1.1rem;
-      margin: 30px 0;
     }
 
     h2 {
       color: var(--accent);
-      border-bottom: 2px solid var(--accent);
+      font-size: 2.1rem;
+      margin: 60px 0 20px;
       padding-bottom: 10px;
-      margin: 50px 0 25px;
-      font-size: 2rem;
+      border-bottom: 2px solid var(--accent);
     }
 
-    .grid {
+    /* ALL IMAGES SAME SIZE + PERFECT CROPPING */
+    .image-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 30px;
-      margin: 40px 0;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 35px;
+      margin: 45px 0;
     }
-    .grid img {
-      width: 100%;
+    .image-item {
+      background: #0d1117;
       border-radius: 16px;
+      overflow: hidden;
       border: 3px solid var(--border);
       box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-      transition: transform .4s;
+      transition: all .4s;
     }
-    .grid img:hover { transform: scale(1.03); }
-    .grid p {
+    .image-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 60px rgba(88,166,255,0.4);
+      border-color: var(--accent);
+    }
+    .image-item img {
+      width: 100%;
+      height: 280px;           /* FIXED HEIGHT = SAME SIZE */
+      object-fit: cover;       /* CROP perfectly */
+      display: block;
+    }
+    .image-item p {
+      padding: 16px;
       text-align: center;
-      margin-top: 12px;
-      opacity: 0.8;
+      margin: 0;
+      background: rgba(13,17,23,0.8);
+      color: var(--text);
       font-style: italic;
+      opacity: 0.9;
+      font-size: 0.95rem;
     }
 
     pre {
       background: #010409 !important;
+      color: #f0f6fc;
       padding: 20px !important;
       border-radius: 16px;
       border: 2px solid var(--border);
       overflow-x: auto;
-      font-size: 1.1rem;
-      margin: 30px 0;
+      font-size: 1.05rem;
+      margin: 35px 0;
     }
 
     .flag-box {
-      background: linear-gradient(135deg, #1e40af, #1e3a8a);
-      padding: 25px;
-      border-radius: 16px;
-      text-align: center;
-      margin: 40px 0;
+      background: rgba(59, 249, 80, 0.1);
       border: 3px solid var(--green);
-      box-shadow: 0 0 40px rgba(59, 249, 80, 0.3);
+      border-radius: 18px;
+      padding: 35px;
+      text-align: center;
+      margin: 60px 0;
+      box-shadow: 0 0 50px rgba(59, 249, 80, 0.25);
     }
     .flag {
-      font-size: 1.8rem;
+      font-size: 2.1rem;
       font-weight: bold;
       color: var(--green);
-      text-shadow: 0 0 20px var(--green);
-      letter-spacing: 1px;
+      text-shadow: 0 0 25px var(--green);
+      letter-spacing: 2px;
+      font-family: 'Roboto Mono', monospace;
     }
 
     .footer-note {
@@ -133,55 +147,57 @@
       margin-top: 100px;
       opacity: 0.6;
       font-size: 0.95rem;
+      color: var(--text);
     }
+    .footer-note a { color: var(--accent); text-decoration: none; }
+    .footer-note a:hover { text-decoration: underline; }
 
     @media (max-width: 768px) {
-      .writeup { margin: 20px; padding: 30px; }
+      .writeup { margin: 20px; padding: 35px; }
       .title h1 { font-size: 3rem; }
       .title small { font-size: 1.6rem; }
-      .grid { grid-template-columns: 1fr; }
-      .back-btn { position: relative; top: auto; left: auto; display: inline-block; margin: 20px 0; }
+      .image-grid { grid-template-columns: 1fr; }
+      .image-item img { height: 240px; }
+      .back-btn { position: static; display: block; margin: 20px auto; text-align: center; }
+      .flag { font-size: 1.7rem; }
     }
   </style>
 </head>
 <body>
 
-  <a href="https://syndro-1.github.io/syndro/" class="back-btn">Back</a>
+  <a href="https://syndro-1.github.io/syndro/CTF/PatriotCTF2025/patriotctf2025.html" class="back-btn">Back</a>
 
   <div class="writeup">
     <div class="title">
       <h1>Reverse Metadata Part 1</h1>
-      <small>Misc • 100 points • 62 solves</small>
+      <small>Misc • 100 pts • 62 solves</small>
     </div>
 
-    <div class="meta">
-      Solved on November 23, 2025 • PatriotCTF 2025
-    </div>
+    <div class="meta">PatriotCTF 2025 • Solved November 23, 2025</div>
 
     <h2>1. The Upload Form</h2>
-    <p>We’re given a simple file upload page with <strong>zero client-side filtering</strong>. That’s a red flag.</p>
+    <p>Simple file upload page — no client-side filtering in the source code.</p>
 
-    <div class="grid">
-      <div>
+    <div class="image-grid">
+      <div class="image-item">
         <img src="https://github.com/user-attachments/assets/420f4536-a676-4eb6-b30a-4d6b760961f5" alt="Upload form">
         <p>The upload interface</p>
       </div>
-      <div>
+      <div class="image-item">
         <img src="https://github.com/user-attachments/assets/93d98d98-ce2e-4462-997c-0c46931c5812" alt="Source code">
-        <p>No extension checks in source</p>
+        <p>Source code — no filtering</p>
       </div>
     </div>
 
     <h2>2. RCE via PHP Shell</h2>
-    <p>Uploaded a one-liner PHP shell → “Upload successful!”<br>
-    Guessed the path: <code>/uploads/shell.php</code> → <strong>Remote code execution achieved.</strong></p>
+    <p>Uploaded a classic PHP web shell → got RCE on first try.</p>
 
-    <div class="grid">
-      <div>
+    <div class="image-grid">
+      <div class="image-item">
         <img src="https://github.com/user-attachments/assets/eec01e40-edc0-469a-9e37-1f85669bfddf" alt="Upload success">
-        <p>Upload confirmed</p>
+        <p>Upload successful!</p>
       </div>
-      <div>
+      <div class="image-item">
         <img src="https://github.com/user-attachments/assets/7f667e88-f38f-4b7d-89da-d662e96c6e80" alt="Shell execution">
         <p>SYNDRO shell running</p>
       </div>
@@ -192,14 +208,20 @@
 cat flag2.txt</code></pre>
 
     <div class="flag-box">
-      <div class="flag">MASONCC{images_****}</div>
+      <div class="flag">MASONCC{images_can_hide_secrets}</div>
     </div>
 
-    <img src="https://github.com/user-attachments/assets/c50c112b-3a8a-4fc3-bbb7-42715a07d8d6" alt="Flag captured" style="max-width:700px; display:block; margin:40px auto; border-radius:16px; border:3px solid var(--border);">
+    <div class="image-grid">
+      <div class="image-item">
+        <img src="https://github.com/user-attachments/assets/c50c112b-3a8a-4fc3-bbb7-42715a07d8d6" alt="Flag captured">
+        <p>Flag captured</p>
+      </div>
+    </div>
 
     <div class="footer-note">
-      Writeup by Syndro • <a href="https://github.com/syndro-1" style="color:var(--accent)">GitHub</a> • 
-      <a href="https://syndro-1.github.io/syndro/" style="color:var(--accent)">Back to all writeups</a>
+      Writeup by Syndro • 
+      <a href="https://github.com/syndro-1">GitHub</a> • 
+      <a href="https://syndro-1.github.io/syndro/">All writeups</a>
     </div>
   </div>
 
