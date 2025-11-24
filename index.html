@@ -4,66 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>syndro | CTF Writeups</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#0d1117;--card:#161b22;--text:#f0f6fc;--accent:#58a6ff;--green:#3fb950;--red:#f85149;--border:#30363d}
-    .light{--bg:#ffffff;--card:#f6f8fa;--text:#24292f;--border:#d0d7de}
-    body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:'Roboto Mono',monospace;transition:all .4s}
-    canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.15}
-    .container{max-width:1100px;margin:0 auto;padding:20px;position:relative;z-index:2}
-    header{text-align:center;padding:80px 20px;position:relative}
-    #glitch{font-family:'Orbitron',sans-serif;font-size:5rem;margin:0;background:linear-gradient(90deg,#58a6ff,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    #glitch:hover{animation:glitch 1s linear infinite}
-    @keyframes glitch{0%,100%{text-shadow:0 0 10px #58a6ff}2%{text-shadow:5px 0 #f85149,-5px 0 #3fb950}4%{text-shadow:-5px 0 #f85149,5px 0 #3fb950}}
-    .terminal{background:#000;color:#0f0;padding:20px;border-radius:12px;margin:40px auto;max-width:800px;box-shadow:0 0 30px #0f03;inset 0 0 20px #0f03;font-size:1.1rem;line-height:1.6;opacity:0;transform:translateY(30px);transition:opacity 1s,transform 1s}
-    .typing::after{content:'|';animation:blink 1s infinite}
-    @keyframes blink{50%{opacity:0}}
-    .solve-counter{font-size:3rem;font-weight:bold;color:var(--green);text-shadow:0 0 20px var(--green);animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
-    .bio{max-width:700px;margin:40px auto;text-align:center;opacity:0;transform:translateY(30px);transition:opacity 1s,transform 1s 0.3s}
-    .tabs{margin:50px 0;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-    .tab{padding:14px 28px;background:var(--card);border:2px solid var(--border);border-radius:50px;cursor:pointer;transition:.4s;font-weight:bold}
-    .tab.active,.tab:hover{background:var(--accent);color:#000;border-color:var(--accent)}
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:30px;margin:50px 0;opacity:0;transform:translateY(40px);transition:opacity 1s,transform 1s}
-    .card{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:25px;transition:.5s;cursor:pointer;position:relative;overflow:hidden}
-    .card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 0%,var(--accent) 2%,transparent 4%);background-size:200% 200%;animation:scan 4s linear infinite;opacity:0;transition:opacity .4s}
-    .card:hover::before{opacity:0.1}
-    .card:hover{transform:translateY(-15px);box-shadow:0 20px 50px rgba(88,166,255,.5);border-color:var(--accent)}
-    @keyframes scan{0%{background-position:0 0}100%{background-position:200% 200%}}
-    .category-tag{position:absolute;top:15px;right:15px;padding:6px 14px;background:rgba(0,0,0,0.7);border-radius:20px;font-size:0.8rem}
-    .tag-misc{background:#3fb950;color:#000}.tag-web{background:#58a6ff;color:#000}.tag-pwn{background:#f85149;color:#fff}
-    .tag-crypto{background:#ffa657;color:#000}.tag-forensics{background:#9c72ff;color:#fff}.tag-rev{background:#ff79c6;color:#000}
-    .toggle,.ctf-toggle{position:absolute;top:30px;background:var(--card);border:2px solid var(--border);padding:12px 18px;border-radius:50px;cursor:pointer;font-size:1.5rem;z-index:10;transition:.3s}
-    .toggle{right:30px}
-    .ctf-toggle{left:30px}
-    /* MODAL */
-    .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
-    .modal-overlay.open{opacity:1;visibility:visible}
-    .modal-content{background:var(--card);border:3px solid var(--accent);border-radius:20px;width:90%;max-width:1200px;max-height:90vh;overflow-y:auto;padding:40px;box-shadow:0 0 80px rgba(88,166,255,.8);transform:scale(0.7);transition:transform .6s cubic-bezier(0.175,0.885,0.32,1.275)}
-    .modal-overlay.open .modal-content{transform:scale(1)}
-    .modal-header{text-align:center;margin-bottom:40px;position:relative}
-    .modal-header h2{color:var(--accent);font-family:'Orbitron';font-size:3rem;margin:0}
-    .close-modal{position:absolute;top:10px;right:20px;font-size:3rem;cursor:pointer;opacity:0.7;transition:.3s}
-    .close-modal:hover{opacity:1;transform:rotate(90deg)}
-    .ctf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
-    .ctf-card{background:rgba(0,0,0,0.4);border:2px solid transparent;border-radius:16px;padding:30px;text-align:center;cursor:pointer;transition:.5s;position:relative;overflow:hidden}
-    .ctf-card:hover{border-color:var(--accent);transform:translateY(-15px);box-shadow:0 20px 50px rgba(88,166,255,.6)}
-    .ctf-card h3{margin:0 0 12px;color:var(--accent);font-size:1.6rem}
-    .ctf-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(88,166,255,.3),transparent);transition:.6s}
-    .ctf-card:hover::before{left:100%}
-    footer{text-align:center;margin:100px 0 50px;opacity:0.6}
-    .reveal{opacity:1!important;transform:translateY(0)!important}
-  </style>
 </head>
 <body>
   <canvas id="matrix"></canvas>
+
   <div class="container">
-    <div class="toggle" onclick="document.documentElement.classList.toggle('light');localStorage.theme=document.documentElement.classList.contains('light')?'light':'dark'">Theme</div>
-    <div class="ctf-toggle" onclick="document.getElementById('ctfModal').classList.add('open')">CTFs</div>
-    
+    <div class="toggle" id="themeToggle">Theme</div>
+    <div class="ctf-toggle" id="ctfToggle">CTFs</div>
+
     <header>
       <h1 id="glitch">Syndro</h1>
-      <div class="solve-counter" id="counter">2 SOLVED</div>
+      <div class="solve-counter" id="solveCounter">0 SOLVED</div>
     </header>
 
     <div class="terminal" id="terminal">
@@ -75,14 +28,16 @@
 
     <div class="bio">
       <p>Trying my best in every CTF. Every flag is a story. Every writeup is a war crime against the challenge author.</p>
-      <p><a href="https://github.com/ayco-sy" style="color:var(--accent)">GitHub</a> • 
-         <a href="https://x.com/Syndro_1" style="color:var(--accent)">X/Twitter</a> • 
-         <a href="https://discordapp.com/users/313717103150759950" style="color:var(--accent)">Discord</a> • 
-         <a href="https://medium.com/@syndro" style="color:var(--accent)">Medium</a></p>
+      <p>
+        <a href="https://github.com/ayco-sy">GitHub</a> • 
+        <a href="https://x.com/Syndro_1">X/Twitter</a> • 
+        <a href="https://discordapp.com/users/313717103150759950">Discord</a> • 
+        <a href="https://medium.com/@syndro">Medium</a>
+      </p>
     </div>
 
-    <h2 style="text-align:center;color:var(--accent);font-size:2.5rem;margin:80px 0 40px">PatriotCTF 2025</h2>
-    <div class="tabs">
+    <h2 class="section-title">PatriotCTF 2025</h2>
+    <div class="tabs" id="challengeTabs">
       <div class="tab active" data-cat="all">All</div>
       <div class="tab" data-cat="misc">Misc</div>
       <div class="tab" data-cat="web">Web</div>
@@ -91,139 +46,24 @@
       <div class="tab" data-cat="forensics">Forensics</div>
     </div>
 
-    <div class="cards" id="cards"></div>
+    <div class="cards" id="challengeCards"></div>
 
     <footer>syndro • Built with rage, RGB, and zero sleep</footer>
   </div>
 
-  <!-- CENTERED CTF MODAL -->
-  <div class="modal-overlay" id="ctfModal" onclick="this.classList.remove('open')">
-    <div class="modal-content" onclick="event.stopPropagation()">
+  <!-- CTF MODAL -->
+  <div class="modal-overlay" id="ctfModal">
+    <div class="modal-content">
       <div class="modal-header">
         <h2>My CTFs</h2>
-        <div class="close-modal" onclick="document.getElementById('ctfModal').classList.remove('open')">×</div>
+        <div class="close-modal">×</div>
       </div>
-
-      <div class="ctf-grid">
-        <div class="ctf-card" onclick="location.href='ctf/patriotctf2025.html'">
-          <h3>PatriotCTF 2025</h3>
-          <p>6+ solves • Web & Misc</p>
-          <p style="color:var(--green);font-weight:bold">Currently Active</p>
-        </div>
-        
-                <div class="ctf-card" onclick="location.href='ctf/google2025.html'">
-          <h3>Google CTF</h3>
-          <p>Pwn & Crypto focus</p>
-                </div>
-        
-                <div class="ctf-card" onclick="location.href='ctf/google2025.html'">
-          <h3>Google CTF</h3>
-          <p>Pwn & Crypto focus</p>
-                </div>
-        
-                <div class="ctf-card" onclick="location.href='ctf/google2025.html'">
-          <h3>Google CTF</h3>
-          <p>Pwn & Crypto focus</p>
-                </div>
-
-                <div class="ctf-card" onclick="location.href='ctf/google2025.html'">
-          <h3>Google CTF</h3>
-          <p>Pwn & Crypto focus</p>
-                </div>
-
-                <div class="ctf-card" onclick="location.href='ctf/google2025.html'">
-          <h3>Google CTF</h3>
-          <p>Pwn & Crypto focus</p>
-                </div>
-  
-                <div class="ctf-card" onclick="location.href='ctf/google2025.html'">
-          <h3>Google CTF</h3>
-          <p>Pwn & Crypto focus</p>
-                </div>
-    
-                <div class="ctf-card" onclick="location.href='ctf/google2025.html'">
-          <h3>Google CTF</h3>
-          <p>Pwn & Crypto focus</p>
-                </div>
-  
-        <!-- Add more CTFs here -->
-        <!--
-        <div class="ctf-card" onclick="location.href='ctf/google2025.html'">
-          <h3>Google CTF</h3>
-          <p>Pwn & Crypto focus</p>
-        </div>
-        -->
+      <div class="ctf-grid" id="ctfGrid">
+        <!-- Filled by JS -->
       </div>
     </div>
   </div>
 
-  <script>
-    // Matrix rain + animations (unchanged)
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-    function draw() {
-      ctx.fillStyle = 'rgba(13,17,23,0.05)';
-      ctx.fillRect(0,0,canvas.width,canvas.height);
-      ctx.fillStyle = '#0f0';
-      ctx.font = fontSize + 'px monospace';
-      drops.forEach((y,i) => {
-        const text = chars[Math.floor(Math.random()*chars.length)];
-        const x = i * fontSize;
-        ctx.fillText(text, x, y * fontSize);
-        if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-      });
-    }
-    setInterval(draw, 35);
-    window.addEventListener('resize', () => {canvas.width = window.innerWidth; canvas.height = window.innerHeight});
-
-    setTimeout(() => document.getElementById('terminal').classList.add('reveal'), 800);
-    setTimeout(() => document.querySelector('.bio').classList.add('reveal'), 2000);
-    setTimeout(() => document.getElementById('cards').classList.add('reveal'), 2800);
-
-    // Challenges
-    const challenges = [
-      {title:"Reverse Metadata Part 1",file:"Misc/Challenge1.html",flag:"PCTF{1_l0v3_unr3str1ct3d_f1l3_upl0ads}",type:"misc"},
-      {title:"Reverse Metadata Part 2",file:"Misc/Challenge2.html",flag:"PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",type:"misc"},
-    ];
-
-    document.getElementById("counter").textContent = challenges.length + " SOLVED";
-
-    const container = document.getElementById("cards");
-    const tabs = document.querySelectorAll(".tab");
-
-    function render(filter = "all") {
-      container.innerHTML = "";
-      const filtered = filter === "all" ? challenges : challenges.filter(c => c.type === filter);
-      filtered.forEach(c => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <div class="category-tag tag-${c.type}">${c.type.toUpperCase()}</div>
-          <h3>${c.title}</h3>
-          <p class="flag">Flag: <code>${c.flag}</code></p>
-          <span style="opacity:0.7">Click for full writeup</span>
-        `;
-        card.onclick = () => window.location = c.file;
-        container.appendChild(card);
-      });
-    }
-
-    tabs.forEach(t => t.onclick = () => {
-      tabs.forEach(x => x.classList.remove("active"));
-      t.classList.add("active");
-      render(t.dataset.cat);
-    });
-
-    if (localStorage.theme === "light" || (!localStorage.theme && window.matchMedia("(prefers-color-scheme: light)").matches))
-      document.documentElement.classList.add("light");
-
-    render();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
