@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PatriotCTF 2025 • syndro</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="container">
+    <a href="/" style="position:absolute;top:30px;left:30px;color:var(--accent);font-size:1.5rem;text-decoration:none">Back</a>
+    <header style="margin-top:100px">
+      <h1 style="font-size:4.5rem">PatriotCTF 2025</h1>
+      <p>All writeups from the ongoing CTF</p>
+    </header>
+    <div class="cards" id="cards"></div>
+  </div>
+  <script>
+    const challenges = [
+      {title:"Reverse Metadata Part 1",file:"/Misc/Challenge1.html",flag:"PCTF{1_l0v3_unr3str1ct3d_f1l3_upl0ads}",type:"misc"},
+      {title:"Reverse Metadata Part 2",file:"/Misc/Challenge2.html",flag:"PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",type:"misc"},
+    ];
+    const container = document.getElementById("cards");
+    challenges.forEach(c => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `<div class="category-tag tag-${c.type}">${c.type.toUpperCase()}</div><h3>${c.title}</h3><p class="flag">Flag: <code>${c.flag}</code></p>`;
+      card.onclick = () => location.href = c.file;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
