@@ -1,3 +1,6 @@
+<script src="/style.js"></script>
+
+---
 # PatriotCTF 2025 – Misc Challenges Writeups
 **Challenge 1: Reverse Metadata Part 1**  
 **Author:** [Syndro/Ayco]  
