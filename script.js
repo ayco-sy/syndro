@@ -41,8 +41,31 @@ if (localStorage.theme === 'light' || (!localStorage.theme && window.matchMedia(
 
 // Challenges
 const challenges = [
-  {title:"Reverse Metadata Part 1",file:"Misc/Challenge1.html",flag:"PCTF{1_l0v3_unr3str1ct3d_f1l3_upl0ads}",type:"misc"},
-  {title:"Reverse Metadata Part 2",file:"Misc/Challenge2.html",flag:"PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",type:"misc"},
+  // Misc
+  
+  {title:"Reverse Metadata Part 1",file:"CTF/patriotCTF2025/Misc/ReverseMetaData1.html",flag:"MASONCC{images_****}",type:"misc"},
+  {title:"Reverse Metadata Part 2",file:"CTF/patriotCTF2025/Misc/ReverseMetaData2.html",flag:"PCTF{hidden_****}",type:"misc"},
+
+
+  // Web
+
+   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/ConnectionTester.html",flag:"PCTF{C0nnection_****}",type:"web"},
+   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/FeedbackFallout.html",flag:"{SQLI_****}",type:"web"},
+   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/SecureAuth.html",flag:"PCTF{cant_****}",type:"web"},
+   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/TrustFall.html",flag:"PCTF{auth_****}",type:"web"},
+   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/TrustVault.html",flag:"FLAG{py7h0n_****}",type:"web"},
+
+  // Crypto
+
+
+
+
+  // Pwn
+
+
+
+
+ // Forensics
 ];
 
 document.getElementById("solveCounter").textContent = challenges.length + " SOLVED";
