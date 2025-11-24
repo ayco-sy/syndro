@@ -5,7 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>syndro | CTF Writeups</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css"> 
+  <style>
+    :root{--bg:#0d1117;--card:#161b22;--text:#f0f6fc;--accent:#58a6ff;--green:#3fb950;--red:#f85149;--border:#30363d}
+    .light{--bg:#ffffff;--card:#f6f8fa;--text:#24292f;--border:#d0d7de}
+    body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:'Roboto Mono',monospace;transition:all .4s}
+    canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.15}
+    .container{max-width:1100px;margin:0 auto;padding:20px;position:relative;z-index:2}
+    header{text-align:center;padding:80px 20px;position:relative}
+    #glitch{font-family:'Orbitron',sans-serif;font-size:5rem;margin:0;background:linear-gradient(90deg,#58a6ff,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}
+    #glitch:hover{animation:glitch 1s linear infinite}
+    @keyframes glitch{0%,100%{text-shadow:0 0 10px #58a6ff}2%{text-shadow:5px 0 #f85149,-5px 0 #3fb950}4%{text-shadow:-5px 0 #f85149,5px 0 #3fb950}}
+    .terminal{background:#000;color:#0f0;padding:20px;border-radius:12px;margin:40px auto;max-width:800px;box-shadow:0 0 30px #0f03;inset 0 0 20px #0f03;font-size:1.1rem;line-height:1.6;opacity:0;transform:translateY(30px);transition:opacity 1s,transform 1s}
+    .typing::after{content:'|';animation:blink 1s infinite}
+    @keyframes blink{50%{opacity:0}}
+    .solve-counter{font-size:3rem;font-weight:bold;color:var(--green);text-shadow:0 0 20px var(--green);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
+    .bio{max-width:700px;margin:40px auto;text-align:center;opacity:0;transform:translateY(30px);transition:opacity 1s,transform 1s 0.3s}
+    .ctf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;margin:60px 0}
+    .ctf-card{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:30px;text-align:center;cursor:pointer;transition:.5s;position:relative;overflow:hidden}
+    .ctf-card:hover{transform:translateY(-15px);box-shadow:0 20px 50px rgba(88,166,255,.5);border-color:var(--accent)}
+    .ctf-card h2{margin:0 0 15px;color:var(--accent);font-size:1.8rem}
+    .ctf-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(88,166,255,.2),transparent);transition:.6s}
+    .ctf-card:hover::before{left:100%}
+    .tabs{margin:50px 0;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .tab{padding:14px 28px;background:var(--card);border:2px solid var(--border);border-radius:50px;cursor:pointer;transition:.4s;font-weight:bold}
+    .tab.active,.tab:hover{background:var(--accent);color:#000;border-color:var(--accent)}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:30px;margin:50px 0;opacity:0;transform:translateY(40px);transition:opacity 1s,transform 1s}
+    .card{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:25px;transition:.5s;cursor:pointer;position:relative;overflow:hidden}
+    .card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 0%,var(--accent) 2%,transparent 4%);background-size:200% 200%;animation:scan 4s linear infinite;opacity:0;transition:opacity .4s}
+    .card:hover::before{opacity:0.1}
+    .card:hover{transform:translateY(-15px);box-shadow:0 20px 50px rgba(88,166,255,.5);border-color:var(--accent)}
+    @keyframes scan{0%{background-position:0 0}100%{background-position:200% 200%}}
+    .category-tag{position:absolute;top:15px;right:15px;padding:6px 14px;background:rgba(0,0,0,0.7);border-radius:20px;font-size:0.8rem}
+    .tag-misc{background:#3fb950;color:#000}.tag-web{background:#58a6ff;color:#000}.tag-pwn{background:#f85149;color:#fff}
+    .tag-crypto{background:#ffa657;color:#000}.tag-forensics{background:#9c72ff;color:#fff}.tag-rev{background:#ff79c6;color:#000}
+    .toggle{position:absolute;top:30px;right:30px;background:var(--card);border:2px solid var(--border);padding:12px 18px;border-radius:50px;cursor:pointer;font-size:1.5rem;z-index:10}
+    footer{text-align:center;margin:100px 0 50px;opacity:0.6}
+    .reveal{opacity:1!important;transform:translateY(0)!important}
+  </style>
 </head>
 <body>
   <canvas id="matrix"></canvas>
@@ -65,7 +102,75 @@
     <footer>syndro • Built with rage, RGB, and zero sleep</footer>
   </div>
 
-  <script src="/main.js">
+  <script>
+    // Matrix rain (unchanged)
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+    function draw() {
+      ctx.fillStyle = 'rgba(13,17,23,0.05)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = fontSize + 'px monospace';
+      drops.forEach((y,i) => {
+        const text = chars[Math.floor(Math.random()*chars.length)];
+        const x = i * fontSize;
+        ctx.fillText(text, x, y * fontSize);
+        if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    setInterval(draw, 35);
+    window.addEventListener('resize', () => {canvas.width = window.innerWidth; canvas.height = window.innerHeight});
+
+    // Animations
+    setTimeout(() => document.getElementById('terminal').classList.add('reveal'), 800);
+    setTimeout(() => document.querySelector('.bio').classList.add('reveal'), 2000);
+    setTimeout(() => document.getElementById('cards').classList.add('reveal'), 2800);
+
+    // Challenges for PatriotCTF 2025
+    const challenges = [
+      {title:"Reverse Metadata Part 1",file:"Misc/Challenge1.html",flag:"PCTF{1_l0v3_unr3str1ct3d_f1l3_upl0ads}",type:"misc"},
+      {title:"Reverse Metadata Part 2",file:"Misc/Challenge2.html",flag:"PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",type:"misc"},
+      // Add more here
+    ];
+
+    document.getElementById("total-solves").textContent = challenges.length + " SOLVED";
+
+    const container = document.getElementById("cards");
+    const tabs = document.querySelectorAll(".tab");
+
+    function render(filter = "all") {
+      container.innerHTML = "";
+      const filtered = filter === "all" ? challenges : challenges.filter(c => c.type === filter);
+      filtered.forEach(c => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="category-tag tag-${c.type}">${c.type.toUpperCase()}</div>
+          <h3>${c.title}</h3>
+          <p class="flag">Flag: <code>${c.flag}</code></p>
+          <span style="opacity:0.7">Click for full writeup</span>
+        `;
+        card.onclick = () => window.location = c.file;
+        container.appendChild(card);
+      });
+    }
+
+    tabs.forEach(t => t.onclick = () => {
+      tabs.forEach(x => x.classList.remove("active"));
+      t.classList.add("active");
+      render(t.dataset.cat);
+    });
+
+    if (localStorage.theme === "light" || (!localStorage.theme && window.matchMedia("(prefers-color-scheme: light)").matches))
+      document.documentElement.classList.add("light");
+
+    render();
   </script>
 </body>
 </html>
