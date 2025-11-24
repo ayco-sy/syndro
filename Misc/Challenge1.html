@@ -1,47 +1,80 @@
-<script src="/style.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Challenge 1: Reverse Metadata Part 1 • PatriotCTF 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0d1117;--card:#161b22;--text:#f0f6fc;--accent:#58a6ff;--green:#3fb950;--border:#30363d}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:'Roboto Mono',monospace;line-height:1.7}
+    .container{max-width:1000px;margin:40px auto;padding:40px;background:var(--card);border-radius:16px;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+    h1{font-family:'Orbitron',sans-serif;font-size:3.5rem;text-align:center;background:linear-gradient(90deg,#58a6ff,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0 0 20px}
+    h2{color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:8px;margin-top:40px}
+    p{margin:16px 0}
+    img{max-width:100%;border-radius:12px;border:2px solid var(--border);margin:20px 0;box-shadow:0 8px 20px rgba(0,0,0,0.5)}
+    table{width:100%;border-collapse:collapse;margin:30px 0}
+    td{border:1px solid var(--border);padding:12px;vertical-align:top;background:#0d1117}
+    .back{display:inline-block;margin:20px 0;padding:12px 28px;background:var(--accent);color:#000;border-radius:50px;font-weight:bold;text-decoration:none;transition:0.3s}
+    .back:hover{transform:scale(1.05)}
+    .flag{color:var(--green);font-weight:bold;font-size:1.1em}
+    .note{background:#30363d;padding:15px;border-radius:10px;border-left:4px solid var(--accent);margin:20px 0}
+    pre{background:#010409!important;padding:16px;border-radius:12px;overflow-x:auto;border:1px solid var(--border)}
+    code{background:#30363d;padding:2px 8px;border-radius:6px}
+    @media (prefers-color-scheme:light){
+      :root{--bg:#ffffff;--card:#f6f8fa;--text:#24292f;--border:#d0d7de}
+      td{background:#ffffff}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="back">← Back to Challenges</a>
+    <h1>Challenge 1<br><small style="font-size:1.8rem;opacity:0.9">Reverse Metadata Part 1</small></h1>
+    <p style="text-align:center;opacity:0.8">
+      <strong>Author:</strong> Syndro/Ayco • <strong>Category:</strong> Misc • 62 solves
+    </p>
 
----
-# PatriotCTF 2025 – Misc Challenges Writeups
-**Challenge 1: Reverse Metadata Part 1**  
-**Author:** [Syndro/Ayco]  
-**Category:** Misc  
+    <img src="https://github.com/user-attachments/assets/6550504a-1e15-4339-aa04-4c811b75b0d6" alt="Challenge banner"/>
 
-----
+    <h2>1. Upload Page</h2>
+    <p>We are greeted by a simple file upload form. Viewing the page source reveals no client-side extension filtering — suspicious!</p>
 
-<img width="491" height="613" alt="image" src="https://github.com/user-attachments/assets/6550504a-1e15-4339-aa04-4c811b75b0d6" />
+    <table>
+      <tr>
+        <td><img src="https://github.com/user-attachments/assets/420f4536-a676-4eb6-b30a-4d6b760961f5" alt="Initial page"/></td>
+        <td><img src="https://github.com/user-attachments/assets/93d98d98-ce2e-4462-997c-0c46931c5812" alt="Source code"/></td>
+      </tr>
+    </table>
 
----
-### 1- Upload page
-At first, We are greeted by an upload page,I Checked the page source, and it doesnt look like it requires a specfic extension.
+    <h2>2. Deploying the Attack</h2>
+    <p>Tried uploading a classic PHP web shell → “Upload successful!”<br>
+    No feedback on location… so we guess the most common path: <code>/uploads/filename.php</code><br>
+    → <strong>It worked!</strong> We have remote code execution.</p>
 
-| Initial Page  | Source page |
-| ------------- | ------------- |
-| <img width="441" height="209" alt="image" src="https://github.com/user-attachments/assets/420f4536-a676-4eb6-b30a-4d6b760961f5" />  | <img width="397" height="206" alt="image" src="https://github.com/user-attachments/assets/93d98d98-ce2e-4462-997c-0c46931c5812" />
-  |
+    <table>
+      <tr>
+        <td><img src="https://github.com/user-attachments/assets/eec01e40-edc0-469a-9e37-1f85669bfddf" alt="Upload success"/></td>
+        <td><img src="https://github.com/user-attachments/assets/7f667e88-f38f-4b7d-89da-d662e96c6e80" alt="Shell execution"/></td>
+      </tr>
+    </table>
 
----
-### 2- Deploying the attack.
+    <h2>3. Capturing the Flag</h2>
+    <p>Once inside:</p>
+    <pre><code>ls -la</code></pre>
+    <p>→ Found <code>flag2.txt</code> (someone was running <code>rm *</code> every few minutes to grief, so timing matters!)</p>
 
-I Tried to upload a PHP Shell and it said it got uploaded Successfully! <br>
+    <pre><code>cat flag2.txt</code></pre>
 
-We dont get information back other than its being stored, So what if we try to navigate to /Uploads/Filename ?
+    <div class="note">
+      <strong>Flag:</strong> <span class="flag">PCTF{1_l0v3_unr3str1ct3d_f1l3_upl0ads}</span>
+    </div>
 
-And luckily it worked and now we have a shell on the server ! <br>
+    <img src="https://github.com/user-attachments/assets/c50c112b-3a8a-4fc3-bbb7-42715a07d8d6" alt="Flag captured"/>
 
-| Uploaded  | File |
-| ------------- | ------------- |
-| <img width="380" height="185" alt="image" src="https://github.com/user-attachments/assets/eec01e40-edc0-469a-9e37-1f85669bfddf" /> | <img width="600" height="1042" alt="image" src="https://github.com/user-attachments/assets/7f667e88-f38f-4b7d-89da-d662e96c6e80" />
-
----
-### 3- Caputring it!
-
-We have a shell at the site, its pretty much solved.
-
-i first 'ls' the directory, And i find a flag2.txt, I try to cat it, And there it is, The flag <br>
-(Someone was just doing rm * every few minutes to grief the challenge, so sometimes when u ls, u wont find the flag.<br>
-<img width="1915" height="1040" alt="image" src="https://github.com/user-attachments/assets/c50c112b-3a8a-4fc3-bbb7-42715a07d8d6" />
-
-
-
-
-
+    <p style="text-align:center;margin-top:60px;opacity:0.7">
+      Solved on November 24, 2025 • <a href="https://github.com/ayco-sy/PatriotCTF2025-Writeups" style="color:var(--accent)">View source on GitHub</a>
+    </p>
+  </div>
+</body>
+</html>
