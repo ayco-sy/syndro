@@ -5,21 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PatriotCTF 2025 • syndro</title>
   <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body { margin: 0; min-height: 100vh; }
+    /* Fix for hidden cards: Force visibility and normal layout */
+    body { margin: 0; padding: 0; min-height: 100vh; }
     .back-btn {
       position: fixed;
       top: 30px;
       left: 30px;
+      z-index: 100;
       color: var(--accent);
       font-size: 1.5rem;
       font-weight: bold;
       text-decoration: none;
-      z-index: 100;
       padding: 10px 16px;
-      background: rgba(22,27,34,0.8);
+      background: rgba(22, 27, 34, 0.8);
       border-radius: 50px;
-      backdrop: blur(10px);
+      backdrop-filter: blur(10px);
+      transition: .3s;
     }
     .back-btn:hover { background: var(--accent); color: #000; }
 
@@ -27,6 +30,7 @@
       text-align: center;
       padding: 140px 20px 80px;
       background: linear-gradient(to bottom, #0d1117, #161b22);
+      margin: 0;
     }
     .header h1 {
       font-family: 'Orbitron', sans-serif;
@@ -42,58 +46,104 @@
       margin-top: 16px;
     }
 
-    /* This is the key fix: override container to be normal again */
+    /* Dedicated container for cards — no conflicts */
     .ctf-container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 20px 100px;
     }
+
+    /* FORCE CARDS VISIBLE: Override homepage animation */
+    .cards {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)) !important;
+      gap: 30px !important;
+      margin: 50px 0 !important;
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      min-height: 400px; /* Ensures space even if empty */
+    }
+    .card {
+      background: var(--card) !important;
+      border: 2px solid var(--border) !important;
+      border-radius: 16px !important;
+      padding: 25px !important;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: .5s !important;
+      min-height: 150px; /* Prevents zero-height cards */
+    }
+    .card:hover { transform: translateY(-15px) !important; box-shadow: 0 20px 50px rgba(88,166,255,.5) !important; border-color: var(--accent) !important; }
+    .category-tag { position: absolute; top: 15px; right: 15px; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+    .tag-misc { background: #3fb950; color: #000; }
+    .tag-web { background: #58a6ff; color: #000; }
+    .tag-pwn { background: #f85149; color: #fff; }
+    .tag-crypto { background: #ffa657; color: #000; }
+    .tag-forensics { background: #9c72ff; color: #fff; }
+    .flag { color: var(--green); font-weight: bold; }
   </style>
 </head>
 <body>
 
-  <a href="/" class="back-btn">Back</a>
+  <a href="/" class="back-btn">← Back</a>
 
   <div class="header">
     <h1>PatriotCTF 2025</h1>
     <p>All writeups from the ongoing CTF</p>
   </div>
 
-  <!-- Main content area — normal container -->
   <div class="ctf-container">
-    <div class="cards" id="cards"></div>
+    <div class="cards" id="cards">
+      <!-- Fallback if JS fails: Static cards here -->
+      <div class="card" style="opacity: 0.5; text-align: center; grid-column: 1 / -1;">
+        <h3>Loading challenges...</h3>
+        <p>If cards don't appear, check browser console (F12) for errors.</p>
+      </div>
+    </div>
   </div>
 
   <script>
+    // Challenges array — ADD YOUR REAL ONES HERE
     const challenges = [
-  // Misc
-  
-  {title:"Reverse Metadata Part 1",file:"CTF/patriotCTF2025/Misc/ReverseMetaData1.html",flag:"MASONCC{images_****}",type:"misc"},
-  {title:"Reverse Metadata Part 2",file:"CTF/patriotCTF2025/Misc/ReverseMetaData2.html",flag:"PCTF{hidden_****}",type:"misc"},
-
-
-  // Web
-
-   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/ConnectionTester.html",flag:"PCTF{C0nnection_****}",type:"web"},
-   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/FeedbackFallout.html",flag:"{SQLI_****}",type:"web"},
-   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/SecureAuth.html",flag:"PCTF{cant_****}",type:"web"},
-   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/TrustFall.html",flag:"PCTF{auth_****}",type:"web"},
-   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/TrustVault.html",flag:"FLAG{py7h0n_****}",type:"web"},
+      {
+        title: "Reverse Metadata Part 1",
+        file: "../Misc/Challenge1.html",
+        flag: "PCTF{1_l0v3_unr3str1ct3d_f1l3_upl0ads}",
+        type: "misc"
+      },
+      {
+        title: "Reverse Metadata Part 2",
+        file: "../Misc/Challenge2.html",
+        flag: "PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",
+        type: "misc"
+      },
+      // Add more: { title: "New Challenge", file: "../Web/New.html", flag: "PCTF{...}", type: "web" },
     ];
 
+    // Render cards
     const container = document.getElementById("cards");
-    challenges.forEach(c => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <div class="category-tag tag-${c.type}">${c.type.toUpperCase()}</div>
-        <h3>${c.title}</h3>
-        <p class="flag">Flag: <code>${c.flag}</code></p>
-        <span style="opacity:0.7">Click for full writeup</span>
-      `;
-      card.onclick = () => location.href = c.file;
-      container.appendChild(card);
-    });
+    if (challenges.length > 0) {
+      container.innerHTML = ""; // Clear fallback
+      challenges.forEach(c => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="category-tag tag-${c.type}">${c.type.toUpperCase()}</div>
+          <h3>${c.title}</h3>
+          <p class="flag">Flag: <code>${c.flag}</code></p>
+          <span style="opacity:0.7; display:block; margin-top:10px;">Click for full writeup</span>
+        `;
+        card.onclick = () => window.location.href = c.file;
+        container.appendChild(card);
+      });
+    } else {
+      container.innerHTML = '<div class="card" style="grid-column:1/-1;text-align:center;"><h3>No challenges yet</h3><p>Add to the array above!</p></div>';
+    }
+
+    // Debug: Log to console (open F12 to see)
+    console.log("PatriotCTF Page Loaded:", challenges.length, "challenges rendered.");
   </script>
+
 </body>
 </html>
