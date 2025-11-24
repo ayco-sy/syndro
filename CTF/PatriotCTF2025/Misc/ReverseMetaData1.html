@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Reverse Metadata Part 1 • PatriotCTF 2025</title>
+  <title>Reverse Metadata Part 2 • PatriotCTF 2025</title>
 
-  <!-- GLOBAL THEME PERSISTENCE — FIXED & BULLETPROOF -->
+  <!-- GLOBAL THEME PERSISTENCE -->
   <script>
     (function() {
       const saved = localStorage.getItem('theme');
@@ -18,7 +18,6 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="../../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -71,11 +70,24 @@
       -webkit-text-fill-color: transparent;
       margin: 0;
     }
+    .title small {
+      display: block;
+      text-align: center;
+      font-size: 2rem;
+      color: #8b949e;
+      margin-top: 12px;
+    }
+    .light .title small { color: #57606a; }
 
-    .title small, .meta, .footer-note, .image-item p { color: #8b949e; }
-    .light .title small, .light .meta, .light .footer-note, .light .image-item p { color: #57606a; }
+    .meta {
+      text-align: center;
+      margin: 30px 0 50px;
+      color: #8b949e;
+      font-size: 1.1rem;
+    }
+    .light .meta { color: #57606a; }
 
-    h2 { color: var(--accent); border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin: 70px 0 25px; font-size: 2.4rem; }
+    h2 { color: var(--accent); font-size: 2.4rem; margin: 70px 0 25px; padding-bottom: 12px; border-bottom: 3px solid var(--accent); }
 
     pre {
       background: #0d1117 !important;
@@ -89,7 +101,12 @@
     }
     .light pre { background: #f6f8fa !important; color: #24292f !important; border-color: #d0d7de; }
 
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 40px; margin: 50px 0; }
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 40px;
+      margin: 50px 0;
+    }
     .image-item {
       background: rgba(13,17,23,0.9);
       border-radius: 20px;
@@ -101,6 +118,7 @@
     }
     .light .image-item { background: white; }
     .image-item:hover { transform: translateY(-12px); border-color: var(--accent); }
+
     .image-item img {
       width: 100%;
       height: auto;
@@ -109,6 +127,7 @@
       background: transparent;
       display: block;
     }
+
     .image-item p {
       padding: 16px 20px;
       text-align: center;
@@ -116,115 +135,11 @@
       font-style: italic;
       font-size: 0.95rem;
       background: rgba(13,17,23,0.95);
+      color: #8b949e;
     }
-    .light .image-item p { background: #f6f8fa; }
+    .light .image-item p { background: #f6f8fa; color: #57606a; }
 
     .flag-box {
       background: rgba(59,249,80,0.15);
       border: 3px solid var(--green);
-      border-radius: 24px;
-      padding: 40px;
-      text-align: center;
-      margin: 70px 0;
-      box-shadow: 0 0 60px rgba(59,249,80,0.3);
-    }
-    .flag { font-size: 2.4rem; color: var(--green); text-shadow: 0 0 30px var(--green); letter-spacing: 2px; font-family: 'Roboto Mono', monospace; }
-
-    .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 20px; }
-    .modal.active { display: flex; }
-    .modal img { max-width: 95%; max-height: 95vh; border-radius: 16px; box-shadow: 0 0 100px rgba(88,166,255,0.6); }
-    .close-modal { position: absolute; top: 30px; right: 40px; font-size: 3.5rem; color: white; cursor: pointer; background: rgba(255,255,255,0.1); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    .close-modal:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
-
-    @media (max-width: 768px) {
-      .writeup { margin: 20px; padding: 40px; }
-      .title h1 { font-size: 3rem; }
-      .image-grid { grid-template-columns: 1fr; }
-      .image-item img { max-height: 420px; }
-      .back-btn { position: static; display: block; margin: 30px auto; text-align: center; }
-    }
-  </style>
-</head>
-<body>
-
-  <a href="https://syndro-1.github.io/syndro/CTF/PatriotCTF2025/patriotctf2025 " class="back-btn">Back</a>
-
-  <div class="writeup">
-    <div class="title">
-      <h1>Reverse Metadata Part 1</h1>
-      <small>Misc • 100 pts • 62 solves</small>
-    </div>
-    <div class="meta">PatriotCTF 2025 • Solved November 23, 2025</div>
-
-    <h2>1. The Upload Form</h2>
-    <p>We are greeted by a very simple image upload page with absolutely no client-side filtering visible in the source code.</p>
-
-    <div class="image-grid">
-      <div class="image-item">
-        <img src="https://github.com/user-attachments/assets/420f4536-a676-4eb6-b30a-4d6b760961f5" alt="Upload form">
-        <p>The upload interface</p>
-      </div>
-      <div class="image-item">
-        <img src="https://github.com/user-attachments/assets/93d98d98-ce2e-4462-997c-0c46931c5812" alt="Source code">
-        <p>Source code — no extension checks</p>
-      </div>
-    </div>
-
-    <h2>2. Uploading a PHP Shell</h2>
-    <p>Since there’s no filtering, we upload a classic one-liner PHP web shell as <code>syndro.php</code>. The server replies “Upload successful!” → instant RCE.</p>
-
-    <div class="image-grid">
-      <div class="image-item">
-        <img src="https://github.com/user-attachments/assets/eec01e40-edc0-469a-9e37-1f85669bfddf" alt="Upload success">
-        <p>Upload successful message</p>
-      </div>
-      <div class="image-item">
-        <img src="https://github.com/user-attachments/assets/7f667e88-f38f-4b7d-89da-d662e96c6e80" alt="Shell execution">
-        <p>SYNDRO shell executing commands</p>
-      </div>
-    </div>
-
-    <h2>3. Finding the Flag</h2>
-    <p>With the shell we simply list the directory and read the flag file:</p>
-    <pre><code>ls -la
-cat flag2.txt</code></pre>
-
-
-    <div class="image-grid">
-      <div class="image-item">
-        <img src="https://github.com/user-attachments/assets/c50c112b-3a8a-4fc3-bbb7-42715a07d8d6" alt="Flag captured">
-        <p>Flag captured</p>
-      </div>
-    </div>
-
-        <div class="flag-box">
-      <div class="flag">MASONCC{images_****}</div>
-    </div>
-
-    <div class="footer-note">
-      Writeup by Syndro • 
-      <a href="https://github.com/syndro-1">GitHub</a> • 
-      <a href="https://syndro-1.github.io/syndro/">All writeups</a>
-    </div>
-  </div>
-
-  <!-- FULLSCREEN MODAL -->
-  <div class="modal" id="imageModal">
-    <span class="close-modal" onclick="document.getElementById('imageModal').classList.remove('active')">&times;</span>
-    <img id="modalImage" src="" alt="Full size">
-  </div>
-
-  <script>
-    document.querySelectorAll('.image-item img').forEach(img => {
-      img.onclick = () => {
-        document.getElementById('modalImage').src = img.src;
-        document.getElementById('imageModal').classList.add('active');
-      };
-    });
-    document.getElementById('imageModal').onclick = e => {
-      if (e.target === document.getElementById('imageModal') || e.target.classList.contains('close-modal'))
-        document.getElementById('imageModal').classList.remove('active');
-    };
-  </script>
-</body>
-</html>
+     
