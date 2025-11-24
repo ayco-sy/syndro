@@ -97,10 +97,7 @@ document.querySelectorAll('#challengeTabs .tab').forEach(tab => {
 });
 
 // CTF Modal
-const ctfs = [
-  { name: "PatriotCTF 2025", link: "/CTF/PatriotCTF2025/patriotctf2025.html", solves: "6+", status: "Ended", color: "var(--gray)" },
-  // Add more CTFs here
-];
+const ctfs = [  { name: "PatriotCTF 2025", link: "CTF/PatriotCTF2025/patriotctf2025.html", solves: "6+", status: "Ended", color: "var(--gray)" },  // Add more CTFs here];
 
 function renderCTFs() {
   document.getElementById("ctfGrid").innerHTML = ctfs.map(ctf => `
