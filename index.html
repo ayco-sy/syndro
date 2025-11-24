@@ -9,33 +9,28 @@
 </head>
 <body>
   <canvas id="matrix"></canvas>
-
   <div class="container">
     <div class="toggle" id="themeToggle">Theme</div>
     <div class="ctf-toggle" id="ctfToggle">CTFs</div>
-
     <header>
       <h1 id="glitch">Syndro</h1>
       <div class="solve-counter" id="solveCounter">0 SOLVED</div>
     </header>
-
     <div class="terminal" id="terminal">
       <div>$ whoami</div>
       <div>Syndro</div>
       <div>$ cat bio.txt</div>
       <div class="typing">CTF player • Web & Misc destroyer • PHP shell enthusiast • Student at AOU</div>
     </div>
-
     <div class="bio">
       <p>Trying my best in every CTF. Every flag is a story. Every writeup is a war crime against the challenge author.</p>
       <p>
-        <a href="https://github.com/ayco-sy">GitHub</a> • 
-        <a href="https://x.com/Syndro_1">X/Twitter</a> • 
-        <a href="https://discordapp.com/users/313717103150759950">Discord</a> • 
+        <a href="https://github.com/ayco-sy">GitHub</a> •
+        <a href="https://x.com/Syndro_1">X/Twitter</a> •
+        <a href="https://discordapp.com/users/313717103150759950">Discord</a> •
         <a href="https://medium.com/@syndro">Medium</a>
       </p>
     </div>
-
     <h2 class="section-title">Write ups!</h2>
     <div class="tabs" id="challengeTabs">
       <div class="tab active" data-cat="all">All</div>
@@ -45,12 +40,9 @@
       <div class="tab" data-cat="pwn">Pwn</div>
       <div class="tab" data-cat="forensics">Forensics</div>
     </div>
-
     <div class="cards" id="challengeCards"></div>
-
     <footer>syndro • Built with rage, RGB, and zero sleep ( actually zero sleep 😟 )</footer>
   </div>
-
   <!-- CTF MODAL -->
   <div class="modal-overlay" id="ctfModal">
     <div class="modal-content">
@@ -58,12 +50,9 @@
         <h2>My CTFs</h2>
         <div class="close-modal">×</div>
       </div>
-      <div class="ctf-grid" id="ctfGrid">
-        <!-- Filled by JS -->
-      </div>
+      <div class="ctf-grid" id="ctfGrid"></div>
     </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
