@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      // GitHub Pages 404 fix — automatically retry the requested page
+      const path = location.pathname;
+      if (path.endsWith('.html') || path.includes('.')) {
+        location.replace(location.href.replace(location.origin, location.origin + '/syndro'));
+      } else {
+        location.replace(location.origin + '/syndro' + location.pathname + (location.search || '') + (location.hash || ''));
+      }
+    </script>
+  </head>
+  <body>Redirecting...</body>
+</html>
