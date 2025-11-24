@@ -5,161 +5,179 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PatriotCTF 2025 • syndro</title>
 
-  <!-- GLOBAL THEME PERSISTENCE (bulletproof) -->
+  <!-- GLOBAL THEME PERSISTENCE -->
   <script>
     (function() {
       const saved = localStorage.getItem('theme');
       const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
       if (saved === 'light' || (!saved && prefersLight)) {
         document.documentElement.classList.add('light');
-      } else {
-        document.documentElement.classList.remove('light');
       }
     })();
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    :root { --accent: #58a6ff; --green: #3fb950; --purple: #8b5cf6; }
-    .light { --accent: #1f6feb; --green: #238636; --purple: #7c3aed; }
+    :root { --accent: #58a6ff; --green: #3fb950; --purple: #8b5cf6; --pink: #f472b6; }
+    .light { --accent: #1f6feb; --green: #238636; }
 
-    * { box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      margin: 0; padding: 0; min-height: 100vh;
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #e6edf3;
+      min-height: 100vh;
       font-family: 'Segoe UI', sans-serif;
       overflow-x: hidden;
     }
     .light body { background: #f6f8fa; color: #0d1117; }
 
-    /* GORGEOUS BACK BUTTON — GLOW + ARROW */
+    /* GORGEOUS BACK BUTTON — SYNDRO SIGNATURE */
     .back-btn {
       position: fixed;
-      top: 30px; left: 30px;
+      top: 30px;
+      left: 30px;
       z-index: 9999;
       background: var(--accent);
       color: #000;
-      padding: 16px 42px;
-      border-radius: 50px;
+      padding: 18px 48px;
+      border-radius: 60px;
       font-weight: bold;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       text-decoration: none;
-      box-shadow: 0 10px 30px rgba(88,166,255,0.6);
-      transition: all 0.35s ease;
+      box-shadow: 0 12px 40px rgba(88,166,255,0.6);
+      transition: all 0.4s ease;
       display: flex;
       align-items: center;
       gap: 12px;
       backdrop-filter: blur(10px);
     }
-    .back-btn::before {
-      content: "Back";
-      font-size: 1.6rem;
-    }
     .back-btn:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(88,166,255,0.8);
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 20px 60px rgba(88,166,255,0.8);
     }
     .light .back-btn { color: white; }
 
     /* HERO HEADER */
-    .hero {
+    .header {
       text-align: center;
-      padding: 160px 20px 100px;
-      background: linear-gradient(to bottom, rgba(13,17,23,0.95), transparent);
+      padding: 180px 20px 100px;
       position: relative;
+      overflow: hidden;
     }
-    .hero::before {
+    .header::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; height: 12px;
-      background: linear-gradient(90deg, var(--accent), var(--purple), #f472b6);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(13,17,23,0.9), rgba(22,27,34,0.95));
+      z-index: -1;
     }
-    .hero h1 {
+    .header h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 6.5rem;
-      margin: 0;
-      background: linear-gradient(90deg, var(--accent), var(--purple), #f472b6);
+      font-size: 7rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #58a6ff, #8b5cf6, #f472b6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      margin: 0;
+      letter-spacing: 4px;
       text-shadow: 0 0 40px rgba(88,166,255,0.5);
     }
-    .light .hero h1 {
-      background: linear-gradient(90deg, #1f6feb, #8b5cf6, #ec4899);
+    .light .header h1 {
+      background: linear-gradient(90deg, #1f6feb, #7c3aed, #ec4899);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .hero p {
+    .header p {
       font-size: 1.5rem;
-      opacity: 0.9;
       margin-top: 20px;
+      opacity: 0.9;
+      font-weight: 300;
     }
 
-    /* CONTAINER */
+    /* MAIN CONTAINER */
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 30px 120px;
+      padding: 0 30px 150px;
     }
 
-    /* CHALLENGES GRID — SEXY CARDS */
+    /* CHALLENGES GRID */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
       gap: 32px;
       margin-top: 60px;
     }
+
     .card {
-      background: rgba(13,17,23,0.92);
+      background: rgba(13,17,23,0.95);
       backdrop-filter: blur(12px);
       border: 2px solid rgba(88,166,255,0.2);
       border-radius: 24px;
       padding: 32px;
       cursor: pointer;
-      transition: all 0.4s ease;
+      transition: all 0.5s ease;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
     }
     .light .card {
       background: rgba(255,255,255,0.95);
       border-color: rgba(88,166,255,0.15);
       box-shadow: 0 15px 40px rgba(0,0,0,0.1);
     }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--accent), var(--purple), var(--pink));
+      border-radius: 24px 24px 0 0;
+    }
+
     .card:hover {
-      transform: translateY(-16px);
+      transform: translateY(-20px);
       border-color: var(--accent);
       box-shadow: 0 30px 80px rgba(88,166,255,0.5);
     }
 
     .tag {
       position: absolute;
-      top: 16px; right: 16px;
+      top: 16px;
+      right: 16px;
       padding: 6px 16px;
-      border-radius: 20px;
+      border-radius: 30px;
       font-size: 0.8rem;
       font-weight: bold;
       text-transform: uppercase;
+      letter-spacing: 1px;
     }
-    .tag-misc    { background: #3fb950; color: #000; }
-    .tag-web     { background: #58a6ff; color: #000; }
-    .tag-pwn     { background: #f85149; color: #fff; }
-    .tag-crypto  { background: #ffa657; color: #000; }
-    .tag-forensics { background: #9c72ff; color: #fff; }
+    .tag.misc { background: #3fb950; color: #000; }
+    .tag.web { background: #58a6ff; color: #000; }
+    .tag.pwn { background: #f85149; color: #fff; }
+    .tag.crypto { background: #ffa657; color: #000; }
+    .tag.forensics { background: #9c72ff; color: #fff; }
 
     .card h3 {
-      margin: 0 0 12px 0;
+      font-family: 'Orbitron', sans-serif;
       font-size: 1.6rem;
+      margin: 10px 0 16px;
       color: var(--accent);
     }
+
     .card .flag {
       font-family: 'Roboto Mono', monospace;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: var(--green);
       margin: 16px 0;
-      word-break: break-all;
+      padding: 12px 0;
+      border-top: 1px solid rgba(88,166,255,0.2);
+      border-bottom: 1px solid rgba(88,166,255,0.2);
     }
+
     .card small {
       opacity: 0.7;
       font-size: 0.95rem;
@@ -169,28 +187,28 @@
     @media (max-width: 768px) {
       .back-btn {
         position: static;
-        margin: 30px auto;
+        margin: 40px auto;
         display: block;
         width: fit-content;
       }
-      .hero { padding: 120px 20px 60px; }
-      .hero h1 { font-size: 4.2rem; }
-      .grid { grid-template-columns: 1fr; }
+      .header h1 { font-size: 4.5rem; }
+      .grid { grid-template-columns: 1fr; padding: 0 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- EPIC BACK BUTTON -->
   <a href="https://syndro-1.github.io/syndro/" class="back-btn">Back</a>
 
-  <div class="hero">
-    <h1>PatriotCTF 2025</h1>
-    <p>All my solved challenges — writeups, flags, glory</p>
+  <div class="header">
+    <h1>PATRIOTCTF 2025</h1>
+    <p>All challenges I pwned • Writeups by syndro</p>
   </div>
 
   <div class="container">
-    <div class="grid" id="grid"></div>
+    <div class="grid" id="grid">
+      <!-- Cards injected here by JS -->
+    </div>
   </div>
 
   <script>
@@ -205,29 +223,26 @@
       { title: "SecureAuth",file: "Web/SecureAuth", flag: "PCTF{cant_****}", type: "web" },
       { title: "TrustFall", file: "Web/TrustFall",flag: "PCTF{auth_****}", type: "web" },
       { title: "TrustVault",file: "Web/TrustVault", flag: "FLAG{py7h0n_****}", type: "web" },
-      // Add more whenever you want!
     ];
 
     const grid = document.getElementById("grid");
 
     if (challenges.length === 0) {
-      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:80px;font-size:1.4rem;opacity:0.6;">No challenges yet. Start hacking!</div>`;
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:100px;color:#888;"><h2>No challenges yet</h2></div>`;
     } else {
       challenges.forEach(c => {
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-          <div class="tag tag-${c.type}">${c.type.toUpperCase()}</div>
+          <div class="tag ${c.type}">${c.type}</div>
           <h3>${c.title}</h3>
-          <p class="flag"><code>${c.flag}</code></p>
-          <small>Click for full writeup</small>
+          <div class="flag">${c.flag}</div>
+          <small>Click to read full writeup</small>
         `;
         card.onclick = () => location.href = c.file;
         grid.appendChild(card);
       });
     }
-
-    console.log("%c PatriotCTF 2025 Index Loaded — " + challenges.length + " challenges ready ", "background:#58a6ff;color:#000;padding:10px 20px;border-radius:10px;font-weight:bold;");
   </script>
 
 </body>
