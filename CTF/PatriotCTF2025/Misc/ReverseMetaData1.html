@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reverse Metadata Part 1 • PatriotCTF 2025</title>
 
-  <!-- GLOBAL THEME PERSISTENCE (add this to every page) -->
+  <!-- GLOBAL THEME PERSISTENCE -->
   <script>
     if (localStorage.theme === "light" || (!localStorage.theme && window.matchMedia("(prefers-color-scheme: light)").matches)) {
       document.documentElement.classList.add("light");
@@ -57,43 +57,48 @@
     h2 { color: #58a6ff; font-size: 2.4rem; margin: 70px 0 25px; padding-bottom: 12px; border-bottom: 3px solid #58a6ff; }
     .light h2 { color: #1f6feb; border-bottom-color: #1f6feb; }
 
-    /* IMAGES: SAME SIZE, NO CROPPING */
+    /* FULL BLEED IMAGES + CLICK TO ZOOM */
     .image-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
       gap: 40px;
       margin: 50px 0;
     }
     .image-item {
-      max-width: 100%;
       background: rgba(13,17,23,0.9);
       border-radius: 20px;
       overflow: hidden;
       border: 3px solid rgba(88,166,255,0.2);
       box-shadow: 0 20px 50px rgba(0,0,0,0.6);
       transition: all .4s;
+      cursor: zoom-in;
     }
-    .image-item:hover { transform: translateY(-10px); border-color: #58a6ff; }
+    .image-item:hover {
+      transform: translateY(-12px);
+      border-color: #58a6ff;
+      box-shadow: 0 30px 80px rgba(88,166,255,0.3);
+    }
     .light .image-item { background: white; }
 
     .image-item img {
       width: 100%;
-      height: 320px;
+      height: 460px;
       object-fit: contain;
       background: #0d1117;
-      padding: 20px;
-      box-sizing: border-box;
+      display: block;
     }
     .light .image-item img { background: #f6f8fa; }
 
     .image-item p {
-      padding: 20px;
+      padding: 16px 20px;
       text-align: center;
       margin: 0;
       font-style: italic;
+      font-size: 0.95rem;
       background: rgba(13,17,23,0.95);
+      color: #8b949e;
     }
-    .light .image-item p { background: #f6f8fa; }
+    .light .image-item p { background: #f6f8fa; color: #57606a; }
 
     pre {
       background: #010409 !important;
@@ -121,18 +126,55 @@
     .footer-note a:hover { text-decoration: underline; }
     .light .footer-note a { color: #1f6feb; }
 
+    /* FULLSCREEN MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.98);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .modal.active { display: flex; }
+    .modal img {
+      max-width: 95%;
+      max-height: 95vh;
+      border-radius: 16px;
+      box-shadow: 0 0 100px rgba(88,166,255,0.6);
+    }
+    .close-modal {
+      position: absolute;
+      top: 30px; right: 40px;
+      font-size: 3.5rem;
+      color: white;
+      cursor: pointer;
+      background: rgba(255,255,255,0.1);
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+    }
+    .close-modal:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
+
     @media (max-width: 768px) {
       .writeup { margin: 20px; padding: 40px; }
       .title h1 { font-size: 3rem; }
       .image-grid { grid-template-columns: 1fr; }
-      .image-item img { height: 280px; }
+      .image-item img { height: 380px; }
       .back-btn { position: static; display: block; margin: 30px auto; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <a href="https://syndro-1.github.io/syndro/CTF/PatriotCTF2025/patriotctf2025" class="back-btn">Back</a>
+  <a href="../../index.html" class="back-btn">Back</a>
 
   <div class="writeup">
     <div class="title">
@@ -156,8 +198,8 @@
     </div>
 
     <h2>2. Uploading a PHP Shell</h2>
-    <p>Since there’s no filtering, we upload a classic one-liner PHP web shell (<code>&lt;?php system($_GET['cmd']); ?&gt;</code>) as <code>syndro.php</code>.  
-    The server replies “Upload successful!” → we guess the path <code>/uploads/syndro.php</code> and get instant RCE.</p>
+    <p>Since there’s no filtering, we upload a classic one-liner PHP web shell as <code>syndro.php</code>.  
+    The server replies “Upload successful!” → we guess the path and get instant RCE.</p>
 
     <div class="image-grid">
       <div class="image-item">
@@ -176,7 +218,7 @@
 cat flag2.txt</code></pre>
 
     <div class="flag-box">
-      <div class="flag">MASONCC{images_****}</div>
+      <div class="flag">MASONCC{images_can_hide_secrets}</div>
     </div>
 
     <div class="image-grid">
@@ -188,10 +230,30 @@ cat flag2.txt</code></pre>
 
     <div class="footer-note">
       Writeup by Syndro • 
-      <a href="https://github.com/syndro-1">GitHub</a> • 
+      <a href="https://github.com/ayco-sy">GitHub</a> • 
       <a href="https://syndro-1.github.io/syndro/">All writeups</a>
     </div>
   </div>
+
+  <!-- FULLSCREEN IMAGE MODAL -->
+  <div class="modal" id="imageModal">
+    <span class="close-modal" onclick="document.getElementById('imageModal').classList.remove('active')">&times;</span>
+    <img id="modalImage" src="" alt="Full size">
+  </div>
+
+  <script>
+    document.querySelectorAll('.image-item img').forEach(img => {
+      img.onclick = () => {
+        document.getElementById('modalImage').src = img.src;
+        document.getElementById('imageModal').classList.add('active');
+      };
+    });
+    document.getElementById('imageModal').onclick = (e) => {
+      if (e.target === document.getElementById('imageModal') || e.target.classList.contains('close-modal')) {
+        document.getElementById('imageModal').classList.remove('active');
+      }
+    };
+  </script>
 
 </body>
 </html>
