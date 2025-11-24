@@ -45,13 +45,13 @@ if (localStorage.theme === 'light' || (!localStorage.theme && window.matchMedia(
 
 // === CHALLENGES ===
 const challenges = [
-  {title:"Reverse Metadata Part 1", file:"CTF/patriotCTF2025/Misc/ReverseMetaData1.html", flag:"MASONCC{images_****}", type:"misc"},
-  {title:"Reverse Metadata Part 2", file:"CTF/patriotCTF2025/Misc/ReverseMetaData2.html", flag:"PCTF{hidden_****}", type:"misc"},
-  {title:"Connection Tester", file:"CTF/PatriotCTF2025/Web/ConnectionTester.html", flag:"PCTF{C0nnection_****}", type:"web"},
-  {title:"Feedback Fallout", file:"CTF/PatriotCTF2025/Web/FeedbackFallout.html", flag:"PCTF{SQLI_****}", type:"web"},
-  {title:"Secure Auth", file:"CTF/PatriotCTF2025/Web/SecureAuth.html", flag:"PCTF{cant_****}", type:"web"},
-  {title:"Trust Fall", file:"CTF/PatriotCTF2025/Web/TrustFall.html", flag:"PCTF{auth_****}", type:"web"},
-  {title:"Trust Vault", file:"CTF/PatriotCTF2025/Web/TrustVault.html", flag:"FLAG{py7h0n_****}", type:"web"},
+  {title:"Reverse Metadata Part 1", file:"CTF/patriotCTF2025/Misc/ReverseMetaData1", flag:"MASONCC{images_****}", type:"misc"},
+  {title:"Reverse Metadata Part 2", file:"CTF/patriotCTF2025/Misc/ReverseMetaData2", flag:"PCTF{hidden_****}", type:"misc"},
+  {title:"Connection Tester", file:"CTF/PatriotCTF2025/Web/ConnectionTester", flag:"PCTF{C0nnection_****}", type:"web"},
+  {title:"Feedback Fallout", file:"CTF/PatriotCTF2025/Web/FeedbackFallout", flag:"PCTF{SQLI_****}", type:"web"},
+  {title:"Secure Auth", file:"CTF/PatriotCTF2025/Web/SecureAuth", flag:"PCTF{cant_****}", type:"web"},
+  {title:"Trust Fall", file:"CTF/PatriotCTF2025/Web/TrustFall", flag:"PCTF{auth_****}", type:"web"},
+  {title:"Trust Vault", file:"CTF/PatriotCTF2025/Web/TrustVault", flag:"FLAG{py7h0n_****}", type:"web"},
 ];
 
 document.getElementById("solveCounter").textContent = challenges.length + " SOLVED";
@@ -86,7 +86,7 @@ document.querySelectorAll('#challengeTabs .tab').forEach(tab => {
 
 // === CTF MODAL ===
 const ctfs = [
-  { name: "PatriotCTF 2025", link: "CTF/PatriotCTF2025/patriotctf2025.html", solves: "7+", status: "Ended", color: "#8b949e" }
+  { name: "PatriotCTF 2025", link: "CTF/PatriotCTF2025/patriotctf2025", solves: "7+", status: "Ended", color: "#8b949e" }
 ];
 
 const grid = document.getElementById("ctfGrid");
