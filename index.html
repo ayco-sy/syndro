@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PatriotCTF 2025 Writeups | ayco-sy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --text: #f0f6fc;
+      --accent: #58a6ff;
+      --green: #3fb950;
+      --red: #f85149;
+    }
+    body {
+      margin: 0; padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Roboto Mono', monospace;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #58a6ff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(88, 166, 255, 0.3);
+      border-color: var(--accent);
+    }
+    .card h3 {
+      margin: 0 0 10px 0;
+      color: var(--accent);
+      font-size: 1.4rem;
+    }
+    .card .flag {
+      color: var(--green);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+    .solved { background: #238636; }
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      color: #8b949e;
+      font-size: 0.9rem;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --card: #f6f8fa;
+        --text: #24292f;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>PatriotCTF 2025</h1>
+      <p>My Web Challenge Writeups ⚡</p>
+    </header>
+
+    <div class="cards" id="challenges">
+      <!-- Challenges will be injected here by JavaScript -->
+    </div>
+
+    <footer>
+      Made with ☕ by ayco-sy • <a href="https://github.com/ayco-sy/PatriotCTF2025-Writeups" style="color:var(--accent)">View on GitHub</a>
+    </footer>
+  </div>
+
+  <script>
+    const challenges = [
+      { title: "Baby XSS", file: "baby-xss.md", flag: "PCTF{xss_is_fun_123}", category: "Web" },
+      { title: "SQLi Surprise", file: "sqli-surprise.md", flag: "PCTF{union_select_all_456}", category: "Web" },
+      { title: "JWT Jungle", file: "jwt-jungle.md", flag: "PCTF{none_algo_ftw_789}", category: "Web" },
+      { title: "Command Land", file: "command-land.md", flag: "PCTF{ls_la_whoami_101}", category: "Web" },
+      // Add new challenges here — super easy!
+    ];
+
+    const container = document.getElementById("challenges");
+
+    challenges.forEach(chal => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h3>${chal.title}</h3>
+        <p><strong>Category:</strong> ${chal.category}</p>
+        <p class="flag">Flag: <code>${chal.flag}</code></p>
+        <span class="status solved">Solved</span>
+      `;
+      card.onclick = () => {
+        // Smooth navigation without full reload
+        window.location.href = chal.file;
+      };
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
