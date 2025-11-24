@@ -98,7 +98,7 @@ document.querySelectorAll('#challengeTabs .tab').forEach(tab => {
 
 // CTF Modal
 const ctfs = [
-  { name: "PatriotCTF 2025", link: "CTF/patriotctf2025/patriotctf2025.html", solves: "6+", status: "Ended", color: "var(--gray)" },
+  { name: "PatriotCTF 2025", link: "/CTF/PatriotCTF2025/patriotctf2025.html", solves: "6+", status: "Ended", color: "var(--gray)" },
   // Add more CTFs here
 ];
 
