@@ -77,13 +77,13 @@ document.querySelectorAll('#challengeTabs .tab').forEach(tab => {
 const ctfs = [
   { name: "PatriotCTF 2025", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
   { name: "PatriotCTF 2025", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
+  { name: "PatriotCTF 20225", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
   { name: "PatriotCTF 2025", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
   { name: "PatriotCTF 2025", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
-  { name: "PatriotCTF 2025", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
-  { name: "PatriotCTF 2025", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
-  { name: "PatriotCTF 2025", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
-  { name: "PatriotCTF 2025", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
-  { name: "PatriotCTF 2025", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
+  { name: "PatriotCTF 2035", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
+  { name: "PatriotCTF 2023", link: "CTF/patriotctf2025.html", solves: "6+", status: "Currently Active", color: "var(--green)" },
+  { name: "PatriotCTF 2022", link: "CTF/patriotctf2025.html", solves: "3+", status: "Currently Active", color: "var(--green)" },
+  { name: "PatriotCTF 2021", link: "CTF/patriotctf2025.html", solves: "3+", status: "Currently Active", color: "var(--green)" },
   // Add more CTFs here
 ];
 
