@@ -124,3 +124,23 @@ p, h1, h2, h3, small, .meta, .footer-note {
 .light p, .light h1, .light h2, .light h3, .light small, .light .meta, .light .footer-note {
   color: #0d1117 !important;
 }
+a:link {
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+}
