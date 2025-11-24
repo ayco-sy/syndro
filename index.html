@@ -3,38 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>syndro | Profile&Writeups</title>
+  <title>syndro | CTF Writeups</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#0d1117;--card:#161b22;--text:#f0f6fc;--accent:#58a6ff;--green:#3fb950;--red:#f85149;--border:#30363d}
-    .light{--bg:#ffffff;--card:#f6f8fa;--text:#24292f;--border:#d0d7de}
-    body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:'Roboto Mono',monospace;transition:all .4s}
-    canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.15}
-    .container{max-width:1100px;margin:0 auto;padding:20px;position:relative;z-index:2}
-    header{text-align:center;padding:80px 20px;position:relative}
-    #glitch{font-family:'Orbitron',sans-serif;font-size:5rem;margin:0;background:linear-gradient(90deg,#58a6ff,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    #glitch:hover{animation:glitch 1s linear infinite}
-    @keyframes glitch{0%,100%{text-shadow:0 0 10px #58a6ff}2%{text-shadow:5px 0 #f85149,-5px 0 #3fb950}4%{text-shadow:-5px 0 #f85149,5px 0 #3fb950}}
-    .terminal{background:#000;color:#0f0;padding:20px;border-radius:12px;margin:40px auto;max-width:800px;box-shadow:0 0 30px #0f03;inset 0 0 20px #0f03;font-size:1.1rem;line-height:1.6;opacity:0;transform:translateY(30px);transition:opacity 1s,transform 1s}
-    .typing::after{content:'|';animation:blink 1s infinite}
-    @keyframes blink{50%{opacity:0}}
-    .solve-counter{font-size:3rem;font-weight:bold;color:var(--green);text-shadow:0 0 20px var(--green);animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
-    .bio{max-width:700px;margin:40px auto;text-align:center;opacity:0;transform:translateY(30px);transition:opacity 1s,transform 1s 0.3s}
-    .tabs{margin:50px 0;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-    .tab{padding:14px 28px;background:var(--card);border:2px solid var(--border);border-radius:50px;cursor:pointer;transition:.4s;font-weight:bold}
-    .tab.active,.tab:hover{background:var(--accent);color:#000;border-color:var(--accent)}
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:30px;margin:50px 0;opacity:0;transform:translateY(40px);transition:opacity 1s,transform 1s}
-    .card{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:25px;transition:.5s;cursor:pointer;position:relative;overflow:hidden}
-    .card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 0%,var(--accent) 2%,transparent 4%);background-size:200% 200%;animation:scan 4s linear infinite;opacity:0;transition:opacity .4s}
-    .card:hover::before{opacity:0.1}
-    .card:hover{transform:translateY(-15px);box-shadow:0 20px 50px rgba(88,166,255,.5);border-color:var(--accent)}
-    @keyframes scan{0%{background-position:0 0}100%{background-position:200% 200%}}
-    .category-tag{position:absolute;top:15px;right:15px;padding:6px 14px;background:rgba(0,0,0,0.7);border-radius:20px;font-size:0.8rem}
-    .toggle{position:absolute;top:30px;right:30px;background:var(--card);border:2px solid var(--border);padding:12px 18px;border-radius:50px;cursor:pointer;font-size:1.5rem;z-index:10}
-    footer{text-align:center;margin:100px 0 50px;opacity:0.6}
-    .reveal{opacity:1!important;transform:translateY(0)!important}
-  </style>
+  <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
   <canvas id="matrix"></canvas>
@@ -43,42 +14,59 @@
     
     <header>
       <h1 id="glitch">Syndro</h1>
-      <div class="solve-counter" id="counter">2 SOLVED</div>
+      <div class="solve-counter" id="total-solves">0 SOLVED</div>
     </header>
 
     <div class="terminal" id="terminal">
       <div>$ whoami</div>
       <div>Syndro</div>
       <div>$ cat bio.txt</div>
-      <div class="typing">CTF player • Web & Misc destroyer • PHP shell enthusiast •</div>
+      <div class="typing">CTF player • Web & Misc destroyer • PHP shell enthusiast • Student at AOU</div>
     </div>
 
     <div class="bio">
-      <p>Trying my best, Student at AOU.</p>
-      <p>Every flag is a story. Every writeup is a war crime against the challenge author.</p>
+      <p>Trying my best in every CTF. Every flag is a story. Every writeup is a war crime against the challenge author.</p>
       <p><a href="https://github.com/ayco-sy" style="color:var(--accent)">GitHub</a> • 
          <a href="https://x.com/Syndro_1" style="color:var(--accent)">X/Twitter</a> • 
-        <a href="discordapp.com/users/313717103150759950" style="color:var(--accent)">Discord</a> • 
-        <a href="https://medium.com/@syndro" style="color:var(--accent)">Medium</a> • <br>
-         Powered by caffeine and <code>rm -rf / --no-preserve-root</code> (jk)</p>
+         <a href="https://discordapp.com/users/313717103150759950" style="color:var(--accent)">Discord</a> • 
+         <a href="https://medium.com/@syndro" style="color:var(--accent)">Medium</a></p>
     </div>
 
+    <!-- CTF SELECTION GRID -->
+    <h2 style="text-align:center;color:var(--accent);font-size:2.5rem;margin:80px 0 40px">My CTFs</h2>
+    <div class="ctf-grid">
+      <div class="ctf-card" onclick="location.href='ctf/patriotctf2025.html'">
+        <h2>PatriotCTF 2025</h2>
+        <p>6 challenges solved • Web & Misc</p>
+        <p style="color:var(--green);font-weight:bold">Currently Active</p>
+      </div>
+      <!-- Add more CTFs here in the future -->
+      <!--
+      <div class="ctf-card" onclick="location.href='ctf/htb2025.html'">
+        <h2>HackTheBox CTF</h2>
+        <p>12 solved • Pwn & Crypto</p>
+      </div>
+      -->
+    </div>
+
+    <!-- CURRENT CTF CHALLENGES (PatriotCTF 2025) -->
+    <h2 style="text-align:center;color:var(--accent);font-size:2.5rem;margin:80px 0 40px">PatriotCTF 2025 Challenges</h2>
     <div class="tabs">
       <div class="tab active" data-cat="all">All</div>
-      <div class="tab" data-cat="Misc">Misc</div>
-      <div class="tab" data-cat="Web">Web</div>
-      <div class="tab" data-cat="Crypto">Crypto</div>
-      <div class="tab" data-cat="Pwn">Pwn</div>
-      <div class="tab" data-cat="Forensics">Forensics</div>
+      <div class="tab" data-cat="misc">Misc</div>
+      <div class="tab" data-cat="web">Web</div>
+      <div class="tab" data-cat="crypto">Crypto</div>
+      <div class="tab" data-cat="pwn">Pwn</div>
+      <div class="tab" data-cat="forensics">Forensics</div>
     </div>
 
     <div class="cards" id="cards"></div>
 
-    <footer>syndro</footer>
+    <footer>syndro • Built with rage, RGB, and zero sleep</footer>
   </div>
 
   <script>
-    // Matrix rain background
+    // Matrix rain (unchanged)
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -102,36 +90,34 @@
     setInterval(draw, 35);
     window.addEventListener('resize', () => {canvas.width = window.innerWidth; canvas.height = window.innerHeight});
 
-    // Terminal typing + reveal animation
+    // Animations
     setTimeout(() => document.getElementById('terminal').classList.add('reveal'), 800);
     setTimeout(() => document.querySelector('.bio').classList.add('reveal'), 2000);
     setTimeout(() => document.getElementById('cards').classList.add('reveal'), 2800);
 
-    // Challenges
+    // Challenges for PatriotCTF 2025
     const challenges = [
-      {title:"Reverse Metadata Part 1",file:"Misc/Challenge1.html",flag:"PCTF{1_l0v3_unr3str1ct3d_f1l3_upl0ads}",cat:"Misc"},
-      {title:"Reverse Metadata Part 2",file:"Misc/Challenge2.html",flag:"PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",cat:"Misc"},
-      {title:"123123",file:"Misc/Challenge2.html",flag:"PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",cat:"Web"},
-      {title:"hellosir",file:"Misc/Challenge2.html",flag:"PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",cat:"Pwn"},
-      {title:"Crypto",file:"Misc/Challenge2.html",flag:"PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",cat:"Crypto"},
-      {title:"Detective",file:"Misc/Challenge2.html",flag:"PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",cat:"Forensics"},
+      {title:"Reverse Metadata Part 1",file:"Misc/Challenge1.html",flag:"PCTF{1_l0v3_unr3str1ct3d_f1l3_upl0ads}",type:"misc"},
+      {title:"Reverse Metadata Part 2",file:"Misc/Challenge2.html",flag:"PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",type:"misc"},
+      // Add more here
     ];
+
+    document.getElementById("total-solves").textContent = challenges.length + " SOLVED";
 
     const container = document.getElementById("cards");
     const tabs = document.querySelectorAll(".tab");
-    document.getElementById("counter").textContent = challenges.length + " SOLVED";
 
     function render(filter = "all") {
       container.innerHTML = "";
-      const filtered = filter === "all" ? challenges : challenges.filter(c => c.cat === filter);
+      const filtered = filter === "all" ? challenges : challenges.filter(c => c.type === filter);
       filtered.forEach(c => {
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-          <div class="category-tag">${c.cat}</div>
+          <div class="category-tag tag-${c.type}">${c.type.toUpperCase()}</div>
           <h3>${c.title}</h3>
           <p class="flag">Flag: <code>${c.flag}</code></p>
-          <span style="opacity:0.7">Click for full writeup →</span>
+          <span style="opacity:0.7">Click for full writeup</span>
         `;
         card.onclick = () => window.location = c.file;
         container.appendChild(card);
@@ -144,7 +130,6 @@
       render(t.dataset.cat);
     });
 
-    // Theme persistence
     if (localStorage.theme === "light" || (!localStorage.theme && window.matchMedia("(prefers-color-scheme: light)").matches))
       document.documentElement.classList.add("light");
 
