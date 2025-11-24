@@ -1,4 +1,3 @@
-// === MATRIX RAIN (SAFE) ===
 const canvas = document.getElementById('matrix');
 if (canvas) {
   const ctx = canvas.getContext('2d');
