@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="container">
-    <a href="/" style="position:absolute;top:30px;left:30px;color:var(--accent);font-size:1.5rem;text-decoration:none">Back</a>
+    <a href="https://syndro-1.github.io/syndro/" style="position:absolute;top:30px;left:30px;color:var(--accent);font-size:1.5rem;text-decoration:none">Back</a>
     <header style="margin-top:100px">
       <h1 style="font-size:4.5rem">PatriotCTF 2025</h1>
       <p>All writeups from the ongoing CTF</p>
@@ -17,8 +17,18 @@
   </div>
   <script>
     const challenges = [
-      {title:"Reverse Metadata Part 1",file:"/Misc/Challenge1.html",flag:"PCTF{1_l0v3_unr3str1ct3d_f1l3_upl0ads}",type:"misc"},
-      {title:"Reverse Metadata Part 2",file:"/Misc/Challenge2.html",flag:"PCTF{l0gs_4r3_4_tr34sur3_tr0v3}",type:"misc"},
+      // Misc
+      
+      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Misc/ReverseMetaData1.html",flag:"MASONCC{images_****}",type:"misc"},
+      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Misc/ReverseMetaData2.html",flag:"PCTF{hidden_****}",type:"misc"},
+
+      // Web
+
+      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/ConnectionTester.html",flag:"PCTF{C0nnection_****}",type:"web"},
+      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/FeedbackFallout.html",flag:"{SQLI_****}",type:"web"},
+      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/SecureAuth.html",flag:"PCTF{cant_****}",type:"web"},
+      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/TrustFall.html",flag:"PCTF{auth_****}",type:"web"},
+      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/TrustVault.html",flag:"FLAG{py7h0n_****}",type:"web"},
     ];
     const container = document.getElementById("cards");
     challenges.forEach(c => {
