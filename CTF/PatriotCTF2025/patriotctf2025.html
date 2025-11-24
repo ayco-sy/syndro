@@ -5,36 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PatriotCTF 2025 • syndro</title>
   <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Only tiny overrides for this page */
+    .back-btn {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      color: var(--accent);
+      font-size: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: .3s;
+    }
+    .back-btn:hover { opacity: 0.8; }
+    .page-header {
+      text-align: center;
+      padding: 120px 20px 60px;
+      background: linear-gradient(135deg, #0d1117, #161b22);
+      margin: -20px -20px 60px;
+      border-bottom: 3px solid var(--accent);
+    }
+    .page-header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 5rem;
+      background: linear-gradient(90deg, #58a6ff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+    .page-header p { font-size: 1.3rem; opacity: 0.9; margin-top: 10px; }
+  </style>
 </head>
 <body>
+
+  <a href="/" class="back-btn">Back</a>
+
+  <div class="page-header">
+    <h1>PatriotCTF 2025</h1>
+  </div>
+
   <div class="container">
-    <a href="https://syndro-1.github.io/syndro/" style="position:absolute;top:30px;left:30px;color:var(--accent);font-size:1.5rem;text-decoration:none">Back</a>
-    <header style="margin-top:100px">
-      <h1 style="font-size:4.5rem">PatriotCTF 2025</h1>
-      <p>All writeups from the ongoing CTF</p>
-    </header>
     <div class="cards" id="cards"></div>
   </div>
+
   <script>
+    // SAME CHALLENGES AS HOMEPAGE (keep in sync!)
     const challenges = [
-      // Misc
-      
-      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Misc/ReverseMetaData1.html",flag:"MASONCC{images_****}",type:"misc"},
-      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Misc/ReverseMetaData2.html",flag:"PCTF{hidden_****}",type:"misc"},
+  // Misc
+  
+  {title:"Reverse Metadata Part 1",file:"CTF/patriotCTF2025/Misc/ReverseMetaData1.html",flag:"MASONCC{images_****}",type:"misc"},
+  {title:"Reverse Metadata Part 2",file:"CTF/patriotCTF2025/Misc/ReverseMetaData2.html",flag:"PCTF{hidden_****}",type:"misc"},
 
-      // Web
 
-      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/ConnectionTester.html",flag:"PCTF{C0nnection_****}",type:"web"},
-      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/FeedbackFallout.html",flag:"{SQLI_****}",type:"web"},
-      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/SecureAuth.html",flag:"PCTF{cant_****}",type:"web"},
-      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/TrustFall.html",flag:"PCTF{auth_****}",type:"web"},
-      {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/TrustVault.html",flag:"FLAG{py7h0n_****}",type:"web"},
+  // Web
+
+   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/ConnectionTester.html",flag:"PCTF{C0nnection_****}",type:"web"},
+   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/FeedbackFallout.html",flag:"{SQLI_****}",type:"web"},
+   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/SecureAuth.html",flag:"PCTF{cant_****}",type:"web"},
+   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/TrustFall.html",flag:"PCTF{auth_****}",type:"web"},
+   {title:"Reverse Metadata Part 1",file:"CTF/PatriotCTF2025/Web/TrustVault.html",flag:"FLAG{py7h0n_****}",type:"web"},
     ];
+
     const container = document.getElementById("cards");
+
     challenges.forEach(c => {
       const card = document.createElement("div");
       card.className = "card";
-      card.innerHTML = `<div class="category-tag tag-${c.type}">${c.type.toUpperCase()}</div><h3>${c.title}</h3><p class="flag">Flag: <code>${c.flag}</code></p>`;
+      card.innerHTML = `
+        <div class="category-tag tag-${c.type}">${c.type.toUpperCase()}</div>
+        <h3>${c.title}</h3>
+        <p class="flag">Flag: <code>${c.flag}</code></p>
+        <span style="opacity:0.7">Click for full writeup</span>
+      `;
       card.onclick = () => location.href = c.file;
       container.appendChild(card);
     });
