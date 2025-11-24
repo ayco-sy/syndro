@@ -3,138 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Challenge 1: Reverse Metadata Part 1 • PatriotCTF 2025</title>
+  <title>Reverse Metadata Part 1 • PatriotCTF 2025</title>
+  
+  <!-- Shared style from your main site -->
   <link rel="stylesheet" href="../../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
-    /* Tiny overrides only for writeups */
-    .writeup-container {
+    /* Only tiny, safe overrides for writeups */
+    .writeup {
       max-width: 1000px;
-      margin: 40px auto;
-      padding: 40px;
+      margin: 60px auto;
+      padding: 50px;
       background: var(--card);
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      border-radius: 20px;
+      border: 2px solid var(--border);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.7);
+      position: relative;
+      overflow: hidden;
     }
+    .writeup::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 6px;
+      background: linear-gradient(90deg, #58a6ff, #8b5cf6);
+    }
+
     .back-btn {
-      display: inline-block;
-      margin: 20px 0;
-      padding: 12px 28px;
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      z-index: 100;
       background: var(--accent);
       color: #000;
+      padding: 14px 32px;
       border-radius: 50px;
       font-weight: bold;
       text-decoration: none;
-      transition: .3s;
+      font-size: 1.1rem;
+      box-shadow: 0 10px 30px rgba(88,166,255,0.4);
+      transition: all .3s;
     }
-    .back-btn:hover { transform: scale(1.05); }
-    .flag { color: var(--green); font-weight: bold; font-size: 1.2em; }
-    .note {
-      background: #30363d;
-      padding: 18px;
-      border-radius: 12px;
-      border-left: 5px solid var(--accent);
-      margin: 25px 0;
+    .back-btn:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(88,166,255,0.6); }
+
+    .title {
+      text-align: center;
+      margin-bottom: 40px;
     }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
+    .title h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4rem;
+      background: linear-gradient(90deg, #58a6ff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+    .title small {
+      display: block;
+      font-size: 2rem;
+      opacity: 0.9;
+      margin-top: 10px;
+      font-weight: normal;
+    }
+    .meta {
+      text-align: center;
+      opacity: 0.8;
+      font-size: 1.1rem;
       margin: 30px 0;
     }
-    .grid-2 img {
+
+    h2 {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 10px;
+      margin: 50px 0 25px;
+      font-size: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .grid img {
       width: 100%;
-      height: auto;
-      border-radius: 12px;
-      border: 2px solid var(--border);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      border-radius: 16px;
+      border: 3px solid var(--border);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      transition: transform .4s;
     }
-    .grid-2 p {
+    .grid img:hover { transform: scale(1.03); }
+    .grid p {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 12px;
       opacity: 0.8;
-      font-size: 0.9em;
+      font-style: italic;
     }
+
     pre {
       background: #010409 !important;
-      padding: 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
+      padding: 20px !important;
+      border-radius: 16px;
+      border: 2px solid var(--border);
       overflow-x: auto;
-      margin: 20px 0;
+      font-size: 1.1rem;
+      margin: 30px 0;
     }
+
+    .flag-box {
+      background: linear-gradient(135deg, #1e40af, #1e3a8a);
+      padding: 25px;
+      border-radius: 16px;
+      text-align: center;
+      margin: 40px 0;
+      border: 3px solid var(--green);
+      box-shadow: 0 0 40px rgba(59, 249, 80, 0.3);
+    }
+    .flag {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--green);
+      text-shadow: 0 0 20px var(--green);
+      letter-spacing: 1px;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 100px;
+      opacity: 0.6;
+      font-size: 0.95rem;
+    }
+
     @media (max-width: 768px) {
-      .grid-2 { grid-template-columns: 1fr; }
+      .writeup { margin: 20px; padding: 30px; }
+      .title h1 { font-size: 3rem; }
+      .title small { font-size: 1.6rem; }
+      .grid { grid-template-columns: 1fr; }
+      .back-btn { position: relative; top: auto; left: auto; display: inline-block; margin: 20px 0; }
     }
   </style>
 </head>
 <body>
 
-  <div class="writeup-container">
+  <a href="https://syndro-1.github.io/syndro/" class="back-btn">Back</a>
 
-    <a href="https://syndro-1.github.io/syndro/" class="back-btn">Back to Challenges</a>
+  <div class="writeup">
+    <div class="title">
+      <h1>Reverse Metadata Part 1</h1>
+      <small>Misc • 100 points • 62 solves</small>
+    </div>
 
-    <h1 style="text-align:center; margin-bottom:10px;">
-      Challenge 1<br>
-      <small style="font-size:1.8rem; opacity:0.9;">Reverse Metadata Part 1</small>
-    </h1>
+    <div class="meta">
+      Solved on November 23, 2025 • PatriotCTF 2025
+    </div>
 
-    <p style="text-align:center; opacity:0.8; margin-bottom:30px;">
-      <strong>Category:</strong> Misc • 
-      <strong>Points:</strong> 100 • 
-      <strong>Solves:</strong> 62
-    </p>
+    <h2>1. The Upload Form</h2>
+    <p>We’re given a simple file upload page with <strong>zero client-side filtering</strong>. That’s a red flag.</p>
 
-    <!-- Optional banner -->
-    <!-- <img src="https://github.com/user-attachments/assets/your-banner" style="border-radius:12px; margin:20px 0;"> -->
-
-    <h2>1. Upload Page</h2>
-    <p>We are greeted by a simple file upload form. Viewing the page source reveals no client-side extension filtering — suspicious!</p>
-
-    <div class="grid-2">
+    <div class="grid">
       <div>
         <img src="https://github.com/user-attachments/assets/420f4536-a676-4eb6-b30a-4d6b760961f5" alt="Upload form">
-        <p>Upload form</p>
+        <p>The upload interface</p>
       </div>
       <div>
         <img src="https://github.com/user-attachments/assets/93d98d98-ce2e-4462-997c-0c46931c5812" alt="Source code">
-        <p>Source code (no filtering)</p>
+        <p>No extension checks in source</p>
       </div>
     </div>
 
-    <h2>2. Deploying the Attack</h2>
-    <p>Tried uploading a classic PHP web shell → “Upload successful!”<br>
-       No location feedback… so we guessed the common path: <code>/uploads/filename.php</code><br>
-       → <strong>It worked!</strong> Remote code execution achieved.</p>
+    <h2>2. RCE via PHP Shell</h2>
+    <p>Uploaded a one-liner PHP shell → “Upload successful!”<br>
+    Guessed the path: <code>/uploads/shell.php</code> → <strong>Remote code execution achieved.</strong></p>
 
-    <div class="grid-2">
+    <div class="grid">
       <div>
         <img src="https://github.com/user-attachments/assets/eec01e40-edc0-469a-9e37-1f85669bfddf" alt="Upload success">
-        <p>Upload successful!</p>
+        <p>Upload confirmed</p>
       </div>
       <div>
-        <img src="https://github.com/user-attachments/assets/7f667e88-f38f-4b7d-89da-d662e96c6e80" alt="Shell executed">
-        <p>SYNDRO shell executed</p>
+        <img src="https://github.com/user-attachments/assets/7f667e88-f38f-4b7d-89da-d662e96c6e80" alt="Shell execution">
+        <p>SYNDRO shell running</p>
       </div>
     </div>
 
-    <h2>3. Capturing the Flag</h2>
-    <p>Once inside:</p>
+    <h2>3. Flag Found</h2>
     <pre><code>ls -la
 cat flag2.txt</code></pre>
 
-    <div class="note">
-      <strong>Flag:</strong> <span class="flag">MASONCC{images_****}</span>
+    <div class="flag-box">
+      <div class="flag">MASONCC{images_****}</div>
     </div>
 
-    <img src="https://github.com/user-attachments/assets/c50c112b-3a8a-4fc3-bbb7-42715a07d8d6" alt="Flag captured" style="max-width:700px; display:block; margin:30px auto;">
+    <img src="https://github.com/user-attachments/assets/c50c112b-3a8a-4fc3-bbb7-42715a07d8d6" alt="Flag captured" style="max-width:700px; display:block; margin:40px auto; border-radius:16px; border:3px solid var(--border);">
 
-    <p style="text-align:center; margin-top:80px; opacity:0.7; font-size:0.9em;">
-      Solved on November 23, 2025 • 
-      <a href="https://syndro-1.github.io/syndro/" style="color:var(--accent)">View repo on GitHub</a>
-    </p>
-
+    <div class="footer-note">
+      Writeup by Syndro • <a href="https://github.com/syndro-1" style="color:var(--accent)">GitHub</a> • 
+      <a href="https://syndro-1.github.io/syndro/" style="color:var(--accent)">Back to all writeups</a>
+    </div>
   </div>
+
 </body>
 </html>
