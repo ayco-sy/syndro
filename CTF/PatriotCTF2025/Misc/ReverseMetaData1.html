@@ -18,195 +18,215 @@
   <link rel="stylesheet" href="../../style.css">
 
   <style>
-    <style>
-  :root { --accent: #58a6ff; --green: #3fb950; --purple: #8b5cf6; --pink: #f472b6; }
-  .light { --accent: #1f6feb; --green: #238636; }
+    :root { --accent: #58a6ff; --green: #3fb950; --purple: #8b5cf6; --pink: #f472b6; }
+    .light { --accent: #1f6feb; --green: #238636; }
 
-  body {
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-    color: #e6edf3;
-    font-family: 'Roboto Mono', monospace;
-    min-height: 100vh;
-    padding: 40px 20px;
-    line-height: 1.8;
-    transition: background 0.5s, color 0.5s;
-  }
-  .light body { background: #f6f8fa; color: #0d1117; }
+    body {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #e6edf3;
+      font-family: 'Roboto Mono', monospace;
+      min-height: 100vh;
+      padding: 40px 20px;
+      line-height: 1.8;
+      transition: background 0.5s, color 0.5s;
+    }
+    .light body { background: #f6f8fa; color: #0d1117; }
 
-  .container { max-width: 1100px; margin: 0 auto; }
+    .container { max-width: 1100px; margin: 0 auto; }
 
-  h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 4.8rem;
-    text-align: center;
-    background: linear-gradient(90deg, var(--accent), var(--purple), var(--pink));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin: 20px 0 10px;
-    text-shadow: 0 0 30px rgba(88,166,255,0.3);
-  }
-  .light h1 { background: linear-gradient(90deg, #1f6feb, #7c3aed, #ec4899); -webkit-background-clip: text; }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4.8rem;
+      text-align: center;
+      background: linear-gradient(90deg, var(--accent), var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 20px 0 10px;
+      text-shadow: 0 0 30px rgba(88,166,255,0.3);
+    }
+    .light h1 { background: linear-gradient(90deg, #1f6feb, #7c3aed, #ec4899); -webkit-background-clip: text; }
 
-  .meta { text-align: center; opacity: 0.85; font-size: 1.2rem; margin-bottom: 60px; }
-  .meta span { color: var(--accent); font-weight: bold; }
+    .meta { text-align: center; opacity: 0.85; font-size: 1.2rem; margin-bottom: 60px; }
+    .meta span { color: var(--accent); font-weight: bold; }
 
-  h2 { color: var(--accent); margin: 50px 0 20px; font-family: 'Orbitron', sans-serif; font-size: 2.2rem; }
+    h2 { color: var(--accent); margin: 50px 0 20px; font-family: 'Orbitron', sans-serif; font-size: 2.2rem; }
 
-  pre {
-    background: #161b22 !important;
-    color: #f0f6fc !important;
-    padding: 20px;
-    border-radius: 14px;
-    overflow-x: auto;
-    border: 1px solid #30363d;
-    font-size: 1.05rem;
-    margin: 25px 0;
-    white-space: pre-wrap;
-  }
-  .light pre {
-    background: #f6f8fa !important;
-    color: #24292f !important;
-    border: 1px solid #d0d7de !important;
-  }
+    pre {
+      background: #161b22 !important;
+      color: #f0f6fc !important;
+      padding: 20px;
+      border-radius: 14px;
+      overflow-x: auto;
+      border: 1px solid #30363d;
+      font-size: 1.05rem;
+      margin: 25px 0;
+      white-space: pre-wrap;
+    }
+    .light pre {
+      background: #f6f8fa !important;
+      color: #24292f !important;
+      border: 1px solid #d0d7de !important;
+    }
 
-  code {
-    background: rgba(88,166,255,0.1);
-    padding: 4px 10px;
-    border-radius: 8px;
-    color: var(--green);
-  }
-  .light code { background: rgba(30,110,254,0.15); }
+    code {
+      background: rgba(88,166,255,0.1);
+      padding: 4px 10px;
+      border-radius: 8px;
+      color: var(--green);
+    }
+    .light code { background: rgba(30,110,254,0.15); }
 
-  /* IMAGES - CURSOR + HOVER EFFECT */
-  img {
-    max-width: 100%;
-    border-radius: 16px;
-    margin: 35px 0;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    border: 2px solid rgba(88,166,255,0.3);
-    cursor: zoom-in !important;
-    transition: all 0.4s ease;
-    user-select: none;
-  }
-  .light img { box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
-  img:hover { transform: scale(1.03); box-shadow: 0 25px 80px rgba(88,166,255,0.6); }
+    img {
+      max-width: 100%;
+      border-radius: 16px;
+      margin: 35px 0;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      border: 2px solid rgba(88,166,255,0.3);
+      cursor: zoom-in;
+      transition: transform 0.3s ease;
+    }
+    .light img { box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+    img:hover { transform: scale(1.02); }
 
-  .flag {
-    background: rgba(0,255,0,0.1);
-    padding: 30px;
-    border-radius: 16px;
-    font-size: 1.8rem;
-    text-align: center;
-    margin: 60px 0;
-    color: var(--green);
-    font-weight: bold;
-    border: 3px dashed var(--green);
-    font-family: 'Roboto Mono', monospace;
-    letter-spacing: 1px;
-  }
-  .light .flag { background: rgba(35,134,54,0.08); border-color: #238636; }
+    .flag {
+      background: rgba(0,255,0,0.1);
+      padding: 30px;
+      border-radius: 16px;
+      font-size: 1.8rem;
+      text-align: center;
+      margin: 60px 0;
+      color: var(--green);
+      font-weight: bold;
+      border: 3px dashed var(--green);
+      font-family: 'Roboto Mono', monospace;
+      letter-spacing: 1px;
+    }
+    .light .flag { background: rgba(35,134,54,0.08); border-color: #238636; }
 
-  .back {
-    position: fixed;
-    top: 30px;
-    left: 30px;
-    background: var(--accent);
-    color: #000;
-    padding: 16px 42px;
-    border-radius: 50px;
-    font-weight: bold;
-    text-decoration: none;
-    box-shadow: 0 12px 40px rgba(88,166,255,0.6);
-    transition: all 0.4s ease;
-    z-index: 9999;
-    font-size: 1.1rem;
-  }
-  .back:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 60px rgba(88,166,255,0.8); }
-  .light .back { color: white; }
+    .back {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      background: var(--accent);
+      color: #000;
+      padding: 16px 42px;
+      border-radius: 50px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 12px 40px rgba(88,166,255,0.6);
+      transition: all 0.4s ease;
+      z-index: 9999;
+      font-size: 1.1rem;
+    }
+    .back:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 60px rgba(88,166,255,0.8); }
+    .light .back { color: white; }
 
-  .theme-toggle {
-    position: fixed;
-    top: 30px;
-    right: 30px;
-    z-index: 9999;
-    background: rgba(0,0,0,0.3);
-    color: var(--accent);
-    border: 2px solid var(--accent);
-    padding: 14px 28px;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 0 25px rgba(88,166,255,0.5);
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-  }
-  .theme-toggle:hover {
-    background: var(--accent);
-    color: #000;
-    transform: scale(1.08);
-  }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+    .modal.active { display: flex; }
+    .modal img {
+      max-width: 95%;
+      max-height: 95vh;
+      border-radius: 16px;
+      box-shadow: 0 0 100px rgba(88,166,255,0.6);
+    }
+    .close-modal {
+      position: absolute;
+      top: 30px; right: 40px;
+      font-size: 4rem;
+      color: white;
+      background: rgba(255,255,255,0.1);
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .close-modal:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
 
-  /* MODAL - SMOOTH FADE + SCALE */
-  #imageModal {
-    display: none;
-    position: fixed;
-    z-index: 10000;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.97);
-    backdrop-filter: blur(16px);
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s;
-    padding: 20px;
-    cursor: zoom-out;
-  }
-  #imageModal.active {
-    display: flex;
-    opacity: 1;
-    visibility: visible;
-  }
-  #imageModal img {
-    max-width: 94%;
-    max-height: 94vh;
-    border-radius: 20px;
-    border: 3px solid var(--accent);
-    box-shadow: 0 0 120px rgba(88,166,255,0.8);
-    transform: scale(0.9);
-    animation: zoomIn 0.5s ease forwards;
-  }
-  @keyframes zoomIn {
-    to { transform: scale(1); }
-  }
-  .close-modal {
-    position: absolute;
-    top: 30px; right: 40px;
-    font-size: 4.5rem;
-    width: 80px; height: 80px;
-    background: rgba(255,255,255,0.15);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-  }
-  .close-modal:hover {
-    background: rgba(255,255,255,0.3);
-    transform: scale(1.2) rotate(90deg);
-  }
+    @media (max-width: 768px) {
+      h1 { font-size: 3.5rem; }
+      .back { position: static; display: block; margin: 30px auto; width: fit-content; }
+      .close-modal { top: 15px; right: 15px; font-size: 3rem; }
+    }
 
-  @media (max-width: 768px) {
-    h1 { font-size: 3.5rem; }
-    .back, .theme-toggle { position: static; display: block; margin: 20px auto; width: fit-content; }
-    .close-modal { top: 15px; right: 15px; font-size: 3.5rem; width: 60px; height: 60px; }
-  }
-</style>
+      .theme-toggle {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      z-index: 9999;
+      background: var(--card);
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(88,166,255,0.5);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .theme-toggle:hover {
+      background: var(--accent);
+      color: #000;
+      transform: scale(1.08);
+      box-shadow: 0 0 40px rgba(88,166,255,0.8);
+    }
+    #imageModal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.97);
+  backdrop-filter: blur(16px);
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  padding: 20px;
+}
+#imageModal.active { display: flex; }
+
+#imageModal img {
+  max-width: 94%;
+  max-height: 94vh;
+  border-radius: 20px;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 120px rgba(88,166,255,0.8);
+}
+
+.close-modal {
+  position: absolute;
+  top: 30px; right: 40px;
+  font-size: 4.5rem;
+  width: 80px; height: 80px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.close-modal:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.2);
+}
   </style>
 </head>
 <body>
@@ -270,17 +290,15 @@ cat flag2.txt</pre>
     <p>Never trust an image upload.</p>
   </div>
 
-<!-- IMAGE ZOOM MODAL -->
-<div id="imageModal">
-  <span class="close-modal">×</span>
-  <img id="modalImage" src="" alt="Zoomed image">
-</div>
+  <div class="modal" id="imageModal">
+    <div class="close-modal" onclick="document.getElementById('imageModal').classList.remove('active')">&times;</div>
+    <img id="modalImage" src="" alt="Zoomed image">
+  </div>
 
 <script>
   const modal = document.getElementById('imageModal');
   const modalImg = document.getElementById('modalImage');
 
-  // Open modal
   document.querySelectorAll('img').forEach(img => {
     if (img.closest('#imageModal')) return;
     img.onclick = () => {
@@ -290,7 +308,6 @@ cat flag2.txt</pre>
     };
   });
 
-  // Close modal
   modal.addEventListener('click', (e) => {
     if (e.target === modal || e.target.classList.contains('close-modal')) {
       modal.classList.remove('active');
@@ -298,7 +315,6 @@ cat flag2.txt</pre>
     }
   });
 
-  // ESC key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
       modal.classList.remove('active');
@@ -306,7 +322,6 @@ cat flag2.txt</pre>
     }
   });
 
-  // Theme toggle
   document.getElementById('themeToggle')?.addEventListener('click', () => {
     document.documentElement.classList.toggle('light');
     localStorage.theme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
