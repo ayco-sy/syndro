@@ -20,7 +20,7 @@ if (canvas) {
       drops[i]++;
     });
   }
-  setInterval(draw, 35);
+  setInterval(draw, 30); // Slightly faster for more activity
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -52,6 +52,34 @@ const challenges = [
   {title:"Trust Fall", file:"CTF/PatriotCTF2025/Web/TrustFall", flag:"PCTF{auth_****}", type:"web"},
   {title:"Trust Vault", file:"CTF/PatriotCTF2025/Web/TrustVault", flag:"FLAG{py7h0n_****}", type:"web"},
 ];
+
+const totalChallenges = 42; // Hardcoded total; update as needed
+
+function updateSolveCounters() {
+  const solved = challenges.length;
+  document.getElementById("solveCounter").textContent = solved + " SOLVED";
+  document.getElementById("sidebarSolveCounter").textContent = solved + " / " + totalChallenges;
+  
+  // Update progress ring
+  const progress = (solved / totalChallenges) * 100;
+  const circle = document.getElementById('progressCircle');
+  if (circle) {
+    circle.style.strokeDasharray = `${progress} 100`;
+  }
+}
+
+function populateRecentSolves() {
+  const list = document.getElementById('recentSolvesList');
+  if (!list) return;
+  list.innerHTML = '';
+  // Sort by assuming reverse order as "recent"; add dates to challenges array for real sorting
+  const recent = challenges.slice(-5).reverse();
+  recent.forEach(c => {
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="tag tag-${c.type}">${c.title}</span> <small>(solved)</small>`;
+    list.appendChild(li);
+  });
+}
 
 document.getElementById("solveCounter").textContent = challenges.length + " SOLVED";
 
@@ -116,3 +144,5 @@ document.getElementById('ctfModal')?.addEventListener('click', (e) => {
 
 // === INITIAL RENDER ===
 renderChallenges();
+updateSolveCounters();
+populateRecentSolves();
