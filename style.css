@@ -27,8 +27,9 @@ canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; opa
 .progress-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
 .circle-bg { fill: none; stroke: var(--border); stroke-width: 3.8; }
 .circle { fill: none; stroke: var(--green); stroke-width: 3.8; stroke-dasharray: 0 100; transition: stroke-dasharray 1s; }
-.recent-solves ul { list-style: none; }
-.recent-solves li { margin: 10px 0; opacity: 0.9; }
+.recent-solves li { color: var(--green) !important; }
+.recent-solves li small { color: #8b949e; }
+.recent-solves .tag-web { background: var(--green) !important; color: #000 !important; }
 .quick-links { margin-top: 40px; display: flex; flex-direction: column; gap: 15px; text-align: center; }
 .quick-links a { color: var(--text); text-decoration: none; padding: 10px; border-radius: 8px; transition: .3s; }
 .quick-links a:hover { background: var(--accent); color: #000; }
