@@ -236,26 +236,43 @@ done</code></pre>
     <p>Log4Shell.</p>
   </div>
 
-  <!-- FULLSCREEN IMAGE MODAL -->
-  <div class="modal" id="imageModal">
-    <div class="close-modal" onclick="document.getElementById('imageModal').classList.remove('active')">×</div>
-    <img id="modalImage" src="" alt="Zoomed image">
-  </div>
+<!-- IMAGE ZOOM MODAL -->
+<div id="imageModal" class="modal">
+  <span class="close-modal">×</span>
+  <img id="modalImage" src="" alt="Zoomed image">
+</div>
 
-  <script>
-    document.querySelectorAll('img').forEach(img => {
-      if (!img.closest('.modal')) {
-        img.onclick = () => {
-          document.getElementById('modalImage').src = img.src;
-          document.getElementById('imageModal').classList.add('active');
-        };
-      }
-    });
-    document.getElementById('imageModal').onclick = function(e) {
-      if (e.target === this || e.target.classList.contains('close-modal')) {
-        this.classList.remove('active');
-      }
+<script>
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+
+  document.querySelectorAll('img').forEach(img => {
+    if (img.closest('#imageModal')) return;
+    img.onclick = () => {
+      modalImg.src = img.src;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     };
-  </script>
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal || e.target.classList.contains('close-modal')) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.getElementById('themeToggle')?.addEventListener('click', () => {
+    document.documentElement.classList.toggle('light');
+    localStorage.theme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
+  });
+</script>
 </body>
 </html>
