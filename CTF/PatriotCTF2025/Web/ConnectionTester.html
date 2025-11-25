@@ -132,7 +132,7 @@
 
      <h2>0. The Challenge Description</h2>
 
-    <p>There is not much in image description.</p>
+    <p>There is not much in the challenge description.</p>
     <img src="Pic/ConnectionTester/1.png" alt="Challenge Description">
 
     <h2>1. Login Page – SQL Injection</h2>
@@ -158,10 +158,10 @@ Password: anything</pre>
 
     <h2>3. Discovering the Injection Point</h2>
     <p>The backend likely runs:</p>
-    <pre>/bin/sh -c "ping -c "<code>"user_input"</code>"</pre>
+    <pre>/bin/sh -c "ping -c <code>"user_input"</code></pre>
     <p>Because of <code>/bin/sh -c</code>, normal separators like <code>;</code> or <code>|</code> are treated as ping arguments → they don’t break out.</p>
     <p>But <code>&amp;</code> and <code>&amp;&amp;</code> work perfectly!</p>
-    <p>Commands like <code>ls</code><code>pwd</code><code>cat</code>Are not going to work, Since they are not a built-in shell Like <code>echo</code></p>
+    <p>Commands like <code>ls</code><code>pwd</code><code>cat</code> are not going to work, since they are not built-in shell like <code>echo</code></p>
     <p>And luckily We can use <code>echo</code> to execute our commands by using the following</p>
     <pre><code>
       echo "$(command)"
