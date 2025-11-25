@@ -142,7 +142,7 @@
 
     <p><strong>Payload:</strong></p>
     <pre>Username: ' OR 1=1-- -
-    Password: anything</pre>
+      Password: anything</pre>
 
     <p><strong>Resulting Query:</strong></p>
     <pre><code>SELECT * FROM users WHERE username = '' OR 1=1-- -' AND password = '...';</code></pre>
@@ -158,7 +158,7 @@
 
     <h2>3. Discovering the Injection Point</h2>
     <p>The backend likely runs:</p>
-    <pre>/bin/sh -c "ping -c 4 <user_input>"</pre>
+    <pre>/bin/sh -c "ping -c "<code><user_input></code>"</pre>
     <p>Because of <code>/bin/sh -c</code>, normal separators like <code>;</code> or <code>|</code> are treated as ping arguments → they don’t break out.</p>
     <p>But <code>&amp;</code> and <code>&amp;&amp;</code> work perfectly!</p>
     <p>Commands like <code>ls</code><code>pwd</code><code>cat</code>Are not going to work, Since they are not a built-in shell Like <code>echo</code></p>
