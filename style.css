@@ -20,55 +20,108 @@ canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.2
   backdrop-filter:blur(10px);transition:all .4s;
 }
 .light .sidebar-left{background:rgba(255,255,255,0.9)}
-
 .sidebar-left h3,.sidebar-left h4{color:var(--accent)}
 .stats-card{text-align:center;margin-bottom:40px}
 
-/* MAIN PROGRESS CIRCLE + TRAILS */
+/* ——— PERFECT PROGRESS CIRCLE + NEON TRAILS ——— */
 .overall-container{
-  position:relative;width:200px;height:200px;margin:30px auto;
+  position:relative;
+  width:220px;
+  height:220px;
+  margin:30px auto;
 }
+
 .progress-ring-big{
-  width:200px;height:200px;position:absolute;top:0;left:0;
+  position:absolute;
+  top:10px;
+  left:10px;
+  width:200px;
+  height:200px;
 }
+
 .progress-ring-big svg{
-  width:100%;height:100%;transform:rotate(-90deg);
+  width:100%;
+  height:100%;
+  transform:rotate(-90deg);
 }
+
 .circle-bg{
-  fill:none;stroke:#30363d;stroke-width:5;
+  fill:none;
+  stroke:#30363d;
+  stroke-width:5;
 }
+
 .circle-progress{
-  fill:none;stroke:url(#glowGradient);stroke-width:5.5;stroke-linecap:round;
-  stroke-dasharray:100;stroke-dashoffset:100;
-  transition:stroke-dashoffset 1.8s ease;
-  filter:drop-shadow(0 0 15px #00ff9d);
+  fill:none;
+  stroke:url(#glowGradient);
+  stroke-width:6;
+  stroke-linecap:round;
+  stroke-dasharray:100;
+  stroke-dashoffset:100;
+  transition:stroke-dashoffset 2s cubic-bezier(0.4,0,0.2,1);
+  filter:drop-shadow(0 0 20px #00ff9d);
 }
+
 .circle-text-big{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-size:2.4rem;font-weight:bold;color:var(--green);
-  text-shadow:0 0 20px var(--green);
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:2.6rem;
+  font-weight:bold;
+  color:var(--green);
+  text-shadow:0 0 25px var(--green);
+  z-index:10;
 }
 
 #category-trails{
-  position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
 }
+
 .category-trail{
-  position:absolute;top:100px;left:100px;width:4px;height:100px;
-  background:linear-gradient(to top,transparent,var(--trail-color));
-  transform-origin:center top;opacity:0;
-  animation:trailIn 1.2s forwards;
-  box-shadow:0 0 20px var(--trail-color);
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:5px;
+  height:110px;
+  margin-top:-110px;
+  margin-left:-2.5px;
+  background:linear-gradient(to top,transparent 10%,var(--trail-color) 70%);
+  transform-origin:center bottom;
+  opacity:0;
+  animation:trailIn 1.4s ease-out forwards;
+  box-shadow:0 0 25px var(--trail-color);
+  border-radius:3px;
 }
+
 .category-trail::after{
   content:attr(data-label);
-  position:absolute;top:-16px;left:-60px;width:120px;text-align:center;
-  font-weight:bold;font-size:0.9rem;color:var(--trail-color);
-  text-shadow:0 0 10px var(--trail-color);
-  background:rgba(0,0,0,0.7);padding:6px 12px;border-radius:20px;
+  position:absolute;
+  bottom:115px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.85);
+  color:var(--trail-color);
+  padding:8px 16px;
+  border-radius:30px;
+  font-weight:bold;
+  font-size:0.95rem;
+  white-space:nowrap;
+  text-shadow:0 0 15px var(--trail-color);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.1);
 }
-@keyframes trailIn{to{opacity:1}}
 
-/* Category trail colors */
+@keyframes trailIn{
+  to{opacity:1}
+}
+
+/* Trail colors */
 .trail-web       {--trail-color:#ff2e63}
 .trail-misc      {--trail-color:#39ff14}
 .trail-crypto    {--trail-color:#ffea00}
@@ -77,10 +130,13 @@ canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.2
 .trail-rev       {--trail-color:#ff9100}
 
 .solve-counter-sidebar{
-  margin-top:20px;font-size:1.5rem;color:var(--green);font-weight:bold;
+  margin-top:20px;
+  font-size:1.5rem;
+  color:var(--green);
+  font-weight:bold;
 }
 
-/* Rest of your original styles (unchanged) */
+/* ——— Rest of your original styles (unchanged) ——— */
 .toggle,.ctf-toggle{position:absolute;top:30px;background:var(--card);border:2px solid var(--border);padding:12px 18px;border-radius:50px;cursor:pointer;font-size:1.5rem;z-index:10;transition:.3s}
 .toggle{right:30px}.ctf-toggle{left:30px}
 header{text-align:center;padding:80px 20px}
@@ -114,7 +170,7 @@ header{text-align:center;padding:80px 20px}
 
 footer{text-align:center;margin:100px 0 50px;opacity:0.6}
 
-/* Modal styles (unchanged) */
+/* Modal */
 .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;visibility:hidden;transition:all .5s}
 .modal-overlay.open{opacity:1;visibility:visible}
 .modal-content{background:var(--card);border:4px solid var(--accent);border-radius:20px;width:92%;max-width:1300px;max-height:88vh;overflow:hidden;padding:0;box-shadow:0 0 100px rgba(88,166,255,.8);transform:scale(0.8);transition:transform .6s cubic-bezier(0.175,0.885,0.32,1.275)}
@@ -124,13 +180,12 @@ footer{text-align:center;margin:100px 0 50px;opacity:0.6}
 .close-modal{position:absolute;top:50%;right:30px;transform:translateY(-50%);font-size:4rem;cursor:pointer;opacity:0.8;transition:.3s}
 .close-modal:hover{opacity:1;transform:translateY(-50%) rotate(90deg)}
 .ctf-grid{padding:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;max-height:65vh;overflow-y:auto}
-.ctf-card{background:rgba(0,0,0,0.4);border:2px solid transparent;border-radius:16px;padding:30px;text-align:center;cursor:pointer;transition:.5s;position:relative;overflow:hidden}
+.ctf-card{background:rgba(0,0,0,0.4);border:2px solid transparent;border-radius:16px;padding:30px;text-align:center;cursor:pointer;transition:.5s}
 .ctf-card:hover{border-color:var(--accent);transform:translateY(-15px);box-shadow:0 20px 50px rgba(88,166,255,.6)}
 .ctf-card h3{color:var(--accent);font-size:1.6rem;margin-bottom:12px}
 
 .reveal{opacity:1!important;transform:translateY(0)!important}
 
-/* Responsive */
 @media (max-width:800px){
   .sidebar-left{transform:translateX(-100%)}
   .container{padding-left:20px}
