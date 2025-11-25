@@ -175,3 +175,13 @@ a:active {
   background-color: transparent;
   text-decoration: underline;
 }
+.ctf-toggle {
+  left: 300px !important;   
+  z-index: 20;
+}
+
+@media (max-width: 800px) {
+  .ctf-toggle {
+    left: 20px !important;   
+  }
+}
