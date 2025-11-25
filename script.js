@@ -171,3 +171,47 @@ setTimeout(() => document.getElementById('challengeCards')?.classList.add('revea
 renderChallenges();
 updateCategoryStats();
 populateRecentSolves();
+
+// SEARCH FUNCTIONALITY
+document.getElementById('searchBar')?.addEventListener('input', function(e) {
+  const term = e.target.value.toLowerCase();
+  document.querySelectorAll('.card').forEach(card => {
+    const title = card.querySelector('h3').textContent.toLowerCase();
+    const flag = card.querySelector('.flag').textContent.toLowerCase();
+    card.style.display = (title.includes(term) || flag.includes(term)) ? 'block' : 'none';
+  });
+});
+
+// VISITOR COUNTER
+(function() {
+  const key = 'syndro-ctf-writeups-visitors-v3';
+  fetch(`https://api.countapi.xyz/hit/${key}`)
+    .then(res => res.json())
+    .then(data => {
+      const count = data.value;
+      document.getElementById('visitorCount').textContent = count.toLocaleString();
+      
+      // Little celebration on 1000+ visits
+      if (count % 1000 === 0) {
+        document.getElementById('visitorCount').style.animation = 'celebration 2s';
+      }
+    })
+    .catch(() => {
+      document.getElementById('visitorCount').textContent = '∞';
+    });
+})();
+
+
+// LIVE CLOCK
+function updateClock() {
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-US', { 
+    hour12: false, 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    second: '2-digit' 
+  });
+  document.getElementById('liveClock').textContent = time;
+}
+updateClock();
+setInterval(updateClock, 1000);
