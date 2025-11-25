@@ -3,9 +3,40 @@
 
 * { margin:0; padding:0; box-sizing:border-box }
 body { font-family:'Roboto Mono',monospace; background:var(--bg); color:var(--text); transition:all .4s; overflow-x:hidden }
-canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; opacity:0.15 }
+canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; opacity:0.2 } /* Increased opacity for better fill */
 
-.container { max-width:1100px; margin:0 auto; padding:20px; position:relative; z-index:2 }
+#scanline-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 180, 0.03) 2px, rgba(0, 255, 180, 0.03) 4px);
+  animation: scanline 8s linear infinite;
+}
+@keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+
+.container { max-width:90vw; margin:0 auto; padding:20px 20px 20px 300px; position:relative; z-index:2 } /* Adjusted for sidebar */
+
+.sidebar-left {
+  position: fixed; top: 0; left: 0; bottom: 0; width: 280px; background: rgba(13,17,23,0.8); 
+  border-right: 2px solid var(--border); padding: 40px 20px; z-index: 5; overflow-y: auto;
+  backdrop-filter: blur(10px); transition: all .4s;
+}
+.light .sidebar-left { background: rgba(255,255,255,0.8); }
+.sidebar-left h3, .sidebar-left h4 { color: var(--accent); }
+.sidebar-left p { opacity: 0.8; }
+.stats-card { text-align: center; margin-bottom: 40px; }
+.progress-ring { width: 80px; height: 80px; margin: 20px auto; }
+.progress-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.circle-bg { fill: none; stroke: var(--border); stroke-width: 3.8; }
+.circle { fill: none; stroke: var(--green); stroke-width: 3.8; stroke-dasharray: 0 100; transition: stroke-dasharray 1s; }
+.recent-solves ul { list-style: none; }
+.recent-solves li { margin: 10px 0; opacity: 0.9; }
+.quick-links { margin-top: 40px; display: flex; flex-direction: column; gap: 15px; text-align: center; }
+.quick-links a { color: var(--text); text-decoration: none; padding: 10px; border-radius: 8px; transition: .3s; }
+.quick-links a:hover { background: var(--accent); color: #000; }
+
+@media (max-width: 800px) {
+  .sidebar-left { transform: translateX(-100%); }
+  .container { padding-left: 20px; }
+}
 
 .toggle, .ctf-toggle {
   position:absolute; top:30px; background:var(--card); border:2px solid var(--border);
