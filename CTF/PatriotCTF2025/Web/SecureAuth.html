@@ -259,6 +259,14 @@ Password: {"$ne": null}</code></pre>
       }
     };
 
+      // ESC key also closes
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
       // Theme toggle
   document.getElementById('themeToggle')?.addEventListener('click', () => {
     document.documentElement.classList.toggle('light');
