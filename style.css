@@ -191,14 +191,73 @@ a:active {
 @media (max-width: 800px) { .ctf-toggle { left: 20px !important; } }
 
 /* Category circles */
-.category-circles { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin: 20px 0; }
-.cat-circle { position: relative; width: 70px; text-align: center; }
-.cat-circle svg { width: 60px; height: 60px; transform: rotate(-90deg); }
-.circle-bg { fill: none; stroke: #30363d; stroke-width: 3.8; }
-.circle { fill: none; stroke: var(--green); stroke-width: 4; stroke-dasharray: 0 100; transition: stroke-dasharray 1.2s ease; }
-.circle-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(90deg); font-weight: bold; font-size: 0.75rem; color: var(--green); }
-.cat-circle small { display: block; margin-top: 6px; font-size: 0.7rem; opacity: 0.8; color: var(--accent); }
+.category-circles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: center;
+  margin: 20px 0;
+}
 
-/* Recent solves spacing + green */
-.recent-solve-item { margin: 20px 0 !important; color: var(--green) !important; font-weight: 500; }
-.recent-solve-item .tag-web { background: var(--green) !important; color: #000 !important; }
+.cat-circle {
+  position: relative;
+  width: 70px;
+  text-align: center;
+}
+
+.cat-circle svg {
+  width: 60px;
+  height: 60px;
+  transform: rotate(-90deg);
+  display: block;
+  margin: 0 auto;
+}
+
+/* Background circle */
+.circle-bg {
+  fill: none;
+  stroke: #30363d;
+  stroke-width: 3.8;
+}
+
+/* Progress circle (green) */
+.circle {
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 4;
+  stroke-dasharray: 0 100;
+  transition: stroke-dasharray 1.2s ease;
+}
+
+/* Percentage text in the middle */
+.circle-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 0.9rem;   /* bigger and visible */
+  color: var(--green);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Category name below */
+.cat-circle small {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  opacity: 0.9;
+  color: var(--accent);
+}
+
+/* Recent solves spacing */
+.recent-solve-item {
+  margin: 22px 0 !important;
+  color: var(--green) !important;
+  font-weight: 500;
+}
+.recent-solve-item .tag-web {
+  background: var(--green) !important;
+  color: #000 !important;
+}
