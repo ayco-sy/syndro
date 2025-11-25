@@ -1,8 +1,8 @@
 {
-  "web": 12,
-  "misc": 8,
-  "crypto": 10,
-  "pwn": 5,
-  "forensics": 7,
-  "rev": 4
+  "web": 5,
+  "misc": 2,
+  "crypto": 0,
+  "pwn": 0,
+  "forensics": 0,
+  "rev": 0
 }
