@@ -13,18 +13,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <body>
   <canvas id="matrix"></canvas>
   <div id="scanline-overlay"></div>
 
-  <!-- Gradient for glowing circle -->
-  <svg width="0" height="0">
-    <defs>
-      <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#00ff9d"/>
-        <stop offset="100%" stop-color="#00d0ff"/>
-      </linearGradient>
-    </defs>
-  </svg>
+  <!-- LIVE DIGITAL CLOCK (top-right corner) -->
+  <div id="liveClock"></div>
 
   <!-- LEFT SIDEBAR -->
   <aside class="sidebar-left">
@@ -54,6 +48,11 @@
       <a href="https://discordapp.com/users/313717103150759950" target="_blank">Discord</a>
       <a href="https://medium.com/@syndro" target="_blank">Medium</a>
     </div>
+
+    <!-- VISITOR COUNTER (far bottom) -->
+    <div class="visitor-counter">
+      <span id="visitorCount">—</span> visitors
+    </div>
   </aside>
 
   <div class="container">
@@ -81,7 +80,11 @@
       </p>
     </div>
 
-    <h2 class="section-title">Write ups!</h2>
+    <h2 class="section-title">
+      Write ups!
+      <!-- SEARCH BAR -->
+      <input type="text" id="searchBar" placeholder="Search writeups..." autocomplete="off">
+    </h2>
 
     <div class="tabs" id="challengeTabs">
       <div class="tab active" data-cat="all">All</div>
@@ -106,6 +109,9 @@
       <div class="ctf-grid" id="ctfGrid"></div>
     </div>
   </div>
+
+  <script src="script.js"></script>
+</body>
 
   <script src="script.js"></script>
 </body>
