@@ -239,7 +239,20 @@
   <p>Always check logs. They remember everything.</p>
 </div>
   <script>
-     // THEME TOGGLE
+    document.querySelectorAll('img').forEach(img => {
+      if (!img.closest('.modal')) {
+        img.onclick = () => {
+          document.getElementById('modalImage').src = img.src;
+          document.getElementById('imageModal').classList.add('active');
+        };
+      }
+    });
+    document.getElementById('imageModal').onclick = function(e) {
+      if (e.target === this || e.target.classList.contains('close-modal')) {
+        this.classList.remove('active');
+      }
+    };
+
     document.getElementById('themeToggle').addEventListener('click', () => {
       document.documentElement.classList.toggle('light');
       localStorage.theme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
