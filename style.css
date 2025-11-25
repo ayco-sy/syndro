@@ -125,12 +125,12 @@ p, h1, h2, h3, small, .meta, .footer-note {
   color: #0d1117 !important;
 }
 a:link {
-  color: blue;
+  color: #737FD9;
   background-color: transparent;
   text-decoration: none;
 }
 a:visited {
-  color: blue;
+  color: #737FD9;
   background-color: transparent;
   text-decoration: none;
 }
