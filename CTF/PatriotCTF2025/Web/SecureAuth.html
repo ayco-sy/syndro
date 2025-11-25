@@ -194,7 +194,6 @@
   <div class="container">
     <h1>SecureAuth™</h1>
     <div class="meta">PatriotCTF 2025 • <span>Web</span> • syndro</div>
-    <div class="theme-toggle" id="themeToggle">Theme</div>
     
     <h2>0. The Challenge description</h2>
     <p>There is not much in challenge description</p>
@@ -244,10 +243,11 @@ Password: {"$ne": null}</code></pre>
   <img id="modalImage" src="" alt="Zoomed image">
 </div>
 
-  <script>
+<script>
   const modal = document.getElementById('imageModal');
   const modalImg = document.getElementById('modalImage');
 
+  // Image zoom
   document.querySelectorAll('img').forEach(img => {
     if (img.closest('#imageModal')) return;
     img.onclick = () => {
@@ -271,11 +271,12 @@ Password: {"$ne": null}</code></pre>
     }
   });
 
+  // Theme toggle
   document.getElementById('themeToggle')?.addEventListener('click', () => {
     document.documentElement.classList.toggle('light');
-    localStorage.theme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
+    const isLight = document.documentElement.classList.contains('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
   });
-
-  </script>
+</script>
 </body>
 </html>
