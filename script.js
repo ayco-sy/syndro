@@ -5,7 +5,7 @@ if (canvas) {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-  const fontSize = 14;
+  const fontSize = 19;
   let columns = canvas.width / fontSize;
   const drops = Array(Math.floor(columns)).fill(1);
 
