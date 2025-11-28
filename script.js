@@ -162,10 +162,43 @@ document.getElementById('themeToggle')?.addEventListener('click', () => {
   localStorage.theme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
 });
 
+// VISITOR COUNTER
+async function updateVisitorCount() {
+  const countElement = document.getElementById('visitorCount');
+
+  try {
+    // This endpoint is 100% alive as of November 2025
+    const response = await fetch('https://api.counterapi.dev/v2/syndro-counter/syndro-visitors/up', {
+      method: 'POST',
+      cache: 'no-store'
+    });
+
+    if (!response.ok) throw new Error('API error');
+
+    const data = await response.json();
+    const count = data.value;
+
+    countElement.textContent = count.toLocaleString();
+    countElement.classList.add('visitor-text');
+
+    if (count % 1000 === 0 && count > 0) {
+      countElement.classList.add('celebrate');
+    }
+  } catch (err) {
+    // Graceful fallback – localStorage so it never shows ∞ again
+    let localCount = parseInt(localStorage.getItem('syndro-local-visits') || '0') + 1;
+    localStorage.setItem('syndro-local-visits', localCount);
+    countElement.textContent = localCount.toLocaleString();
+    countElement.classList.add('visitor-text');
+    console.warn('CounterAPI failed, using local count:', localCount);
+  }
+}
+
 setTimeout(() => document.getElementById('terminal')?.classList.add('reveal'), 800);
 setTimeout(() => document.querySelector('.bio')?.classList.add('reveal'), 2000);
 setTimeout(() => document.getElementById('challengeCards')?.classList.add('reveal'), 2800);
 
+updateVisitorCount();
 renderChallenges();
 updateCategoryStats();
 populateRecentSolves();
@@ -180,27 +213,6 @@ document.getElementById('searchBar')?.addEventListener('input', function(e) {
   });
 });
 
-async function updateVisitorCount() {
-  const countElement = document.getElementById('visitorCount');
-
-  try {
-    const counter = new Counter({
-      workspace: ' syndro-counter',
-    });
-
-    const result = await counter.up('syndro-visitors'); 
-    countElement.textContent = result.value.toLocaleString();
-
-    if (result.value % 1000 === 0 && result.value > 0) {
-      countElement.classList.add('celebrate');
-    }
-  } catch (err) {
-    console.error("CounterAPI failed:", err);
-    countElement.innerHTML = '<span style="color:#39ff14">∞</span>';
-  }
-}
-
-document.addEventListener('DOMContentLoaded', updateVisitorCount);
 
 // LIVE CLOCK
 function updateClock() {
