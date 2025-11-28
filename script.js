@@ -185,10 +185,10 @@ async function updateVisitorCount() {
 
   try {
     const counter = new Counter({
-      workspace: 'syndro',
+      workspace: ' syndro-counter',
     });
 
-    const result = await counter.up('visitors'); 
+    const result = await counter.up('syndro-visitors'); 
     countElement.textContent = result.value.toLocaleString();
 
     if (result.value % 1000 === 0 && result.value > 0) {
