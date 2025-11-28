@@ -180,13 +180,6 @@ document.getElementById('searchBar')?.addEventListener('input', function(e) {
   });
 });
 
-// Rare celebration for visitor badge (~every 100th visit)
-document.addEventListener("DOMContentLoaded", () => {
-  const badge = document.querySelector(".visitor-badge");
-  if (badge && Math.random() < 0.01) {
-    badge.classList.add("celebrate");
-  }
-});
 
 // LIVE CLOCK
 function updateClock() {
