@@ -35,14 +35,12 @@ const challenges = [
   {title:"Reverse Metadata Part 1", file:"CTF/PatriotCTF2025/Misc/ReverseMetaData1", flag:"MASONCC{images_****}", type:"misc"},
   {title:"Reverse Metadata Part 2", file:"CTF/PatriotCTF2025/Misc/ReverseMetaData2", flag:"PCTF{hidden_****}", type:"misc"},
 
-
   // web
   {title:"Connection Tester", file:"CTF/PatriotCTF2025/Web/ConnectionTester", flag:"PCTF{C0nnection_****}", type:"web"},
   {title:"Feedback Fallout", file:"CTF/PatriotCTF2025/Web/FeedbackFallout", flag:"PCTF{SQLI_****}", type:"web"},
   {title:"Secure Auth", file:"CTF/PatriotCTF2025/Web/SecureAuth", flag:"PCTF{cant_****}", type:"web"},
   {title:"Trust Fall", file:"CTF/PatriotCTF2025/Web/TrustFall", flag:"PCTF{auth_****}", type:"web"},
   {title:"Trust Vault", file:"CTF/PatriotCTF2025/Web/TrustVault", flag:"FLAG{py7h0n_****}", type:"web"},
-  
 ];
 
 // MAIN PROGRESS + COLORED BACKGROUND + NEON TRAILS
@@ -60,7 +58,6 @@ function updateCategoryStats() {
       const totalChallenges = Object.values(totals).reduce((a,b) => a + b, 0);
       const percent = totalChallenges > 0 ? Math.round((totalSolved / totalChallenges) * 100) : 0;
 
-      // Update progress
       const circle = document.getElementById('circle-overall');
       const text = document.getElementById('text-overall');
       const bgCircle = document.querySelector('.circle-bg-dynamic');
@@ -68,7 +65,6 @@ function updateCategoryStats() {
       if (circle) circle.style.strokeDashoffset = 100 - percent;
       if (text) text.textContent = `${percent}%`;
 
-      // Color the background circle based on progress
       if (bgCircle) {
         if (percent >= 80) bgCircle.style.stroke = '#39ff14';
         else if (percent >= 60) bgCircle.style.stroke = '#00ff9d';
@@ -78,7 +74,6 @@ function updateCategoryStats() {
         bgCircle.style.opacity = 0.25 + (percent / 200);
       }
 
-      // Trails
       const container = document.getElementById('category-trails');
       container.innerHTML = '';
 
@@ -182,26 +177,24 @@ document.getElementById('searchBar')?.addEventListener('input', function(e) {
   });
 });
 
-// VISITOR COUNTER 
-(function() {
-  const key = 'syndro-portfolio-visitors';  
-  
-  fetch(`https://api.simplehitcounter.com/hit/${key}`)
-    .then(r => r.json())
-    .then(data => {
-      const count = data.count;
-      document.getElementById('visitorCount').textContent = count.toLocaleString();
+// VISITOR COUNTER - RELIABLE & BEAUTIFUL (2025 BEST PRACTICE)
+document.addEventListener("DOMContentLoaded", () => {
+  const counterContainer = document.getElementById("visitorCount");
+  if (!counterContainer) return;
 
-      // Your celebration on every 1000th visit
-      if (count % 1000 === 0 && count > 0) {
-        document.getElementById('visitorCount').style.animation = 'celebration 2s';
-      }
-    })
-    .catch(() => {
-      document.getElementById('visitorCount').textContent = '∞';
-    });
-})();
+  const siteUrl = encodeURIComponent("https://syndro-1.github.io/syndro/");
 
+  counterContainer.innerHTML = `
+    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=${siteUrl}&count_bg=%230F0&title_bg=%2313171e&icon=&icon_color=%230F0&title=visitors&edge_flat=false"
+         alt="Visitor counter"
+         style="height: 22px; vertical-align: middle; filter: drop-shadow(0 0 4px #0f0);">
+  `;
+
+  if (Math.random() < 0.01) { // ~1% chance = roughly every 100th visitor
+    const img = counterContainer.querySelector("img");
+    img.style.animation = "celebration 3s ease-in-out";
+  }
+});
 
 // LIVE CLOCK
 function updateClock() {
