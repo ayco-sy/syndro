@@ -11,6 +11,23 @@
       document.documentElement.classList.add("light");
     }
   </script>
+
+  <!-- Celebration animation for rare visits -->
+  <style>
+    @keyframes celebration {
+      0%, 100% { filter: drop-shadow(0 0 6px #0f0); transform: scale(1); }
+      50% { filter: drop-shadow(0 0 30px #39ff14); transform: scale(1.15); }
+    }
+    .visitor-badge {
+      height: 24px;
+      border-radius: 6px;
+      filter: drop-shadow(0 0 6px #0f0);
+      transition: all 0.4s ease;
+    }
+    .visitor-badge.celebrate {
+      animation: celebration 3s ease-in-out;
+    }
+  </style>
 </head>
 <body>
   <canvas id="matrix"></canvas>
@@ -22,38 +39,37 @@
   <!-- LEFT SIDEBAR -->
   <aside class="sidebar-left">
     <div class="stats-card">
-  <h3>Overall Progress</h3>
-  <div class="overall-container">
-    <div class="progress-ring-big">
-      <svg viewBox="0 0 36 36">
-        <defs>
-          <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#58a6ff"/>
-            <stop offset="100%" stop-color="#8b5cf6"/>
-          </linearGradient>
-          <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#39ff14"/>
-            <stop offset="100%" stop-color="#00ff9d"/>
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
-            <feMerge>
-              <feMergeNode in="blur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke="url(#bgGradient)" opacity="0.25"/>
-        <path id="circle-overall" class="circle-progress" stroke="url(#progressGradient)" stroke-dasharray="100" stroke-dashoffset="100" filter="url(#glow)"/>
-      </svg>
-      <span id="text-overall" class="circle-text-big">0%</span>
-    </div>
+      <h3>Overall Progress</h3>
+      <div class="overall-container">
+        <div class="progress-ring-big">
+          <svg viewBox="0 0 36 36">
+            <defs>
+              <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#58a6ff"/>
+                <stop offset="100%" stop-color="#8b5cf6"/>
+              </linearGradient>
+              <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#39ff14"/>
+                <stop offset="100%" stop-color="#00ff9d"/>
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke="url(#bgGradient)" opacity="0.25"/>
+            <path id="circle-overall" class="circle-progress" stroke="url(#progressGradient)" stroke-dasharray="100" stroke-dashoffset="100" filter="url(#glow)"/>
+          </svg>
+          <span id="text-overall" class="circle-text-big">0%</span>
+        </div>
 
-    <div id="category-trails">
+        <div id="category-trails"></div>
+      </div>
+      <div class="solve-counter-sidebar" id="solveCounter">0 SOLVED</div>
     </div>
-  </div>
-  <div class="solve-counter-sidebar" id="solveCounter">0 SOLVED</div>
-</div>
 
     <div class="recent-solves">
       <h4>Recent Solves</h4>
@@ -68,8 +84,15 @@
       <a href="https://www.linkedin.com/in/ibrahim-mahmoud-15905a340/" target="_blank">Linked-in</a>
     </div>
 
+    <!-- VISITOR COUNTER - 100% WORKING & BEAUTIFUL -->
     <div class="visitor-counter">
-      <span id="visitorCount">—</span> visitors
+      <span id="visitorCount">
+        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fsyndro-1.github.io&count_bg=%230F0&title_bg=%2313171e&icon=&icon_color=%230F0&title=visitors&edge_flat=false"
+             alt="Visitors"
+             class="visitor-badge"
+             loading="lazy">
+      </span>
+      visitors
     </div>
   </aside>
 
@@ -129,5 +152,15 @@
   </div>
 
   <script src="script.js"></script>
+
+  <!-- Optional: Rare celebration trigger (1 in 100 chance) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const badge = document.querySelector(".visitor-badge");
+      if (badge && Math.random() < 0.01) { // ~1% chance = every ~100th visitor
+        badge.classList.add("celebrate");
+      }
+    });
+  </script>
 </body>
 </html>
