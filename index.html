@@ -18,14 +18,14 @@
       0%, 100% { filter: drop-shadow(0 0 6px #0f0); transform: scale(1); }
       50% { filter: drop-shadow(0 0 30px #39ff14); transform: scale(1.15); }
     }
-    .visitor-badge {
+    .visitor-badge, .visitor-text {
       height: 24px;
       border-radius: 6px;
       filter: drop-shadow(0 0 6px #0f0);
       transition: all 0.4s ease;
       vertical-align: middle;
     }
-    .visitor-badge.celebrate {
+    .visitor-badge.celebrate, .visitor-text.celebrate {
       animation: celebration 3s ease-in-out;
     }
     .visitor-fallback {
@@ -91,16 +91,17 @@
       <a href="https://www.linkedin.com/in/ibrahim-mahmoud-15905a340/" target="_blank">Linked-in</a>
     </div>
 
-    <!-- VISITOR COUNTER - FIXED WITH WORKING SERVICE (glitch.me, 2025 ACTIVE) -->
-    <div class="visitor-counter">
-      <span id="visitorCount">
-        <img src="https://visitor-badge.glitch.me/badge?page_id=syndro-ctf-writeups-visitors-v3&left_color=grey&right_color=brightgreen&style=flat" 
-             alt="Visitors"
-             class="visitor-badge"
-             loading="lazy">
-      </span>
-      visitors
-    </div>
+    <!-- VISITOR COUNTER -->
+<div class="visitor-counter">
+  <span id="visitorCount">
+    <img src="https://hits.gjbae1212.xyz/api/count/incr/badge.svg?url=https%3A%2F%2Fsyndro-1.github.io%2Fsyndro%2F&count_bg=%230F0&title_bg=%2313171e&icon=&icon_color=%230F0&title=visitors&edge_flat=false"
+         alt="Visitors"
+         class="visitor-badge"
+         loading="lazy"
+         onerror="this.style.display='none'; document.getElementById('visitorCount').textContent='∞';">
+  </span>
+  visitors
+</div>
   </aside>
 
   <div class="container">
