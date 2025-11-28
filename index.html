@@ -93,15 +93,54 @@
       <a href="https://www.linkedin.com/in/ibrahim-mahmoud-15905a340/" target="_blank">Linked-in</a>
     </div>
 
-    <!-- VISITOR COUNTER - counterapi.dev (2025 working version) -->
+    <!-- VISITOR COUNTER - JS-powered counterapi.dev (fixed version) -->
     <div class="visitor-counter">
-      <img src="https://api.counterapi.dev/v2/shiraoris-team-1851/first-counter-1851/badge?style=neon"
-           alt="Visitors"
-           class="visitor-badge"
-           loading="lazy"
-           onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
-      <span class="visitor-fallback" style="display:none;">∞ visitors</span>
+      <span id="visitorCount">
+        <span class="visitor-fallback" style="opacity:0.6;">Loading...</span>
+      </span>
+      visitors
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const container = document.getElementById("visitorCount");
+        
+        try {
+          // Fetch and increment the counter
+          const response = await fetch('https://api.counterapi.dev/v2/shiraoris-team-1851/first-counter-1851', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ up: 1 })
+          });
+          
+          if (!response.ok) throw new Error('API error');
+          
+          const data = await response.json();
+          const count = data.up_count || 0;
+          
+          // Format with commas
+          const formatted = count.toLocaleString("en-US");
+          
+          // Create display element
+          const countEl = document.createElement("span");
+          countEl.className = "visitor-text";
+          countEl.textContent = formatted;
+          
+          // Celebration on milestones
+          if (count % 1000 === 0 && count > 0) {
+            countEl.classList.add("celebrate");
+          }
+          
+          container.innerHTML = "";
+          container.appendChild(countEl);
+          
+        } catch (err) {
+          // Fallback to 0 if error (but shows actual 0 now)
+          container.innerHTML = '<span class="visitor-text">0</span>';
+          console.error('Counter error:', err);
+        }
+      });
+    </script>
   </aside>
 
   <div class="container">
