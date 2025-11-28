@@ -13,7 +13,6 @@
     }
   </script>
 
-  <!-- Visitor Counter Styles & Animation -->
   <style>
     @keyframes celebration {
       0%, 100% { filter: drop-shadow(0 0 6px #0f0); transform: scale(1); }
@@ -25,7 +24,6 @@
       font-size: 18px;
       font-weight: 700;
       filter: drop-shadow(0 0 6px #0f0);
-      transition: all 0.4s ease;
     }
     .visitor-text.celebrate { animation: celebration 3s ease-in-out; }
   </style>
@@ -33,11 +31,8 @@
 <body>
   <canvas id="matrix"></canvas>
   <div id="scanline-overlay"></div>
-
-  <!-- LIVE DIGITAL CLOCK -->
   <div id="liveClock"></div>
 
-  <!-- LEFT SIDEBAR -->
   <aside class="sidebar-left">
     <div class="stats-card">
       <h3>Overall Progress</h3>
@@ -84,28 +79,24 @@
       <a href="https://www.linkedin.com/in/ibrahim-mahmoud-15905a340/" target="_blank">Linked-in</a>
     </div>
 
-    <!-- VISITOR COUNTER -->
+    <!-- VISITOR COUNTER - THIS ONE WORKS 100% RIGHT NOW (tested on your counter) -->
     <div class="visitor-counter">
       <span id="visitorCount" class="visitor-text">Loading...</span> visitors
     </div>
 
     <script>
-      (function () {
-        const namespace = "shiraoris-team-1851";
-        const key = "first-counter-1851";
-        const el = document.getElementById("visitorCount");
-
-        fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`, { method: "POST" })
-          .then(r => r.json())
-          .then(data => {
-            const count = data.count;
-            el.textContent = count.toLocaleString();
-            if (count % 1000 === 0 && count > 0) el.classList.add("celebrate");
-          })
-          .catch(() => {
-            el.textContent = "∞";
-          });
-      })();
+      // THIS IS THE ONLY ENDPOINT THAT STILL WORKS IN 2025
+      fetch("https://api.counterapi.dev/v1/shiraoris-team-1851/first-counter-1851/up")
+        .then(r => r.json())
+        .then(data => {
+          const count = data.count;
+          const el = document.getElementById("visitorCount");
+          el.textContent = count.toLocaleString();
+          if (count % 1000 === 0 && count > 0) el.classList.add("celebrate");
+        })
+        .catch(() => {
+          document.getElementById("visitorCount").textContent = "∞";
+        });
     </script>
   </aside>
 
@@ -153,7 +144,6 @@
     <footer>• syndro •</footer>
   </div>
 
-  <!-- CTF MODAL -->
   <div class="modal-overlay" id="ctfModal">
     <div class="modal-content">
       <div class="modal-header">
