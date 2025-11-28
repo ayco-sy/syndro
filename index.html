@@ -19,23 +19,15 @@
       0%, 100% { filter: drop-shadow(0 0 6px #0f0); transform: scale(1); }
       50% { filter: drop-shadow(0 0 30px #39ff14); transform: scale(1.15); }
     }
-    .visitor-badge, .visitor-text {
-      height: 24px;
-      border-radius: 6px;
-      filter: drop-shadow(0 0 6px #0f0);
-      transition: all 0.4s ease;
-      vertical-align: middle;
-    }
-    .visitor-badge.celebrate, .visitor-text.celebrate {
-      animation: celebration 3s ease-in-out;
-    }
-    .visitor-fallback {
+    .visitor-text {
       font-family: 'Roboto Mono', monospace;
       color: #0f0;
       font-size: 18px;
-      opacity: 0.9;
       font-weight: 700;
+      filter: drop-shadow(0 0 6px #0f0);
+      transition: all 0.4s ease;
     }
+    .visitor-text.celebrate { animation: celebration 3s ease-in-out; }
   </style>
 </head>
 <body>
@@ -74,7 +66,6 @@
           </svg>
           <span id="text-overall" class="circle-text-big">0%</span>
         </div>
-
         <div id="category-trails"></div>
       </div>
       <div class="solve-counter-sidebar" id="solveCounter">0 SOLVED</div>
@@ -93,53 +84,28 @@
       <a href="https://www.linkedin.com/in/ibrahim-mahmoud-15905a340/" target="_blank">Linked-in</a>
     </div>
 
-    <!-- VISITOR COUNTER - JS-powered counterapi.dev (fixed version) -->
+    <!-- VISITOR COUNTER -->
     <div class="visitor-counter">
-      <span id="visitorCount">
-        <span class="visitor-fallback" style="opacity:0.6;">Loading...</span>
-      </span>
-      visitors
+      <span id="visitorCount" class="visitor-text">Loading...</span> visitors
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const container = document.getElementById("visitorCount");
-        
-        try {
-          // Fetch and increment the counter
-          const response = await fetch('https://api.counterapi.dev/v2/shiraoris-team-1851/first-counter-1851', {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ up: 1 })
+      (function () {
+        const namespace = "shiraoris-team-1851";
+        const key = "first-counter-1851";
+        const el = document.getElementById("visitorCount");
+
+        fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`, { method: "POST" })
+          .then(r => r.json())
+          .then(data => {
+            const count = data.count;
+            el.textContent = count.toLocaleString();
+            if (count % 1000 === 0 && count > 0) el.classList.add("celebrate");
+          })
+          .catch(() => {
+            el.textContent = "∞";
           });
-          
-          if (!response.ok) throw new Error('API error');
-          
-          const data = await response.json();
-          const count = data.up_count || 0;
-          
-          // Format with commas
-          const formatted = count.toLocaleString("en-US");
-          
-          // Create display element
-          const countEl = document.createElement("span");
-          countEl.className = "visitor-text";
-          countEl.textContent = formatted;
-          
-          // Celebration on milestones
-          if (count % 1000 === 0 && count > 0) {
-            countEl.classList.add("celebrate");
-          }
-          
-          container.innerHTML = "";
-          container.appendChild(countEl);
-          
-        } catch (err) {
-          // Fallback to 0 if error (but shows actual 0 now)
-          container.innerHTML = '<span class="visitor-text">0</span>';
-          console.error('Counter error:', err);
-        }
-      });
+      })();
     </script>
   </aside>
 
