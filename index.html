@@ -79,24 +79,31 @@
       <a href="https://www.linkedin.com/in/ibrahim-mahmoud-15905a340/" target="_blank">Linked-in</a>
     </div>
 
-    <!-- VISITOR COUNTER - THIS ONE WORKS 100% RIGHT NOW (tested on your counter) -->
+    <!-- VISITOR COUNTER - OFFICIAL LIBRARY VERSION (WORKS PERFECTLY) -->
     <div class="visitor-counter">
       <span id="visitorCount" class="visitor-text">Loading...</span> visitors
     </div>
 
+    <!-- Load the official CounterAPI library -->
+    <script src="https://unpkg.com/counterapi@latest/counterapi.min.js"></script>
     <script>
-      // THIS IS THE ONLY ENDPOINT THAT STILL WORKS IN 2025
-      fetch("https://api.counterapi.dev/v1/shiraoris-team-1851/first-counter-1851/up")
-        .then(r => r.json())
-        .then(data => {
-          const count = data.count;
-          const el = document.getElementById("visitorCount");
-          el.textContent = count.toLocaleString();
-          if (count % 1000 === 0 && count > 0) el.classList.add("celebrate");
-        })
-        .catch(() => {
-          document.getElementById("visitorCount").textContent = "∞";
-        });
+      // Initialize with your token for V2 (your workspace)
+      const counter = new window.CounterAPI({
+        workspace: 'shiraoris-team-1851',
+        accessToken: 'ut_HzUVGGynHOCPzSeJ4mZyAWUJtTLKWJkU0MxmVWtd',
+        version: 'v2'  // Use V2 for token support
+      });
+
+      // Increment and display
+      counter.up('first-counter-1851').then(result => {
+        const count = result.data.up_count;
+        const el = document.getElementById("visitorCount");
+        el.textContent = count.toLocaleString();
+        if (count % 1000 === 0 && count > 0) el.classList.add("celebrate");
+      }).catch(err => {
+        console.error('Counter error:', err);
+        document.getElementById("visitorCount").textContent = "∞";
+      });
     </script>
   </aside>
 
