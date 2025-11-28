@@ -37,7 +37,7 @@ const challenges = [
 
   // web
   {title:"Connection Tester", file:"CTF/PatriotCTF2025/Web/ConnectionTester", flag:"PCTF{C0nnection_****}", type:"web"},
-  {title:"Feedback Fallout", file:"CTF/PatriotCTF2025/Web/FeedbackFallout", flag:"PCTF{SQLI_****}", type:"web"},
+  {title:"Feedback Fallout", file="CTF/PatriotCTF2025/Web/FeedbackFallout", flag:"PCTF{SQLI_****}", type:"web"},
   {title:"Secure Auth", file:"CTF/PatriotCTF2025/Web/SecureAuth", flag:"PCTF{cant_****}", type:"web"},
   {title:"Trust Fall", file:"CTF/PatriotCTF2025/Web/TrustFall", flag:"PCTF{auth_****}", type:"web"},
   {title:"Trust Vault", file:"CTF/PatriotCTF2025/Web/TrustVault", flag:"FLAG{py7h0n_****}", type:"web"},
@@ -124,7 +124,7 @@ function populateRecentSolves() {
 function renderChallenges(filter = "all") {
   const container = document.getElementById("challengeCards");
   container.innerHTML = "";
-  const toShow = filter =="all" ? challenges : challenges.filter(c => c.type === filter);
+  const toShow = filter === "all" ? challenges : challenges.filter(c => c.type === filter);
   toShow.forEach(c => {
     const card = document.createElement("div");
     card.className = "card";
@@ -178,6 +178,14 @@ document.getElementById('searchBar')?.addEventListener('input', function(e) {
     const flag = card.querySelector('.flag').textContent.toLowerCase();
     card.style.display = (title.includes(term) || flag.includes(term)) ? 'block' : 'none';
   });
+});
+
+// Rare celebration for badge (~every 100th visit)
+document.addEventListener("DOMContentLoaded", () => {
+  const badge = document.querySelector(".visitor-badge");
+  if (badge && Math.random() < 0.01) {
+    badge.classList.add("celebrate");
+  }
 });
 
 // LIVE CLOCK
